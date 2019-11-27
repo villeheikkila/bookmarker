@@ -2,7 +2,7 @@ import React from 'react';
 import { Divider, Header } from 'semantic-ui-react';
 import { Book } from './Book';
 
-export const ListEntries = ({ books }) => {
+export const ListEntries = ({ items }) => {
     return (
         <>
             <Divider horizontal>

@@ -6,7 +6,7 @@ import { ListEntries } from './components/ListEntries';
 import { useResource } from './hooks';
 
 function App() {
-  const [books, booksService] = useResource('http://localhost:3001/books');
+  const [items, itemService] = useResource('http://localhost:3001/books');
 
   useEffect(() => {
     if (books.length === 0) booksService.getAll()
@@ -16,8 +16,8 @@ function App() {
     <Container>
       <Header>
         <Header size='huge'>Lukuvinkkikirjasto</Header>
-        <CreateForm booksService={booksService} />
-        <ListEntries books={books} />
+        <CreateForm itemService={itemService} />
+        <ListEntries items={items} />
       </Header>
     </Container >
   );

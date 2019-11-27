@@ -1,62 +1,47 @@
-import React from 'react';
-import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../hooks';
+import React, { useState } from 'react';
+import { BookForm } from './saving_forms/BookForm'
+import { VideoForm } from './saving_forms/VideoForm'
+import { BlogForm } from './saving_forms/BlogForm'
 
-export const CreateForm = ({ booksService }) => {
-    const [kirjoittaja, kirjoittajaReset] = useField('text')
-    const [otsikko, otsikkoReset] = useField('text')
-    const [isbn, isbnReset] = useField('text')
-    const [tagit, tagitReset] = useField('text')
-    const [related, relatedReset] = useField('text')
+export const CreateForm = ({ itemService }) => {
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const [selected, setSelected] = useState(0)
 
-        booksService.create({
-            id: Math.floor((Math.random() * 1000) + 1),
-            kirjoittaja: kirjoittaja.value,
-            otsikko: otsikko.value,
-            isbn: isbn.value,
-            tagit: tagit.value.split(','),
-            related: related.value.split(',')
-        })
-
-        kirjoittajaReset();
-        otsikkoReset();
-        isbnReset();
-        tagitReset();
-        relatedReset();
+    const buttonClicked = (type) => {
+        setSelected(type)
     }
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Field>
-                <label>Kirjoittaja</label>
-                <input {...kirjoittaja} />
-            </Form.Field>
-
-            <Form.Field>
-                <label>Otsikko</label>
-                <input {...otsikko} />
-            </Form.Field>
-
-            <Form.Field>
-                <label>ISBN</label>
-                <input {...isbn} />
-            </Form.Field>
-
-            <Form.Field>
-                <label>Tagit</label>
-                <input {...tagit} />
-            </Form.Field>
-
-            <Form.Field>
-                <label>Vastaavat kurssit</label>
-                <input {...related} />
-            </Form.Field>
-
-            <Button positive type="submit" value="Submit">Lähetä</Button>
-        </Form>
+    return(
+        <div>
+            <div style={{widht:'100%',backgroundColor:'green',height:50}}>
+                <div style={{textAlign:'center'}}>
+                    <button style={selected == 0 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(0)}>Book</button>
+                    <button style={selected == 1 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(1)}>Video</button>
+                    <button style={selected == 2 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(2)}>Article</button>
+                    <button style={selected == 3 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(3)}>Blog</button>
+                </div>
+            </div>
+            {selected == 0 ?
+                <BookForm itemService={itemService}/>
+            : selected == 1 ?
+                <VideoForm itemService={itemService}/>
+            : selected == 2 ?
+                <BlogForm itemService={itemService}/>
+            :
+                <BlogForm itemService={itemService}/>}
+        </div>
     )
 
+}
+
+
+const styles = {
+    button: {
+        margin: 10,
+        backgroundColor: 'yellow'
+    },
+    selectedButton: {
+        margin: 10,
+        backgroundColor: 'orange'
+    }
 }
