@@ -2,7 +2,7 @@ import React from 'react';
 import { Embed, Table } from 'semantic-ui-react';
 
 export const Video = ({ video }) => {
-    const { url, author, title, comment } = video;
+    const { author, title, comment } = video;
     return (
         <div>
             <Table definition>
