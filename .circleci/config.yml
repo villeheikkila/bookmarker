@@ -43,11 +43,14 @@ jobs:
           name: Deploy to Netlify
           command: netlify deploy --dir=./public -p
 
-  workflows:
+workflows:
   version: 2
-  build:
+  build_and_deploy:
     jobs:
-      - build
+      - test
+      - build:
+          requires:
+            - test
       - deploy:
           requires:
             - build
