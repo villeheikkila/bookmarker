@@ -21,6 +21,10 @@ export const useField = (type) => {
 export const useResource = url => {
     const [resources, setResources] = useState([])
 
+    const init = () => {
+        if (resources.length === 0) getAll()
+    }
+
     const create = async data => {
         const newResource = await axios.post(url, data)
         const updatedResources = resources.concat(newResource.data)
@@ -34,7 +38,8 @@ export const useResource = url => {
 
     const service = {
         create,
-        getAll
+        getAll,
+        init
     }
 
     return [resources, service]

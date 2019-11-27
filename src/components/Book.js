@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 
 export const Book = ({ book }) => {
+    console.log("TCL: Book -> book", book)
     const { kirjoittaja, otsikko, isbn, tagit, related } = book;
     return (
         <Table definition>
@@ -23,12 +24,12 @@ export const Book = ({ book }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Tagit</Table.Cell>
-                    <Table.Cell>{tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell>{tagit && tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Vastaavat kurssit</Table.Cell>
-                    <Table.Cell>{related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
+                    <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
                 </Table.Row>
             </Table.Body>
         </Table>
