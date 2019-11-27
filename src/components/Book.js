@@ -2,18 +2,18 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 
 export const Book = ({ book }) => {
-    const { kirjoittaja, otsikko, isbn, tagit, related } = book;
+    const { author, title, isbn, tags, related } = book;
     return (
         <Table definition>
             <Table.Body>
                 <Table.Row>
-                    <Table.Cell width={3}>Kirjoittaja</Table.Cell>
-                    <Table.Cell>{kirjoittaja}</Table.Cell>
+                    <Table.Cell width={3}>Author</Table.Cell>
+                    <Table.Cell>{author}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>Otsikko</Table.Cell>
-                    <Table.Cell>{otsikko}</Table.Cell>
+                    <Table.Cell width={3}>Title</Table.Cell>
+                    <Table.Cell>{title}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
@@ -22,17 +22,15 @@ export const Book = ({ book }) => {
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>Tagit</Table.Cell>
-                    <Table.Cell>{tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell width={3}>Tags</Table.Cell>
+                    <Table.Cell>{tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>Vastaavat kurssit</Table.Cell>
+                    <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>{related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
                 </Table.Row>
             </Table.Body>
-        </Table>
-
+        </Table>        
     )
-
 }
