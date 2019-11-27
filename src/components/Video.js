@@ -23,7 +23,7 @@ export const Video = ({ video }) => {
                     </Table.Row>
 
                 </Table.Body>
-                
+
             </Table>
             <Embed source='youtube' placeholder='http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg' id='dQw4w9WgXcQ' />
         </div>

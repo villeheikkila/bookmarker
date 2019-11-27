@@ -23,14 +23,14 @@ export const Book = ({ book }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell>{tags && tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>{related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
+                    <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
                 </Table.Row>
             </Table.Body>
-        </Table>        
+        </Table>
     )
 }

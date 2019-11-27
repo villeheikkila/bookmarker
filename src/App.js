@@ -9,15 +9,16 @@ import { useResource } from './hooks';
 function App() {
   const [items, itemService] = useResource('http://127.0.0.1:5500/db.json')
   const [categorySelected, setCategorySelected] = useState(0)
+
   useEffect(() => {
-    if (items.length === 0) itemService.getAll()
-  }, [items.length, itemService])
+    itemService.init()
+  }, [itemService])
 
   return (
     <Container>
       <Header>
         <Header size='huge'>Lukuvinkkikirjasto</Header>
-        <NavBar selected={categorySelected} setSelected={setCategorySelected}/>
+        <NavBar selected={categorySelected} setSelected={setCategorySelected} />
         <CreateForm selected={categorySelected} itemService={itemService} />
         <ListEntries items={items} selected={categorySelected} />
       </Header>

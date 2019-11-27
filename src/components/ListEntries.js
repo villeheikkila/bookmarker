@@ -29,7 +29,7 @@ export const ListEntries = ({ items, selected }) => {
         <>
             <Divider horizontal>
                 <Header as='h2'>
-                    {selected === 0 ? 'Books': selected === 1 ? 'Videos' : selected === 2 ? 'Articles': selected === 3 ? 'Blog posts' : 'All items'}
+                    {selected === 0 ? 'Books' : selected === 1 ? 'Videos' : selected === 2 ? 'Articles' : selected === 3 ? 'Blog posts' : 'All items'}
                 </Header>
             </Divider>
 

@@ -19,23 +19,40 @@ export const useField = (type) => {
 }
 
 export const useResource = url => {
-    const [resources, setResources] = useState([])
+    const [resources, setResources] = useState([]);
+    const [loading, setLoading] = useState([]);
+    const [error, setError] = useState([]);
+
+    const init = () => (resources.length === 0) && getAll();
 
     const create = async data => {
-        const newResource = await axios.post(url, data)
-        const updatedResources = resources.concat(newResource.data)
-        setResources(updatedResources)
+        try {
+            const newResource = await axios.post(url, data)
+            const updatedResources = resources.concat(newResource.data)
+            setResources(updatedResources)
+            setError(false);
+        } catch (error) {
+            setError(true);
+        }
     }
 
     const getAll = async () => {
-        const response = await axios.get(url)
-        setResources(response.data)
+        setLoading(true);
+        try {
+            const response = await axios.get(url);
+            setResources(response.data);
+            setError(false);
+        } catch (error) {
+            setError(true);
+        }
+        setLoading(false);
     }
 
     const service = {
+        init,
         create,
-        getAll
+        getAll,
     }
 
-    return [resources, service]
+    return [resources, service, error, loading,]
 }

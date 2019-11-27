@@ -5,16 +5,16 @@ import { VideoForm } from './saving_forms/VideoForm';
 
 export const CreateForm = ({ selected, itemService }) => {
 
-    return(
+    return (
         <div>
             {selected === 0 ?
-                <BookForm itemService={itemService}/>
-            : selected === 1 ?
-                <VideoForm itemService={itemService}/>
-            : selected === 2 ?
-                <BlogForm itemService={itemService}/>
-            :
-                <BlogForm itemService={itemService}/>}
+                <BookForm itemService={itemService} />
+                : selected === 1 ?
+                    <VideoForm itemService={itemService} />
+                    : selected === 2 ?
+                        <BlogForm itemService={itemService} />
+                        :
+                        <BlogForm itemService={itemService} />}
         </div>
     )
 
