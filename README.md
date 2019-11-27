@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/CodemonkeysOhtu/lukuvinkkikirjasto-frontend.svg?style=svg)](https://circleci.com/gh/CodemonkeysOhtu/lukuvinkkikirjasto-frontend)
+
 # Development
 
 ### Start frontend development version
