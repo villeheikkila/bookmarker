@@ -1,36 +1,55 @@
-{
-  "books": [
-    {
-      "id": 30,
-      "kirjoittaja": "Robert Martin",
-      "otsikko": "Clean Code: A Handbook of Agile Software Craftsmanship",
-      "isbn": "978-0132350884",
-      "tagit": ["Ohjelmointi, design patterns, agile"],
-      "related": ["TKT20006 Ohjelmistotuotanto"]
-    },
-    {
-      "id": 89,
-      "kirjoittaja": "Kent Beck",
-      "otsikko": "Individuals and interactions",
-      "isbn": "978-0132350884",
-      "tagit": ["Ohjelmointi, design patterns, collaboration"],
-      "related": ["TKT20006 Ohjelmistotuotanto"]
-    },
-    {
-      "id": 91,
-      "kirjoittaja": "James Grenning",
-      "otsikko": "Working software",
-      "isbn": "978-0132350884",
-      "tagit": ["Ohjelmointi, design patterns, interaction"],
-      "related": ["TKT20006 Ohjelmistotuotanto"]
-    },
-    {
-      "id": 92,
-      "kirjoittaja": "Jim Highsmith",
-      "otsikko": "Customer collaboration",
-      "isbn": "978-0132350884",
-      "tagit": ["Ohjelmointi, design patterns"],
-      "related": ["TKT20006 Ohjelmistotuotanto"]
-    }
-  ]
-}
+[
+  {
+    "id": 30,
+    "kirjoittaja": "Robert Martin",
+    "otsikko": "Clean Code: A Handbook of Agile Software Craftsmanship",
+    "isbn": "978-0132350884",
+    "tagit": ["Ohjelmointi, design patterns, agile"],
+    "related": ["TKT20006 Ohjelmistotuotanto"],
+    "type": "book"
+  },
+  {
+    "id": 89,
+    "kirjoittaja": "Kent Beck",
+    "otsikko": "Individuals and interactions",
+    "isbn": "978-0132350884",
+    "tagit": ["Ohjelmointi, design patterns, collaboration"],
+    "related": ["TKT20006 Ohjelmistotuotanto"],
+    "type": "book"
+  },
+  {
+    "id": 91,
+    "kirjoittaja": "James Grenning",
+    "otsikko": "Working software",
+    "isbn": "978-0132350884",
+    "tagit": ["Ohjelmointi, design patterns, interaction"],
+    "related": ["TKT20006 Ohjelmistotuotanto"],
+    "type": "book"
+  },
+  {
+    "id": 92,
+    "kirjoittaja": "Jim Highsmith",
+    "otsikko": "Customer collaboration",
+    "isbn": "978-0132350884",
+    "tagit": ["Ohjelmointi, design patterns"],
+    "related": ["TKT20006 Ohjelmistotuotanto"],
+    "type": "book"
+  },
+  {
+    "id": 130,
+    "type": "video",
+    "url": "https://youtu.be/dQw4w9WgXcQ",
+    "comment": "Timeless classic!",
+    "title": "Never gonna give you up",
+    "author": "Rick Astley"
+
+  },
+  {
+    "id": 29,
+    "type": "podcast",
+    "url": "https://www.sbspod.com/episodes/qa-bands-chains-useful-supplements-and-tweaking-your-program",
+    "author": "Greg Nuckols",
+    "title": "Q&A: Bands, Chains, Useful Supplements, and Tweaking Your Program",
+    "description": "In today’s episode, Greg and Eric field listener questions about protein powders, accommodating resistance (bands, chains, etc.), pull-up technique, how to tweak your training program to break through plateaus, and much more. To finish off the episode, Greg and Eric share their perspectives on the most useful, evidence-based supplements."
+  }
+]
