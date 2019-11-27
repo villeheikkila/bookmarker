@@ -43,7 +43,7 @@ jobs:
           command: sudo npm install -g --silent netlify-cli
       - run:
           name: Deploy to Netlify
-          command: netlify deploy --dir=./public -p
+          command: netlify deploy --prod --dir=./public -p
 
 workflows:
   version: 2
