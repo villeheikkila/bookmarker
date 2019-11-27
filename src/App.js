@@ -12,7 +12,6 @@ function App() {
     itemService.init()
   }, [itemService])
 
-
   return (
     <Container>
       <Header>

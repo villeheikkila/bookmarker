@@ -2,7 +2,6 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 
 export const Book = ({ book }) => {
-    console.log("TCL: Book -> book", book)
     const { kirjoittaja, otsikko, isbn, tagit, related } = book;
     return (
         <Table definition>
