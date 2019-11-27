@@ -1,37 +1,37 @@
 [
   {
     "id": 30,
-    "kirjoittaja": "Robert Martin",
-    "otsikko": "Clean Code: A Handbook of Agile Software Craftsmanship",
+    "author": "Robert Martin",
+    "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
     "isbn": "978-0132350884",
-    "tagit": ["Ohjelmointi, design patterns, agile"],
+    "tags": ["Ohjelmointi, design patterns, agile"],
     "related": ["TKT20006 Ohjelmistotuotanto"],
     "type": "book"
   },
   {
     "id": 89,
-    "kirjoittaja": "Kent Beck",
-    "otsikko": "Individuals and interactions",
+    "author": "Kent Beck",
+    "title": "Individuals and interactions",
     "isbn": "978-0132350884",
-    "tagit": ["Ohjelmointi, design patterns, collaboration"],
+    "tags": ["Ohjelmointi, design patterns, collaboration"],
     "related": ["TKT20006 Ohjelmistotuotanto"],
     "type": "book"
   },
   {
     "id": 91,
-    "kirjoittaja": "James Grenning",
-    "otsikko": "Working software",
+    "author": "James Grenning",
+    "title": "Working software",
     "isbn": "978-0132350884",
-    "tagit": ["Ohjelmointi, design patterns, interaction"],
+    "tags": ["Ohjelmointi, design patterns, interaction"],
     "related": ["TKT20006 Ohjelmistotuotanto"],
     "type": "book"
   },
   {
     "id": 92,
-    "kirjoittaja": "Jim Highsmith",
-    "otsikko": "Customer collaboration",
+    "author": "Jim Highsmith",
+    "title": "Customer collaboration",
     "isbn": "978-0132350884",
-    "tagit": ["Ohjelmointi, design patterns"],
+    "tags": ["Ohjelmointi, design patterns"],
     "related": ["TKT20006 Ohjelmistotuotanto"],
     "type": "book"
   },
