@@ -6,8 +6,8 @@ import { ListEntries } from './components/ListEntries';
 import { useResource } from './hooks';
 
 function App() {
-  const [items, itemService] = useResource('http://localhost:3001/books');
-
+  const [items, itemService] = useResource('http://localhost:3001/books')
+  const [books, booksService] = useResource('http://localhost:3001/books')
   useEffect(() => {
     if (books.length === 0) booksService.getAll()
   }, [books.length, booksService])

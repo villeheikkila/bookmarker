@@ -11,7 +11,7 @@ export const ListEntries = ({ items }) => {
                 </Header>
             </Divider>
 
-            {books.map(book => <Book key={book.id} book={book} />)}
+            {items.map(book => <Book key={book.id} book={book} />)}
         </>
     )
 }

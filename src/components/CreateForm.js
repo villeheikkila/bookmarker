@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BookForm } from './saving_forms/BookForm'
-import { VideoForm } from './saving_forms/VideoForm'
-import { BlogForm } from './saving_forms/BlogForm'
+import { BlogForm } from './saving_forms/BlogForm';
+import { BookForm } from './saving_forms/BookForm';
+import { VideoForm } from './saving_forms/VideoForm';
 
 export const CreateForm = ({ itemService }) => {
 
@@ -15,17 +15,17 @@ export const CreateForm = ({ itemService }) => {
         <div>
             <div style={{widht:'100%',backgroundColor:'green',height:50}}>
                 <div style={{textAlign:'center'}}>
-                    <button style={selected == 0 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(0)}>Book</button>
-                    <button style={selected == 1 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(1)}>Video</button>
-                    <button style={selected == 2 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(2)}>Article</button>
-                    <button style={selected == 3 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(3)}>Blog</button>
+                    <button style={selected === 0 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(0)}>Book</button>
+                    <button style={selected === 1 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(1)}>Video</button>
+                    <button style={selected === 2 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(2)}>Article</button>
+                    <button style={selected === 3 ? styles.selectedButton : styles.button} onClick={()=>buttonClicked(3)}>Blog</button>
                 </div>
             </div>
-            {selected == 0 ?
+            {selected === 0 ?
                 <BookForm itemService={itemService}/>
-            : selected == 1 ?
+            : selected === 1 ?
                 <VideoForm itemService={itemService}/>
-            : selected == 2 ?
+            : selected === 2 ?
                 <BlogForm itemService={itemService}/>
             :
                 <BlogForm itemService={itemService}/>}
