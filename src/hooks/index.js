@@ -22,8 +22,14 @@ export const useResource = url => {
     const [resources, setResources] = useState([]);
     const [loading, setLoading] = useState([]);
     const [error, setError] = useState([]);
+    const [isLoaded, setLoaded] = useState(false);
 
-    const init = () => (resources.length === 0) && getAll();
+    const init = () => {
+        if (!isLoaded) {
+            getAll();
+            setLoaded(true);
+        }
+    }
 
     const create = async data => {
         try {
