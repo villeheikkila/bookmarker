@@ -7,7 +7,7 @@ import { NavBar } from './components/NavBar';
 import { useResource } from './hooks';
 
 function App() {
-  const [items, itemService] = useResource(process.env.REACT_APP_BACKEND)
+  const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL)
   const [categorySelected, setCategorySelected] = useState(0)
 
   useEffect(() => {
