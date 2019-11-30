@@ -5,7 +5,8 @@ import { useField } from '../../hooks';
 export const ArticleForm = ({ booksService }) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text')
     const [otsikko, otsikkoReset] = useField('text')
-    const [isbn, isbnReset] = useField('text')
+    const [publisher, publisherReset] = useField('text')
+    const [localDate, localDateReset] = useField('text')
     const [tagit, tagitReset] = useField('text')
     const [related, relatedReset] = useField('text')
     
@@ -14,16 +15,18 @@ export const ArticleForm = ({ booksService }) => {
 
         booksService.create({
             id: Math.floor((Math.random() * 1000) + 1),
-            kirjoittaja: kirjoittaja.value,
-            otsikko: otsikko.value,
-            isbn: isbn.value,
+            author: kirjoittaja.value,
+            title: otsikko.value,
+            publisher: publisher.value,
+            localDate: localDate.value,
             tagit: tagit.value.split(','),
             related: related.value.split(',')
         })
 
         kirjoittajaReset();
         otsikkoReset();
-        isbnReset();
+        publisherReset();
+        localDateReset();
         tagitReset();
         relatedReset();
     }
@@ -41,8 +44,13 @@ export const ArticleForm = ({ booksService }) => {
             </Form.Field>
 
             <Form.Field>
-                <label>ISBN</label>
-                <input {...isbn} />
+                <label>Julkaisija</label>
+                <input {...publisher} />
+            </Form.Field>
+
+            <Form.Field>
+                <label>Päivämäärä</label>
+                <input {...localDate} />
             </Form.Field>
 
             <Form.Field>

@@ -3,6 +3,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks';
 
 export const VideoForm = ({ itemService }) => {
+    const [author, authorReset] = useField('text')
     const [otsikko, otsikkoReset] = useField('text')
     const [url, urlReset] = useField('text')
     const [relatedCourses, relatedCoursesReset] = useField('text')
@@ -13,12 +14,14 @@ export const VideoForm = ({ itemService }) => {
 
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
-            otsikko: otsikko.value,
+            author: author.value,
+            title: otsikko.value,
             url: url.value,
             relatedCourses: relatedCourses.value.split(','),
-            kommentti: kommentti.value
+            comment: kommentti.value
         })
 
+        authorReset();
         otsikkoReset();
         urlReset();
         relatedCoursesReset();
@@ -27,6 +30,11 @@ export const VideoForm = ({ itemService }) => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <Form.Field>
+                <label>Kirjoittaja</label>
+                <input {...author} />
+            </Form.Field>
+            
             <Form.Field>
                 <label>Otsikko</label>
                 <input {...otsikko} />
