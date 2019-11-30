@@ -6,6 +6,8 @@ export const BookForm = ({ itemService }) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text')
     const [otsikko, otsikkoReset] = useField('text')
     const [isbn, isbnReset] = useField('text')
+    const [year, yearReset] = useField('text')
+    const [edition, editionReset] = useField('text')
     const [tagit, tagitReset] = useField('text')
     const [related, relatedReset] = useField('text')
     
@@ -15,8 +17,10 @@ export const BookForm = ({ itemService }) => {
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             kirjoittaja: kirjoittaja.value,
-            otsikko: otsikko.value,
+            title: otsikko.value,
             isbn: isbn.value,
+            year: year.value,
+            edition: edition.value,
             tagit: tagit.value.split(','),
             related: related.value.split(',')
         })
@@ -24,6 +28,8 @@ export const BookForm = ({ itemService }) => {
         kirjoittajaReset();
         otsikkoReset();
         isbnReset();
+        yearReset();
+        editionReset();
         tagitReset();
         relatedReset();
     }
@@ -43,6 +49,16 @@ export const BookForm = ({ itemService }) => {
             <Form.Field>
                 <label>ISBN</label>
                 <input {...isbn} />
+            </Form.Field>
+
+            <Form.Field>
+                <label>Vuosi</label>
+                <input {...year} />
+            </Form.Field>
+
+            <Form.Field>
+                <label>Edition</label>
+                <input {...edition} />
             </Form.Field>
 
             <Form.Field>
