@@ -21,14 +21,9 @@ export const Video = ({ video }) => {
                         <Table.Cell width={3}>Comment</Table.Cell>
                         <Table.Cell>{comment}</Table.Cell>
                     </Table.Row>
-
                 </Table.Body>
-
             </Table>
             <Embed source='youtube' placeholder='http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg' id='dQw4w9WgXcQ' />
         </div>
-
-
     )
-
 }
