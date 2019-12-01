@@ -7,10 +7,9 @@ import { NavBar } from './components/NavBar';
 import { useResource } from './hooks';
 
 function App() {
-  const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL+'/books')
+  const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL)
   const [showForm, setShowForm] = useState(false)
-  const [categorySelected, setCategorySelected] = useState(0)
-
+  const [categorySelected, setCategorySelected] = useState(-1)
   useEffect(() => {
     itemService.init()
   }, [itemService])
@@ -20,8 +19,9 @@ function App() {
       <Header>
         <Header size='huge'>Lukuvinkkikirjasto</Header>
         <NavBar selected={categorySelected} setSelected={setCategorySelected} />
-        <Button onClick={() => setShowForm(!showForm)}>Show form</Button>
-        {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div/>}
+        {categorySelected >= 0 && categorySelected < 5 ?
+          <Button onClick={() => setShowForm(!showForm)}>Show form</Button> : <div />}
+        {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
         <ListEntries items={items} selected={categorySelected} />
       </Header>
     </Container >

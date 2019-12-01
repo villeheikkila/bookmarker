@@ -1,29 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Divider, Header } from 'semantic-ui-react';
-import { Book } from './Book';
-import { Video } from './Video';
+import { Books } from './Books';
+import { ItemsTable } from './ItemsTable';
+import { Videos } from './Videos';
 
 export const ListEntries = ({ items, selected }) => {
     const [filteredItems, setFilteredItems] = useState([])
 
     useEffect(() => {
-        switch (selected) {
-            case 0:
-                setFilteredItems(items.filter(item => item.type === 'book'))
-                break
-            case 1:
-                setFilteredItems(items.filter(item => item.type === 'video'))
-                break
-            case 2:
-                setFilteredItems(items.filter(item => item.type === 'article'))
-                break
-            case 3:
-                setFilteredItems(items.filter(item => item.type === 'blog'))
-                break
-            default:
-                setFilteredItems(items)
+        if (items !== undefined) {
+            switch (selected) {
+                case 0:
+                    setFilteredItems(items.books)
+                    break
+                case 1:
+                    setFilteredItems(items.videos)
+                    break
+                case 2:
+                    setFilteredItems(items.articles)
+                    break
+                case 3:
+                    setFilteredItems(items.blogposts)
+                    break
+                default:
+                    setFilteredItems([])
+            }
         }
-    }, [items, selected, setFilteredItems])
+    }, [items, selected])
 
     return (
         <>
@@ -33,11 +36,11 @@ export const ListEntries = ({ items, selected }) => {
                 </Header>
             </Divider>
 
-            {filteredItems
-                .map(item => item.type === 'book' ?
-                    <Book key={item.id} book={item} /> :
-                    item.type === 'video' ? <Video key={item.id} video={item} /> :
-                        <div key={item.id}>Article or blog!</div>)}
+            {selected === 0 ? <Books books={filteredItems} /> :
+                selected === 1 ? <Videos videos={filteredItems} /> :
+                    selected === 2 ? <div>Articles</div> :
+                        selected === 3 ? <div>Blogposts</div> :
+                            <ItemsTable items={items} />}
         </>
     )
 }
