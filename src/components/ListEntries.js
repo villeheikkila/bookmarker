@@ -35,8 +35,10 @@ export const ListEntries = ({ items, selected }) => {
                 </Header>
             </Divider>
 
-            {selected === 0 ? <Books books={filteredItems} /> :
+            {   selected === 0 ? <Books books={filteredItems} /> :
                 selected === 1 ? <Videos videos={filteredItems} /> :
+                selected === 2 ? <div>Articles</div> :
+                selected === 3 ? <div>Blogposts</div> :
                     <ItemsTable items={items} />}
         </>
     )
