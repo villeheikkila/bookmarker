@@ -6,14 +6,15 @@ import { Videos } from './Videos';
 
 export const ListEntries = ({ items, selected }) => {
     const [filteredItems, setFilteredItems] = useState([])
+
     useEffect(() => {
-        if (!items.length === 0 && items !== undefined) {
+        if (items !== undefined) {
             switch (selected) {
                 case 0:
                     setFilteredItems(items.books)
                     break
                 case 1:
-                    setFilteredItems(items.items)
+                    setFilteredItems(items.videos)
                     break
                 case 2:
                     setFilteredItems(items.articles)
@@ -22,7 +23,7 @@ export const ListEntries = ({ items, selected }) => {
                     setFilteredItems(items.blogposts)
                     break
                 default:
-                    setFilteredItems(items)
+                    setFilteredItems([])
             }
         }
     }, [items, selected])
@@ -35,11 +36,11 @@ export const ListEntries = ({ items, selected }) => {
                 </Header>
             </Divider>
 
-            {   selected === 0 ? <Books books={filteredItems} /> :
+            {selected === 0 ? <Books books={filteredItems} /> :
                 selected === 1 ? <Videos videos={filteredItems} /> :
-                selected === 2 ? <div>Articles</div> :
-                selected === 3 ? <div>Blogposts</div> :
-                    <ItemsTable items={items} />}
+                    selected === 2 ? <div>Articles</div> :
+                        selected === 3 ? <div>Blogposts</div> :
+                            <ItemsTable items={items} />}
         </>
     )
 }
