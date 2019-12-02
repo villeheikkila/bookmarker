@@ -3,7 +3,7 @@ import { Button } from 'semantic-ui-react'
 
 export const NavBar = ({ selected, setSelected }) => {
     return (
-        <div style={{ widht: '100%', backgroundColor: '#fef6fb', height: 50 }}>
+        <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50 }}>
             <div style={{ textAlign: 'center' }}>
                 <Button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(10)}>All</Button>
                 <Button style={selected === 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(0)}>Book</Button>
