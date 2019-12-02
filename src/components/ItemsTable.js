@@ -14,7 +14,7 @@ export const ItemsTable = ({ items }) => {
         if (items.length !== 0) {
             setData(prevState => ({
                 ...prevState,
-                data: Object.values(items).reduce((result, prev) => result.concat(prev.map(p => ({ type: p.type, author: p.author, title: p.author }))), [])
+                data: Object.values(items).reduce((result, prev) => result.concat(prev.map(p => ({ type: p.type, author: p.author, title: p.title }))), [])
             }))
         }
     }, [items])
