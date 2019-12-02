@@ -26,7 +26,7 @@ export const Videos = ({ videos }) => {
     }
 
     const sortByTitle = () => {
-        const clone = sortDirections.author ? _.sortBy(sortedVideos, ['title']) : _.sortBy(sortedVideos, ['title']).reverse()
+        const clone = sortDirections.title ? _.sortBy(sortedVideos, ['title']) : _.sortBy(sortedVideos, ['title']).reverse()
         setSortedVideos(clone)
         setSortDirections(prev => ({
             ...prev,
