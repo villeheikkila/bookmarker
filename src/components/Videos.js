@@ -11,7 +11,7 @@ export const Videos = ({ videos }) => {
     })
 
     useEffect(() => {
-        if (videos.length !== 0) {
+        if (videos !== undefined && videos.length !== 0) {
             setSortedVideos(videos)
         }
     }, [videos])

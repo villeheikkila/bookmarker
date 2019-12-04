@@ -21,8 +21,8 @@ export const BookForm = ({ itemService }) => {
             isbn: isbn.value,
             year: year.value,
             edition: edition.value,
-            tagit: tagit.value.split(','),
-            related: related.value.split(',')
+            tagit: tagit.value,
+            related: related.value
         }, "books")
 
         kirjoittajaReset();

@@ -9,15 +9,15 @@ export const VideoForm = ({ itemService }) => {
     const [relatedCourses, relatedCoursesReset] = useField('text')
     const [kommentti, kommenttiReset] = useField('text')
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        itemService.create({
+        await itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             author: author.value,
             title: otsikko.value,
             url: url.value,
-            relatedCourses: relatedCourses.value.split(','),
+            relatedCourses: relatedCourses.value,
             comment: kommentti.value
         }, "videos")
 
