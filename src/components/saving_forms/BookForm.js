@@ -16,7 +16,7 @@ export const BookForm = ({ itemService }) => {
 
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
-            kirjoittaja: kirjoittaja.value,
+            author: kirjoittaja.value,
             title: otsikko.value,
             isbn: isbn.value,
             year: year.value,

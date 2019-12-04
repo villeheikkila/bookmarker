@@ -13,8 +13,8 @@ export const BlogForm = ({ itemService }) => {
 
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
-            otsikko: otsikko.value,
-            kirjoittaja: kirjoittaja.value,
+            title: otsikko.value,
+            author: kirjoittaja.value,
             url: url.value,
             relatedCourses: relatedCourses.value
         }, "blogposts")
