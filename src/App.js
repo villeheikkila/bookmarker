@@ -18,7 +18,7 @@ function App() {
     <Container>
       <Header>
         <Header size='huge'>Lukuvinkkikirjasto</Header>
-        <NavBar selected={categorySelected} setSelected={setCategorySelected} />
+        <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
         {categorySelected >= 0 && categorySelected < 5 ?
           <Button onClick={() => setShowForm(!showForm)}>Show form</Button> : <div />}
         {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}

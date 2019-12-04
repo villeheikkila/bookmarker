@@ -1,15 +1,20 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 
-export const NavBar = ({ selected, setSelected }) => {
+export const NavBar = ({ selected, setSelected, setShowForm }) => {
+    const navButtonClicked = (index) => {
+        setSelected(index)
+        setShowForm(false)
+    }
+    
     return (
         <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50 }}>
             <div style={{ textAlign: 'center' }}>
-                <Button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(10)}>All</Button>
-                <Button style={selected === 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(0)}>Book</Button>
-                <Button style={selected === 1 ? styles.selectedButton : styles.Button} onClick={() => setSelected(1)}>Video</Button>
-                <Button style={selected === 2 ? styles.selectedButton : styles.Button} onClick={() => setSelected(2)}>Article</Button>
-                <Button style={selected === 3 ? styles.selectedButton : styles.Button} onClick={() => setSelected(3)}>Blog</Button>
+                <Button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(10)}>All</Button>
+                <Button style={selected === 0 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(0)}>Book</Button>
+                <Button style={selected === 1 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(1)}>Video</Button>
+                <Button style={selected === 2 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(2)}>Article</Button>
+                <Button style={selected === 3 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(3)}>Blog</Button>
             </div>
         </div>
     )
