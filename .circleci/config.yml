@@ -1,6 +1,4 @@
 version: 2
-orbs:
-  cypress: cypress-io/cypress@1
 
 jobs:
   build:
@@ -19,12 +17,13 @@ jobs:
 
       - run: yarn install
 
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+      - run: yarn run cypress:run
       - run: yarn test
 
   deploy:
@@ -53,8 +52,7 @@ workflows:
 
   build_and_deploy:
     jobs:
-      - cypress/run:
-        executor: with-chrome
+      - build
       - deploy:
           requires:
             - build
