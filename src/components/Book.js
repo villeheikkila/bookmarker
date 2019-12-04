@@ -22,18 +22,19 @@ export const Book = ({ book }) => {
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tags}</Table.Cell>
-                </Table.Row>
-
-                <Table.Row>
                     <Table.Cell width={3}>Year</Table.Cell>
                     <Table.Cell>{year}</Table.Cell>
                 </Table.Row>
 
+
+                <Table.Row>
+                    <Table.Cell width={3}>Tags</Table.Cell>
+                    <Table.Cell>{tags && tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                </Table.Row>
+
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>{related}</Table.Cell>
+                    <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
                 </Table.Row>
             </Table.Body>
         </Table>
