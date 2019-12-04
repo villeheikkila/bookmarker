@@ -17,7 +17,7 @@ export const VideoForm = ({ itemService }) => {
             author: author.value,
             title: otsikko.value,
             url: url.value,
-            relatedCourses: relatedCourses.value.splice(","),
+            relatedCourses: relatedCourses.value.split(","),
             comment: kommentti.value
         }, "videos")
 
