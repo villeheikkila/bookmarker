@@ -6,7 +6,7 @@ export const OwnLoader = () => {
     return(
         <Loader 
             type="Bars"
-            color="orange"
+            color="#d77fa1"
             height={50}
             width={50}
             style={{textAlign:'center'}}
