@@ -41,7 +41,7 @@ export const VideoForm = ({ itemService }) => {
         } else {
             id = url.value.split("//")[1].split("/")[1]
         }
-        fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id='+id.trim()+'&key=AIzaSyDKMW-erZLu2smSyRlbhdJ4MKcyjrSRPeU')//+process.env.YOUTUBE_API_KEY)
+        fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id='+id.trim()+'&key='+process.env.YOUTUBE_API_KEY)
         .then((response) => response.json())
         .then((json) => {
             setLoadErrorMessage()
