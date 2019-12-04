@@ -1,4 +1,7 @@
 version: 2
+orbs:
+  cypress: cypress-io/cypress@1
+
 jobs:
   build:
     docker:
@@ -50,6 +53,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build
+      - cypress/run:
       - deploy:
           requires:
             - build
