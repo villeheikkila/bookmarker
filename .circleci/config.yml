@@ -1,5 +1,8 @@
 version: 2
 
+orbs:
+  cypress: cypress-io/cypress@1.11.0
+
 jobs:
   build:
     docker:
@@ -23,7 +26,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: yarn run cypress:run
       - run: yarn test
 
   deploy:
@@ -49,6 +51,13 @@ jobs:
 
 workflows:
   version: 2
+
+  cypress_test:
+      - cypress/run:
+          executor: cypress/browsers-chrome69
+          browser: chrome
+          record: true
+          start: 'npm run start:ci'
 
   build_and_deploy:
     jobs:
