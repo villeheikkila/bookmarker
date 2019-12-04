@@ -23,7 +23,7 @@ export const BookForm = ({ itemService }) => {
             edition: edition.value,
             tagit: tagit.value.split(','),
             related: related.value.split(',')
-        })
+        }, "books")
 
         kirjoittajaReset();
         otsikkoReset();

@@ -19,7 +19,7 @@ export const VideoForm = ({ itemService }) => {
             url: url.value,
             relatedCourses: relatedCourses.value.split(','),
             comment: kommentti.value
-        })
+        }, "videos")
 
         authorReset();
         otsikkoReset();

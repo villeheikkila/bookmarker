@@ -17,7 +17,7 @@ export const BlogForm = ({ itemService }) => {
             kirjoittaja: kirjoittaja.value,
             url: url.value,
             relatedCourses: relatedCourses.value.split(',')
-        })
+        }, "blogposts")
 
         otsikkoReset();
         kirjoittajaReset();
