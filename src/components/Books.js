@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Book } from './Book'
 
 export const Books = ({books}) => {
@@ -8,6 +8,7 @@ export const Books = ({books}) => {
         if (books !== undefined && books.length !== 0) {
             setSortedBooks(books)
         }
+        else setSortedBooks([])
     }, [books])
 
     return (

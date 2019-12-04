@@ -13,7 +13,8 @@ export const Videos = ({ videos }) => {
     useEffect(() => {
         if (videos !== undefined && videos.length !== 0) {
             setSortedVideos(videos)
-        }
+        } 
+        else setSortDirections([])
     }, [videos])
 
     const sortByAuthor = () => {
