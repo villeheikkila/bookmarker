@@ -50,10 +50,11 @@ jobs:
 
 workflows:
   version: 2
+
   build_and_deploy:
     jobs:
+      - cypress/run
       - build
-      - cypress/run:
       - deploy:
           requires:
             - build
