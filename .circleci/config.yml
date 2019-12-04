@@ -54,8 +54,7 @@ workflows:
   build_and_deploy:
     jobs:
       - cypress/run:
-          executor: with-chrome
-      - build
+        executor: with-chrome
       - deploy:
           requires:
             - build
