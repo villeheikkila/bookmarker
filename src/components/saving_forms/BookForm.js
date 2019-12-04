@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks';
+import {OwnLoader} from '../OwnLoader'
 
 export const BookForm = ({ itemService }) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text')
@@ -10,6 +11,9 @@ export const BookForm = ({ itemService }) => {
     const [edition, editionReset] = useField('text')
     const [tagit, tagitReset] = useField('text')
     const [related, relatedReset] = useField('text')
+    const [isbnErrorMessage, setIsbnErrorMessage] = useState()
+    const [showFullForm, setShowFullForm] = useState(false)
+    const [isbnLoader, setIsbnLoader] = useState(false)
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,32 +38,78 @@ export const BookForm = ({ itemService }) => {
         relatedReset();
     }
 
+    const autoFillWithISBN = () => {
+        setIsbnLoader(true)
+        fetch('https://openlibrary.org/api/books?bibkeys=ISBN:'+isbn.value.trim()+'&jscmd=details&format=json')
+        .then((response) => response.json())
+        .then((json) => {
+            setIsbnErrorMessage()
+            const data = json['ISBN:'+isbn.value]
+            if(data === undefined) {
+                isbnError()
+                return
+            }
+            const details = data['details']
+            kirjoittajaReset(details['authors'][0]['name'])
+            otsikkoReset(details['title'])
+            yearReset(details['publish_date'])
+            editionReset(details['revision'])
+            setIsbnLoader(false)
+            setShowFullForm(true)
+        })
+        .catch(()=>isbnError)
+    }
+
+    const isbnError = () => {
+        setIsbnLoader(false)
+        setIsbnErrorMessage("Couldn't find anything with given ISBN")
+        setTimeout(()=>{
+            setIsbnErrorMessage()
+        },5000)
+    }
+
     return (
         <Form onSubmit={handleSubmit}>
-            <Form.Field>
-                <label>Kirjoittaja</label>
-                <input {...kirjoittaja} />
-            </Form.Field>
-
-            <Form.Field>
-                <label>Otsikko</label>
-                <input {...otsikko} />
-            </Form.Field>
-
             <Form.Field>
                 <label>ISBN</label>
                 <input {...isbn} />
             </Form.Field>
 
-            <Form.Field>
-                <label>Vuosi</label>
-                <input {...year} />
-            </Form.Field>
+            <button onClick={autoFillWithISBN}>Autofill</button>
 
-            <Form.Field>
-                <label>Edition</label>
-                <input {...edition} />
-            </Form.Field>
+            <p style={{color:'red'}}>{isbnErrorMessage}</p>
+
+            {isbnLoader ?
+                <OwnLoader />
+            :
+                null
+            }
+
+            {showFullForm ?
+                <div>
+                    <Form.Field>
+                        <label>Kirjoittaja</label>
+                        <input {...kirjoittaja} />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label>Otsikko</label>
+                        <input {...otsikko} />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label>Vuosi</label>
+                        <input {...year} />
+                    </Form.Field>
+
+                    <Form.Field>
+                        <label>Edition</label>
+                        <input {...edition} />
+                    </Form.Field>
+                </div>
+            :
+                null
+            }
 
             <Form.Field>
                 <label>Tagit</label>
