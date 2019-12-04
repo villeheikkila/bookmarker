@@ -21,7 +21,7 @@ export const ArticleForm = ({ booksService }) => {
             localDate: localDate.value,
             tagit: tagit.value.split(','),
             related: related.value.split(',')
-        })
+        }, "articles")
 
         kirjoittajaReset();
         otsikkoReset();

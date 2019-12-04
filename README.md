@@ -23,3 +23,8 @@ Starts frontend by default on port 3000
 ### Run functional or Cucumber -tests
 
 ```npm run fute```
+
+
+--------------
+
+[Backend -repositorio](https://github.com/CodemonkeysOhtu/lukuvinkkikirjasto)

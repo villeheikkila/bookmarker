@@ -31,10 +31,11 @@ export const useResource = url => {
         }
     }
 
-    const create = async data => {
+    const create = async (data, endpoint) => {
         try {
-            const newResource = await axios.post(url, data)
-            const updatedResources = resources.concat(newResource.data)
+            const newResource = await axios.post(url + "/" + endpoint, data)
+            const updatedResources = {...resources}
+            updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
             setResources(updatedResources)
             setError(false);
         } catch (error) {

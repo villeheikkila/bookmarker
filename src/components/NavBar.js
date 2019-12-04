@@ -1,26 +1,27 @@
 import React from 'react'
+import { Button } from 'semantic-ui-react'
 
 export const NavBar = ({ selected, setSelected }) => {
     return (
-        <div style={{ widht: '100%', backgroundColor: 'green', height: 50 }}>
+        <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50 }}>
             <div style={{ textAlign: 'center' }}>
-                <button style={selected === 0 ? styles.selectedButton : styles.button} onClick={() => setSelected(0)}>Book</button>
-                <button style={selected === 1 ? styles.selectedButton : styles.button} onClick={() => setSelected(1)}>Video</button>
-                <button style={selected === 2 ? styles.selectedButton : styles.button} onClick={() => setSelected(2)}>Article</button>
-                <button style={selected === 3 ? styles.selectedButton : styles.button} onClick={() => setSelected(3)}>Blog</button>
-                <button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.button} onClick={() => setSelected(10)}>All</button>
+                <Button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(10)}>All</Button>
+                <Button style={selected === 0 ? styles.selectedButton : styles.Button} onClick={() => setSelected(0)}>Book</Button>
+                <Button style={selected === 1 ? styles.selectedButton : styles.Button} onClick={() => setSelected(1)}>Video</Button>
+                <Button style={selected === 2 ? styles.selectedButton : styles.Button} onClick={() => setSelected(2)}>Article</Button>
+                <Button style={selected === 3 ? styles.selectedButton : styles.Button} onClick={() => setSelected(3)}>Blog</Button>
             </div>
         </div>
     )
 }
 
 const styles = {
-    button: {
+    Button: {
         margin: 10,
-        backgroundColor: 'yellow'
+        backgroundColor: '#e6b2c6'
     },
     selectedButton: {
         margin: 10,
-        backgroundColor: 'orange'
+        backgroundColor: '#d77fa1'
     }
 }

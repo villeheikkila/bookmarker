@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 
 export const Book = ({ book }) => {
-    const { author, title, isbn, tags, related } = book;
+    const { author, title, isbn, tags, related, year } = book;
     return (
         <Table definition>
             <Table.Body>
@@ -20,6 +20,12 @@ export const Book = ({ book }) => {
                     <Table.Cell width={3}>ISBN</Table.Cell>
                     <Table.Cell>{isbn}</Table.Cell>
                 </Table.Row>
+
+                <Table.Row>
+                    <Table.Cell width={3}>Year</Table.Cell>
+                    <Table.Cell>{year}</Table.Cell>
+                </Table.Row>
+
 
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
