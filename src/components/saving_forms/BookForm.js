@@ -75,7 +75,7 @@ export const BookForm = ({ itemService }) => {
                 <input {...isbn} />
             </Form.Field>
 
-            <button onClick={autoFillWithISBN}>Autofill</button>
+            <Button primary onClick={autoFillWithISBN}>Hae tiedot</Button>
 
             <p style={{color:'red'}}>{isbnErrorMessage}</p>
 
