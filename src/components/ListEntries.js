@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Divider, Header } from 'semantic-ui-react';
+import { Articles } from './Articles';
+import { Blogposts } from './Blogposts';
 import { Books } from './Books';
 import { ItemsTable } from './ItemsTable';
 import { Videos } from './Videos';
@@ -38,8 +40,8 @@ export const ListEntries = ({ items, selected }) => {
 
             {selected === 0 ? <Books books={filteredItems} /> :
                 selected === 1 ? <Videos videos={filteredItems} /> :
-                    selected === 2 ? <div>Articles</div> :
-                        selected === 3 ? <div>Blogposts</div> :
+                    selected === 2 ? <Articles articles={filteredItems} /> :
+                        selected === 3 ? <Blogposts blogs={filteredItems} />:
                             <ItemsTable items={items} />}
         </>
     )
