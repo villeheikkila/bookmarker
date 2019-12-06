@@ -50,7 +50,7 @@ export const ArticleForm = ({ booksService }) => {
 
     return (
         <div>
-            <Form style={{marginBottom: '10px', marginTop: '10px'}} onSubmit={lookUpDOI}>
+            <Form style={{marginBottom: '10px', marginTop: '10px'}} onSubmit={lookUpDOI} inverted>
                 <Form.Field>
                     <label>DOI</label>
                     <Input type='text' placeholder='DOI' onChange={e => setDoi(e.target.value)}/>
@@ -58,7 +58,7 @@ export const ArticleForm = ({ booksService }) => {
                 <Button primary type='submit'>Look up info by DOI</Button>
             </Form>
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} inverted>
                 <Form.Field>
                     <label>Kirjoittaja</label>
                     <input {...kirjoittaja} />

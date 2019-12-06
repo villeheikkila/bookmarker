@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react'
 export const Article = ({ article }) => {
     const { author, title, publisher, date, tags, related } = article
     return (
-        <Table definition>
+        <Table inverted celled>
             <Table.Body>
                 <Table.Row>
                     <Table.Cell width={3}>Author</Table.Cell>

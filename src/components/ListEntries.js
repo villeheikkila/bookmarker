@@ -33,7 +33,7 @@ export const ListEntries = ({ items, selected }) => {
     return (
         <>
             <Divider horizontal>
-                <Header as='h2'>
+                <Header inverted as='h2'>
                     {selected === 0 ? 'Books' : selected === 1 ? 'Videos' : selected === 2 ? 'Articles' : selected === 3 ? 'Blog posts' : 'All items'}
                 </Header>
             </Divider>

@@ -5,7 +5,7 @@ export const Video = ({ video }) => {
     const { author, title, comment } = video;
     return (
         <div>
-            <Table definition>
+            <Table inverted celled>
                 <Table.Body>
                     <Table.Row>
                         <Table.Cell width={3}>Author</Table.Cell>

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks';
-import {OwnLoader} from '../OwnLoader'
+import { OwnLoader } from '../OwnLoader';
 
 export const VideoForm = ({ itemService }) => {
     const [author, authorReset] = useField('text')
@@ -68,7 +68,7 @@ export const VideoForm = ({ itemService }) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} inverted>
             <Form.Field>
                 <label>Url</label>
                 <input {...url} />

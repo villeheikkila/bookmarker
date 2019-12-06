@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks';
-import {OwnLoader} from '../OwnLoader'
+import { OwnLoader } from '../OwnLoader';
 
 export const BookForm = ({ itemService }) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text')
@@ -69,7 +69,7 @@ export const BookForm = ({ itemService }) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} inverted>
             <Form.Field>
                 <label>ISBN</label>
                 <input {...isbn} />

@@ -8,7 +8,7 @@ export const NavBar = ({ selected, setSelected, setShowForm }) => {
     }
     
     return (
-        <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50 }}>
+        <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50, display:'inline' }}>
             <div style={{ textAlign: 'center' }}>
                 <Button style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(10)}>All</Button>
                 <Button style={selected === 0 ? styles.selectedButton : styles.Button} onClick={() => navButtonClicked(0)}>Book</Button>

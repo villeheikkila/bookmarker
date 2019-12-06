@@ -26,7 +26,7 @@ export const BlogForm = ({ itemService }) => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} inverted>
             <Form.Field>
                 <label>Otsikko</label>
                 <input {...otsikko} />

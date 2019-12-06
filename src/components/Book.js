@@ -4,7 +4,7 @@ import { Table } from 'semantic-ui-react';
 export const Book = ({ book }) => {
     const { author, title, isbn, tags, related, year } = book;
     return (
-        <Table definition>
+        <Table inverted celled>
             <Table.Body>
                 <Table.Row>
                     <Table.Cell width={3}>Author</Table.Cell>

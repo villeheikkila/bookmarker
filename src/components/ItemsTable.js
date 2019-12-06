@@ -39,7 +39,7 @@ export const ItemsTable = ({ items }) => {
     }
     return (
         <div>
-            <Table sortable celled>
+            <Table sortable celled inverted>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell sorted={data.column === 'type' ? data.direction : null}
