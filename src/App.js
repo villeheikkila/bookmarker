@@ -10,6 +10,7 @@ function App() {
   const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL)
   const [showForm, setShowForm] = useState(false)
   const [categorySelected, setCategorySelected] = useState(-1)
+
   useEffect(() => {
     itemService.init()
   }, [itemService])
