@@ -23,14 +23,14 @@ function App() {
         background-color: #1C1C1E !important;
       }`}
           </style>
-      <Header>
+      <div>
         <Header size='huge' inverted>Lukuvinkkikirjasto</Header>
         <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
         {categorySelected >= 0 && categorySelected < 5 ?
-          <Button onClick={() => setShowForm(!showForm)}>Show form</Button> : <div />}
+          <Button inverted color='purple' style={{display:'block', margin:'0 auto'}} onClick={() => setShowForm(!showForm)}>{showForm ? 'Close form' : 'Show form'}</Button> : <div />}
         {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
         <ListEntries items={items} selected={categorySelected} />
-      </Header>
+      </div>
     </Container >
   );
 }
