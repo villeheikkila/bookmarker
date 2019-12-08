@@ -32,31 +32,35 @@ export const VideoForm = ({ itemService }) => {
         kommenttiReset();
     }
 
-    const autoFillWithYoutubeUrl = () => {
+    const autoFillWithYoutubeUrl = (e) => {
+        e.preventDefault();
+
         setLoader(true)
         // Parse from url
-        let id = ""
-        if (url.value.toLowerCase().includes('youtube')) {
-            id = url.value.split("?")[1].split("&")[0].split("=")[1]
+        if (url.value) {
+            const id = url.value.toLowerCase().includes('youtube') ? url.value.split("?")[1].split("&")[0].split("=")[1] : url.value.split("//")[1].split("/")[1]
+            console.log("TCL: autoFillWithYoutubeUrl -> id", id)
+            fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id=' + id.trim() + '&key=' + process.env.REACT_APP_YOUTUBE_API_KEY)
+                .then((response) => response.json())
+                .then((json) => {
+                    setLoadErrorMessage()
+                    const data = json['items']
+
+                    if (!data) {
+                        loadError()
+                        return
+                    }
+
+                    const details = data[0]['snippet']
+                    authorReset(details['channelTitle'])
+                    otsikkoReset(details['title'])
+                    setLoader(false)
+                    setShowFullForm(true)
+                })
+                .catch(() => loadError)
         } else {
-            id = url.value.split("//")[1].split("/")[1]
+            setLoadErrorMessage("URL can't be empty")
         }
-        fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id=' + id.trim() + '&key=' + process.env.YOUTUBE_API_KEY)
-            .then((response) => response.json())
-            .then((json) => {
-                setLoadErrorMessage()
-                const data = json['items']
-                if (data === undefined) {
-                    loadError()
-                    return
-                }
-                const details = data[0]['snippet']
-                authorReset(details['channelTitle'])
-                otsikkoReset(details['title'])
-                setLoader(false)
-                setShowFullForm(true)
-            })
-            .catch(() => loadError)
     }
 
     const loadError = () => {
