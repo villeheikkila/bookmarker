@@ -27,16 +27,19 @@ export const Video = ({ video }) => {
                         <Table.Cell width={3}>Comment</Table.Cell>
                         <Table.Cell>{comment}</Table.Cell>
                     </Table.Row>
+
                     <Table.Row>
                         <Table.Cell width={3} >Video</Table.Cell>
                         <Table.Cell>
                             <Embed source='youtube' placeholder='http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg' id='dQw4w9WgXcQ' />
                         </Table.Cell>
                     </Table.Row>
-                    <Table.Row>
-                        <Button basic color='red' onClick={handleDelete}>Delete</Button>
-                    </Table.Row>
 
+                    <Table.Row>
+                        <Table.Cell>
+                            <Button basic color='red' onClick={handleDelete}>Delete</Button>
+                        </Table.Cell>
+                    </Table.Row>
                 </Table.Body>
             </Table>
             <div />

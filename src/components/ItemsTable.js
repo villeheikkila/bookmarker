@@ -48,7 +48,7 @@ export const ItemsTable = ({ items }) => {
 
     return (
         <div>
-            <ItemModal portalOpen={modalOpen} setPortalOpen={setModalOpen} item={modalObject}/>
+            <ItemModal portalOpen={modalOpen} setPortalOpen={setModalOpen} item={modalObject} />
             <Table sortable celled inverted>
                 <Table.Header>
                     <Table.Row>
@@ -64,11 +64,11 @@ export const ItemsTable = ({ items }) => {
                 <Table.Body>
                     {data.data.length !== 0 ? data.data.map(item =>
                         <Table.Row key={item.id} onClick={() => handleModal(item)}>
-                            <Table.Cell>{item.type}</Table.Cell>
-                            <Table.Cell>{item.author}</Table.Cell>
-                            <Table.Cell>{item.title}</Table.Cell>
+                            <Table.Cell key={`${item.id}${item.type}`}>{item.type}</Table.Cell>
+                            <Table.Cell key={`${item.id}${item.author ? item.author : Math.floor(Math.random() * 1000)}`}>{item.author}</Table.Cell>
+                            <Table.Cell key={`${item.id}${item.title ? item.title : Math.floor(Math.random() * 1000)}`}>{item.title}</Table.Cell>
                         </Table.Row>
-                    ) : <Table.Row ><Table.Cell>loading...</Table.Cell></Table.Row>}
+                    ) : <Table.Row key="loading"><Table.Cell>loading...</Table.Cell></Table.Row>}
 
                 </Table.Body>
             </Table>

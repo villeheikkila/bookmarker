@@ -15,7 +15,6 @@ export const useField = (type) => {
         type,
         value,
         onChange,
-        setValue
     }, reset]
 }
 

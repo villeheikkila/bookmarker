@@ -13,7 +13,7 @@ export const Videos = ({ videos }) => {
     useEffect(() => {
         if (videos !== undefined && videos.length !== 0) {
             setSortedVideos(videos)
-        } 
+        }
         else setSortDirections([])
     }, [videos])
 
@@ -37,7 +37,7 @@ export const Videos = ({ videos }) => {
 
     return (
         <div>
-            <Button.Group basic size='large' color='green' inverted style={{display:'flex', marginBottom: '10px'}}>
+            <Button.Group basic size='large' color='green' inverted style={{ display: 'flex', marginBottom: '10px' }}>
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
             </Button.Group>
