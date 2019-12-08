@@ -7,6 +7,7 @@ export const BlogForm = ({ itemService }) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text')
     const [url, urlReset] = useField('text')
     const [relatedCourses, relatedCoursesReset] = useField('text')
+    const [tagit, tagitReset] = useField('text')
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -15,6 +16,7 @@ export const BlogForm = ({ itemService }) => {
             id: Math.floor((Math.random() * 1000) + 1),
             title: otsikko.value,
             author: kirjoittaja.value,
+            tagit: tagit.value.split(","),
             url: url.value,
             relatedCourses: relatedCourses.value.split(",")
         }, "blogposts")
@@ -23,6 +25,7 @@ export const BlogForm = ({ itemService }) => {
         kirjoittajaReset();
         urlReset();
         relatedCoursesReset();
+        tagitReset();
     }
 
     return (
@@ -40,6 +43,11 @@ export const BlogForm = ({ itemService }) => {
             <Form.Field>
                 <label>Url</label>
                 <input {...url} />
+            </Form.Field>
+
+            <Form.Field>
+                <label>Tagit</label>
+                <input {...tagit} />
             </Form.Field>
 
             <Form.Field>
