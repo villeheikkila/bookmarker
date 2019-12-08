@@ -12,7 +12,7 @@ export const VideoForm = ({ itemService }) => {
     const [showFullForm, setShowFullForm] = useState(false)
     const [loader, setLoader] = useState(false)
     const [loadErrorMessage, setLoadErrorMessage] = useField()
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -36,35 +36,35 @@ export const VideoForm = ({ itemService }) => {
         setLoader(true)
         // Parse from url
         let id = ""
-        if(url.value.toLowerCase().includes('youtube')){
+        if (url.value.toLowerCase().includes('youtube')) {
             id = url.value.split("?")[1].split("&")[0].split("=")[1]
         } else {
             id = url.value.split("//")[1].split("/")[1]
         }
-        fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id='+id.trim()+'&key='+process.env.YOUTUBE_API_KEY)
-        .then((response) => response.json())
-        .then((json) => {
-            setLoadErrorMessage()
-            const data = json['items']
-            if(data === undefined) {
-                loadError()
-                return
-            }
-            const details = data[0]['snippet']
-            authorReset(details['channelTitle'])
-            otsikkoReset(details['title'])
-            setLoader(false)
-            setShowFullForm(true)
-        })
-        .catch(()=>loadError)
+        fetch('https://www.googleapis.com/youtube/v3/videos/?part=snippet&id=' + id.trim() + '&key=' + process.env.YOUTUBE_API_KEY)
+            .then((response) => response.json())
+            .then((json) => {
+                setLoadErrorMessage()
+                const data = json['items']
+                if (data === undefined) {
+                    loadError()
+                    return
+                }
+                const details = data[0]['snippet']
+                authorReset(details['channelTitle'])
+                otsikkoReset(details['title'])
+                setLoader(false)
+                setShowFullForm(true)
+            })
+            .catch(() => loadError)
     }
 
     const loadError = () => {
         setLoader(false)
         setLoadErrorMessage("Couldn't find anything with given URL")
-        setTimeout(()=>{
+        setTimeout(() => {
             setLoadErrorMessage()
-        },5000)
+        }, 5000)
     }
 
     return (
@@ -76,28 +76,22 @@ export const VideoForm = ({ itemService }) => {
 
             <Button primary onClick={autoFillWithYoutubeUrl}>Hae tiedot</Button>
 
-            <p style={{color:'red'}}>{loadErrorMessage.value}</p>
+            <p style={{ color: 'red' }}>{loadErrorMessage.value}</p>
 
-            {loader ?
-                <OwnLoader />
-            :
-                null
-            }
+            {loader && <OwnLoader />}
 
-            { showFullForm ?
+            {showFullForm &&
                 <div>
                     <Form.Field>
                         <label>Kirjoittaja</label>
                         <input {...author} />
                     </Form.Field>
-                    
+
                     <Form.Field>
                         <label>Otsikko</label>
                         <input {...otsikko} />
                     </Form.Field>
                 </div>
-            :
-                null
             }
 
             <Form.Field>
