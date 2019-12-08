@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'semantic-ui-react'
 
 export const Blogpost = ({ blogpost }) => {
-    const { author, title, url, tags, related}  = blogpost
+    const { author, title, url, tagit, relatedCourses}  = blogpost
     return (
         <Table inverted celled>
             <Table.Body>
@@ -23,12 +23,12 @@ export const Blogpost = ({ blogpost }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tags && tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell>{tagit && tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
+                    <Table.Cell>{relatedCourses && relatedCourses.map(related => <p key={related}>{related}</p>)}</Table.Cell>
                 </Table.Row>
             </Table.Body>
         </Table>

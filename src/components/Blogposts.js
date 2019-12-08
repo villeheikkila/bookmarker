@@ -41,7 +41,7 @@ export const Blogposts = ({ blogs }) => {
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
             </Button.Group>
-            {sortedBlogs.map(b => <Blogpost key={b.id} blostgpost={b} />)}
+            {sortedBlogs.map(b => <Blogpost key={b.id} blogpost={b} />)}
         </div>
     )
 }
