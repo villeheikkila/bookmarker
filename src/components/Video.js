@@ -1,8 +1,14 @@
-import React from 'react';
-import { Embed, Table } from 'semantic-ui-react';
-
+import React, { useContext } from 'react';
+import { Button, Embed, Table } from 'semantic-ui-react';
+import { ItemServiceContext } from '../App';
 export const Video = ({ video }) => {
-    const { author, title, comment } = video;
+    const { author, title, id, comment } = video;
+    const { itemService } = useContext(ItemServiceContext)
+
+    const handleDelete = () => {
+        itemService.remove(id, "videos");
+    }
+
     return (
         <div>
             <Table inverted celled>
@@ -27,6 +33,10 @@ export const Video = ({ video }) => {
                             <Embed source='youtube' placeholder='http://i3.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg' id='dQw4w9WgXcQ' />
                         </Table.Cell>
                     </Table.Row>
+                    <Table.Row>
+                        <Button onClick={handleDelete}>Delete</Button>
+                    </Table.Row>
+
                 </Table.Body>
             </Table>
             <div />

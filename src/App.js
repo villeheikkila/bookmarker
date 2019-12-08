@@ -1,5 +1,5 @@
 import 'fomantic-ui-css/semantic.css';
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { Button, Container, Header } from 'semantic-ui-react';
 import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
@@ -17,22 +17,28 @@ function App() {
 
   return (
     <Container>
-       <style>
-            {`
+      <style>
+        {`
       html, body {
         background-color: #1C1C1E !important;
       }`}
-          </style>
+      </style>
       <div>
+
         <Header size='huge' inverted>Lukuvinkkikirjasto</Header>
         <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
         {categorySelected >= 0 && categorySelected < 5 ?
-          <Button inverted color='purple' style={{display:'block', margin:'0 auto'}} onClick={() => setShowForm(!showForm)}>{showForm ? 'Close form' : 'Show form'}</Button> : <div />}
+          <Button inverted color='purple' style={{ display: 'block', margin: '0 auto' }} onClick={() => setShowForm(!showForm)}>{showForm ? 'Close form' : 'Show form'}</Button> : <div />}
         {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
-        <ListEntries items={items} selected={categorySelected} />
+        <ItemServiceContext.Provider value={{ itemService }} >
+          <ListEntries items={items} selected={categorySelected} />
+        </ItemServiceContext.Provider>
+
       </div>
+
     </Container >
   );
 }
 
+export const ItemServiceContext = createContext({})
 export default App;

@@ -7,7 +7,7 @@ export const useField = (type) => {
         setValue(event.target.value)
     }
 
-    const reset = (value='') => {
+    const reset = (value = '') => {
         setValue(value)
     }
 
@@ -34,8 +34,9 @@ export const useResource = url => {
 
     const create = async (data, endpoint) => {
         try {
-            const newResource = await axios.post(url + "/" + endpoint, data)
-            const updatedResources = {...resources}
+            const newResource = await axios.post(`${url}/${endpoint}`, data)
+            console.log("TCL: create -> newResource", newResource)
+            const updatedResources = { ...resources }
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
             setResources(updatedResources)
             setError(false);
@@ -56,9 +57,21 @@ export const useResource = url => {
         setLoading(false);
     }
 
+    const remove = async (id, endpoint) => {
+        try {
+            await axios.delete(`${url}/${endpoint}/${id}`);
+            const updatedResources = resources.filter(resource => resource.id !== id)
+            setResources(updatedResources);
+            setError(false);
+        } catch (error) {
+            setError(true);
+        }
+    }
+
     const service = {
         init,
         create,
+        remove,
         getAll,
     }
 
