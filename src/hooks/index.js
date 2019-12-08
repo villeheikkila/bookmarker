@@ -35,7 +35,6 @@ export const useResource = url => {
     const create = async (data, endpoint) => {
         try {
             const newResource = await axios.post(`${url}/${endpoint}`, data)
-            console.log("TCL: create -> newResource", newResource)
             const updatedResources = { ...resources }
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
             setResources(updatedResources)
