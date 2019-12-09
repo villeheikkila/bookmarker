@@ -25,7 +25,7 @@ export const Article = ({ article }) => {
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>URL</Table.Cell>
+                    <Table.Cell width={3}>Publisher</Table.Cell>
                     <Table.Cell>{publisher}</Table.Cell>
                 </Table.Row>
 
