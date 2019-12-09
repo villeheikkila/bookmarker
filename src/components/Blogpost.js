@@ -23,7 +23,7 @@ export const Blogpost = ({ blogpost }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>URL</Table.Cell>
-                    <Table.Cell>{url}</Table.Cell>
+                    <Table.Cell><a href={url} >{url}</a></Table.Cell>
                 </Table.Row>
 
                 <Table.Row>

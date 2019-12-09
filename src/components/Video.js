@@ -3,7 +3,7 @@ import { Button, Embed, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../App';
 
 export const Video = ({ video }) => {
-    const { author, title, id, comment, url, tags, relatedCourses } = video;
+    const { author, title, id, comment, url, relatedCourses } = video;
     const { itemService } = useContext(ItemServiceContext)
 
     const handleDelete = () => itemService.remove(id, "videos");
