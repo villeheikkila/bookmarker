@@ -3,7 +3,7 @@ import { Button, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../App';
 
 export const Article = ({ article }) => {
-    const { id, author, title, publisher, date, tags, related } = article
+    const { id, author, title, publisher, localDate, tagit, related } = article
     const { itemService } = useContext(ItemServiceContext)
 
     const handleDelete = () => itemService.remove(id, "articles");
@@ -29,13 +29,13 @@ export const Article = ({ article }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Date published</Table.Cell>
-                    <Table.Cell>{date}</Table.Cell>
+                    <Table.Cell>{localDate.day+'/'+localDate.month+'/'+localDate.year}</Table.Cell>
                 </Table.Row>
 
 
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tags && tags.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell>{tagit && tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
