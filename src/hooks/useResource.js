@@ -40,14 +40,14 @@ export const useResource = url => {
 
     const remove = async (id, endpoint) => {
         try {
-            const response = await axios.delete(`${url}/${endpoint}/${id}`, {
+            await axios.delete(`${url}/${endpoint}/${id}`, {
                 mode: 'no-cors',
                 headers: {
                     'Access-Control-Allow-Origin': '*',
                     'Content-Type': 'application/json',
                 }
             });
-            console.log("TCL: remove -> response", response)
+
             const updatedResources = resources.filter(resource => resource.id !== id)
             setResources(updatedResources);
             setError(false);
