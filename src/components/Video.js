@@ -47,7 +47,7 @@ export const Video = ({ video }) => {
 
                     <Table.Row>
                         <Table.Cell width={3} >
-                            <Button basic color='red' onClick={handleDelete}>Delete</Button>
+                            <Button inverted color='red' onClick={handleDelete}>Delete</Button>
                         </Table.Cell>
                         <Table.Cell />
                     </Table.Row>
