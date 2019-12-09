@@ -17,7 +17,7 @@ export const ItemsTable = ({ items }) => {
         if (items.length !== 0) {
             setData(prevState => ({
                 ...prevState,
-                data: Object.values(items).reduce((result, prev) => result.concat(prev.map(p => ({ type: p.type, author: p.author, title: p.title }))), [])
+                data: Object.values(items).reduce((result, prev) => result.concat(prev.map(p => ({ type: p.type, author: p.author, title: p.title, id: p.id }))), [])
             }))
         }
     }, [items])
@@ -41,7 +41,8 @@ export const ItemsTable = ({ items }) => {
     }
 
     const handleModal = (item) => {
-        setModalObject(item)
+        let itemFull = items[item.type+"s"].find(i => i.id === item.id)
+        setModalObject(itemFull)
         setModalOpen(true)
     }
 
