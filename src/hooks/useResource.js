@@ -1,23 +1,5 @@
-import axios from 'axios'
-import { useState } from 'react'
-export const useField = (type) => {
-    const [value, setValue] = useState('')
-
-    const onChange = (event) => {
-        setValue(event.target.value)
-    }
-
-    const reset = (value='') => {
-        setValue(value)
-    }
-
-    return [{
-        type,
-        value,
-        onChange,
-        setValue
-    }, reset]
-}
+import axios from 'axios';
+import { useState } from 'react';
 
 export const useResource = url => {
     const [resources, setResources] = useState([]);
@@ -34,8 +16,8 @@ export const useResource = url => {
 
     const create = async (data, endpoint) => {
         try {
-            const newResource = await axios.post(url + "/" + endpoint, data)
-            const updatedResources = {...resources}
+            const newResource = await axios.post(`${url}/${endpoint}`, data)
+            const updatedResources = { ...resources }
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
             setResources(updatedResources)
             setError(false);
@@ -56,9 +38,28 @@ export const useResource = url => {
         setLoading(false);
     }
 
+    const remove = async (id, endpoint) => {
+        try {
+            await axios.delete(`${url}/${endpoint}/${id}`, {
+                mode: 'no-cors',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const updatedResources = resources.filter(resource => resource.id !== id)
+            setResources(updatedResources);
+            setError(false);
+        } catch (error) {
+            setError(true);
+        }
+    }
+
     const service = {
         init,
         create,
+        remove,
         getAll,
     }
 

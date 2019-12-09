@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
-import { useField } from '../../hooks';
+import { useField } from '../../hooks/useField';
 
 export const ArticleForm = ({ booksService }) => {
     const [doi, setDoi] = useState('')
@@ -50,46 +50,46 @@ export const ArticleForm = ({ booksService }) => {
 
     return (
         <div>
-            <Form style={{marginBottom: '10px', marginTop: '10px'}} onSubmit={lookUpDOI} inverted>
+            <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={lookUpDOI} inverted>
                 <Form.Field>
                     <label>DOI</label>
-                    <Input type='text' placeholder='DOI' onChange={e => setDoi(e.target.value)}/>
+                    <Input type='text' placeholder='DOI' onChange={e => setDoi(e.target.value)} />
                 </Form.Field>
                 <Button primary type='submit'>Look up info by DOI</Button>
             </Form>
 
             <Form onSubmit={handleSubmit} inverted>
                 <Form.Field>
-                    <label>Kirjoittaja</label>
+                    <label>Author</label>
                     <input {...kirjoittaja} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Otsikko</label>
+                    <label>Title</label>
                     <input {...otsikko} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Julkaisija</label>
+                    <label>Publisher</label>
                     <input {...publisher} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Päivämäärä</label>
+                    <label>Date</label>
                     <input {...localDate} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Tagit</label>
+                    <label>Tags</label>
                     <input {...tagit} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Vastaavat kurssit</label>
+                    <label>Related Courses</label>
                     <input {...related} />
                 </Form.Field>
 
-                <Button positive type="submit" value="Submit">Lähetä</Button>
+                <Button positive type="submit" value="Submit">Submit</Button>
             </Form>
         </div>
 
