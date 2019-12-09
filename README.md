@@ -29,4 +29,6 @@ Starts frontend by default on port 3000
 
 [Backend -repositorio](https://github.com/CodemonkeysOhtu/lukuvinkkikirjasto)
 
+[Testikattavuus](https://lukuvinkkikirjasto-coverage.netlify.com/)
+
 [License](LICENSE)
