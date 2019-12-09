@@ -5,8 +5,10 @@ import { ItemServiceContext } from '../App';
 export const Article = ({ article }) => {
     const { id, author, title, publisher, localDate, tagit, related } = article
     const { itemService } = useContext(ItemServiceContext)
+    const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year
 
     const handleDelete = () => itemService.remove(id, "articles");
+
 
 
     return (
@@ -29,7 +31,7 @@ export const Article = ({ article }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Date published</Table.Cell>
-                    <Table.Cell>{localDate.day+'/'+localDate.month+'/'+localDate.year}</Table.Cell>
+                    <Table.Cell>{date}</Table.Cell>
                 </Table.Row>
 
 

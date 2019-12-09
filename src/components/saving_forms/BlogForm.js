@@ -55,7 +55,7 @@ export const BlogForm = ({ itemService }) => {
                 <input {...relatedCourses} />
             </Form.Field>
 
-            <Button positive type="submit" value="Submit">Lähetä</Button>
+            <Button positive type="submit" value="Submit">Submit</Button>
         </Form>
     )
 }
