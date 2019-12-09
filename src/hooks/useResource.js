@@ -40,18 +40,14 @@ export const useResource = url => {
 
     const remove = async (id, endpoint) => {
         try {
-            await axios.delete(`${url}/${endpoint}/${id}`, {
-                mode: 'no-cors',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json',
-                }
-            });
+            await axios.delete(`${url}/${endpoint}/${id}`);
+            const removeEntry = resources[endpoint].filter(e => e.id !== id)
+            const updatedResources = { ...resources, [endpoint]: removeEntry }
+            setResources(updatedResources)
 
-            const updatedResources = resources.filter(resource => resource.id !== id)
-            setResources(updatedResources);
             setError(false);
         } catch (error) {
+            console.log(error)
             setError(true);
         }
     }
