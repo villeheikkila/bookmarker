@@ -49,7 +49,6 @@ export const ArticleForm = ({ itemService }) => {
       let publishedOn = new Date(0);
       publishedOn.setUTCSeconds(parseInt(articleJson.published_on));
       let publishedOnString = publishedOn.toISOString().split('T')[0]
-      console.log(publishedOnString)
       setLocalDate(publishedOnString);
     }
   };
