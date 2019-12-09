@@ -30,7 +30,7 @@ export const Video = ({ video }) => {
                     <Table.Row>
                         <Table.Cell width={3} >Video</Table.Cell>
                         <Table.Cell>
-                            <Embed source='youtube' placeholder={`http://img.youtube.com/vi/${url}/0.jpg`} id={url} />
+                            <Embed source='youtube' placeholder={`https://img.youtube.com/vi/${url}/0.jpg`} id={url} />
                         </Table.Cell>
                     </Table.Row>
 
