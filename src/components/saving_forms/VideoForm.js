@@ -17,14 +17,18 @@ export const VideoForm = ({ itemService }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await itemService.create({
+        const splitRelated = relatedCourses.value.split(",")
+        const related = splitRelated[0] !== "" ? splitRelated : null
+
+        const response = await itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             author: author.value,
             title: title.value,
             url: id,
-            relatedCourses: relatedCourses.value.split(","),
+            relatedCourses: related,
             comment: comment.value
         }, "videos")
+        console.log("TCL: handleSubmit -> response", response)
 
         authorReset();
         setTitle();

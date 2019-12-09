@@ -18,6 +18,12 @@ export const BookForm = ({ itemService }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const splitTags = tagit.value.split(",")
+        const splitRelated = related.value.split(",")
+
+        const tags = splitTags[0] !== "" ? splitTags : null
+        const relatedCourses = splitRelated[0] !== "" ? splitRelated : null
+
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             author: kirjoittaja.value,
@@ -25,8 +31,8 @@ export const BookForm = ({ itemService }) => {
             isbn: isbn.value,
             year: year.value,
             edition: edition.value,
-            tagit: tagit.value.split(","),
-            related: related.value.split(",")
+            tagit: tags,
+            related: relatedCourses
         }, "books")
 
         kirjoittajaReset();
@@ -52,9 +58,11 @@ export const BookForm = ({ itemService }) => {
                     return
                 }
                 const details = data['details']
+                const year = new Date(details['publish_date']).getFullYear()
+
                 kirjoittajaReset(details['authors'][0]['name'])
                 otsikkoReset(details['title'])
-                yearReset(details['publish_date'])
+                yearReset(year)
                 editionReset(details['revision'])
                 setIsbnLoader(false)
                 setShowFullForm(true)

@@ -12,13 +12,19 @@ export const BlogForm = ({ itemService }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const splitTags = tagit.value.split(",")
+        const splitRelated = relatedCourses.value.split(",")
+
+        const tags = splitTags[0] !== "" ? splitTags : null
+        const related = splitRelated[0] !== "" ? splitRelated : null
+
         itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             title: otsikko.value,
             author: kirjoittaja.value,
-            tagit: tagit.value.split(","),
+            tagit: tags,
             url: url.value,
-            relatedCourses: relatedCourses.value.split(",")
+            relatedCourses: related
         }, "blogposts")
 
         otsikkoReset();

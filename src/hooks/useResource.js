@@ -21,6 +21,7 @@ export const useResource = url => {
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
             setResources(updatedResources)
             setError(false);
+            return newResource;
         } catch (error) {
             setError(true);
         }

@@ -15,6 +15,12 @@ export const ArticleForm = ({ itemService }) => {
     const handleSubmit = e => {
         e.preventDefault();
 
+        const splitTags = tagit.value.split(",")
+        const splitRelated = related.value.split(",")
+
+        const tags = splitTags[0] !== "" ? splitTags : null
+        const relatedCoureses = splitRelated[0] !== "" ? splitRelated : null
+
         itemService.create(
             {
                 id: Math.floor(Math.random() * 1000 + 1),
@@ -22,8 +28,8 @@ export const ArticleForm = ({ itemService }) => {
                 title: otsikko.value,
                 publisher: publisher.value,
                 localDate: localDate.value,
-                tagit: tagit.value.split(","),
-                related: related.value.split(",")
+                tagit: tags,
+                related: relatedCoureses
             },
             "articles"
         );
