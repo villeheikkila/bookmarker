@@ -1,8 +1,14 @@
-import React from 'react'
-import { Table } from 'semantic-ui-react'
+import React, { useContext } from 'react';
+import { Button, Table } from 'semantic-ui-react';
+import { ItemServiceContext } from '../App';
 
 export const Article = ({ article }) => {
-    const { author, title, publisher, date, tags, related } = article
+    const { id, author, title, publisher, date, tags, related } = article
+    const { itemService } = useContext(ItemServiceContext)
+
+    const handleDelete = () => itemService.remove(id, "articles");
+
+
     return (
         <Table inverted celled>
             <Table.Body>
@@ -35,6 +41,14 @@ export const Article = ({ article }) => {
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
+                </Table.Row>
+
+
+                <Table.Row>
+                    <Table.Cell width={3} >
+                        <Button basic color='red' onClick={handleDelete}>Delete</Button>
+                    </Table.Cell>
+                    <Table.Cell />
                 </Table.Row>
             </Table.Body>
         </Table>
