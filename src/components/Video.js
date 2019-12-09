@@ -11,12 +11,12 @@ export const Video = ({ video }) => {
     return (
         <div>
             <Table inverted celled>
-                <Table.Row>
-                    <Table.Cell width={3}>Title</Table.Cell>
-                    <Table.Cell>{title}</Table.Cell>
-                </Table.Row>
-
                 <Table.Body>
+                    <Table.Row>
+                        <Table.Cell width={3}>Title</Table.Cell>
+                        <Table.Cell>{title}</Table.Cell>
+                    </Table.Row>
+
                     <Table.Row>
                         <Table.Cell width={3}>Channel</Table.Cell>
                         <Table.Cell>{author}</Table.Cell>
