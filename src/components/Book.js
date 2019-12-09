@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Table } from 'semantic-ui-react';
+import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../App';
 
 export const Book = ({ book }) => {
@@ -34,12 +34,13 @@ export const Book = ({ book }) => {
 
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tagit && tagit.map(tagi => <p key={tagi}>{tagi}</p>)}</Table.Cell>
+                    <Table.Cell>{tagit && tagit.map(tagi => <Label key={tagi}>
+                        <Icon name='tag' />{tagi}</Label>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>{related && related.map(related => <p key={related}>{related}</p>)}</Table.Cell>
+                    <Table.Cell>{related && related.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>

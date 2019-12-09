@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Button, Embed, Table } from 'semantic-ui-react';
+import { Button, Embed, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../App';
 
 export const Video = ({ video }) => {
-    const { author, title, id, comment, url } = video;
+    const { author, title, id, comment, url, tagit, relatedCourses } = video;
     const { itemService } = useContext(ItemServiceContext)
 
     const handleDelete = () => itemService.remove(id, "videos");
@@ -25,6 +25,17 @@ export const Video = ({ video }) => {
                     <Table.Row>
                         <Table.Cell width={3}>Comment</Table.Cell>
                         <Table.Cell>{comment}</Table.Cell>
+                    </Table.Row>
+
+                    <Table.Row>
+                        <Table.Cell width={3}>Tags</Table.Cell>
+                        <Table.Cell>{tagit && tagit.map(tagi => <Label key={tagi}>
+                            <Icon name='tag' />{tagi}</Label>)}</Table.Cell>
+                    </Table.Row>
+
+                    <Table.Row>
+                        <Table.Cell width={3}>Related courses</Table.Cell>
+                        <Table.Cell>{relatedCourses && relatedCourses.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
                     </Table.Row>
 
                     <Table.Row>
