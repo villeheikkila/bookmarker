@@ -4,7 +4,7 @@ import { Button, Container, Header } from 'semantic-ui-react';
 import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
 import { NavBar } from './components/NavBar';
-import { useResource } from './hooks';
+import { useResource } from './hooks/useResource';
 
 function App() {
   const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL)

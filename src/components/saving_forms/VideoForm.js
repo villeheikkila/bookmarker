@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../../hooks';
+import { useField } from '../../hooks/useField';
 import { OwnLoader } from '../OwnLoader';
 
 export const VideoForm = ({ itemService }) => {

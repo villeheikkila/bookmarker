@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../../hooks';
+import { useField } from '../../hooks/useField';
 
 export const BlogForm = ({ itemService }) => {
     const [otsikko, otsikkoReset] = useField('text')

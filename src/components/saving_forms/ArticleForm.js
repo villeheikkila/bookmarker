@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
-import { useField } from '../../hooks';
+import { useField } from '../../hooks/useField';
 
 export const ArticleForm = ({ booksService }) => {
     const [doi, setDoi] = useState('')
