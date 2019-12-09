@@ -1,10 +1,11 @@
-import 'fomantic-ui-css/semantic.css';
+import 'fomantic-ui-css/semantic.min.css';
 import React, { createContext, useEffect, useState } from 'react';
 import { Button, Container, Header } from 'semantic-ui-react';
 import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
 import { NavBar } from './components/NavBar';
 import { useResource } from './hooks/useResource';
+
 
 function App() {
   const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL)
