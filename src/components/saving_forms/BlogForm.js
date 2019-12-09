@@ -8,7 +8,7 @@ export const BlogForm = ({ itemService }) => {
     const [url, urlReset] = useField('text')
     const [relatedCourses, relatedCoursesReset] = useField('text')
     const [tagit, tagitReset] = useField('text')
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -31,22 +31,22 @@ export const BlogForm = ({ itemService }) => {
     return (
         <Form onSubmit={handleSubmit} inverted>
             <Form.Field>
-                <label>Otsikko</label>
+                <label>Title</label>
                 <input {...otsikko} />
             </Form.Field>
 
             <Form.Field>
-                <label>Kirjoittaja</label>
+                <label>Author</label>
                 <input {...kirjoittaja} />
             </Form.Field>
 
             <Form.Field>
-                <label>Url</label>
+                <label>URL</label>
                 <input {...url} />
             </Form.Field>
 
             <Form.Field>
-                <label>Tagit</label>
+                <label>Tags</label>
                 <input {...tagit} />
             </Form.Field>
 

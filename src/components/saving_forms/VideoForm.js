@@ -5,12 +5,13 @@ import { OwnLoader } from '../OwnLoader';
 
 export const VideoForm = ({ itemService }) => {
     const [author, authorReset] = useField('text')
-    const [otsikko, otsikkoReset] = useField('text')
-    const [url, urlReset] = useField('text')
+    const [title, setTitle] = useField('text')
+    const [url, setUrl] = useField('text')
     const [relatedCourses, relatedCoursesReset] = useField('text')
-    const [kommentti, kommenttiReset] = useField('text')
+    const [comment, setComment] = useField('text')
     const [showFullForm, setShowFullForm] = useState(false)
     const [loader, setLoader] = useState(false)
+    const [id, setId] = useState()
     const [loadErrorMessage, setLoadErrorMessage] = useField()
 
     const handleSubmit = async (e) => {
@@ -19,17 +20,17 @@ export const VideoForm = ({ itemService }) => {
         await itemService.create({
             id: Math.floor((Math.random() * 1000) + 1),
             author: author.value,
-            title: otsikko.value,
-            url: url.value,
+            title: title.value,
+            url: id,
             relatedCourses: relatedCourses.value.split(","),
-            comment: kommentti.value
+            comment: comment.value
         }, "videos")
 
         authorReset();
-        otsikkoReset();
-        urlReset();
+        setTitle();
+        setUrl();
         relatedCoursesReset();
-        kommenttiReset();
+        setComment();
     }
 
     const autoFillWithYoutubeUrl = (e) => {
@@ -53,8 +54,9 @@ export const VideoForm = ({ itemService }) => {
 
                     const details = data[0]['snippet']
                     authorReset(details['channelTitle'])
-                    otsikkoReset(details['title'])
+                    setTitle(details['title'])
                     setLoader(false)
+                    setId(id)
                     setShowFullForm(true)
                 })
                 .catch(() => loadError)
@@ -78,7 +80,7 @@ export const VideoForm = ({ itemService }) => {
                 <input {...url} />
             </Form.Field>
 
-            <Button primary onClick={autoFillWithYoutubeUrl}>Hae tiedot</Button>
+            <Button primary onClick={autoFillWithYoutubeUrl}>Autofill</Button>
 
             <p style={{ color: 'red' }}>{loadErrorMessage.value}</p>
 
@@ -87,13 +89,13 @@ export const VideoForm = ({ itemService }) => {
             {showFullForm &&
                 <div>
                     <Form.Field>
-                        <label>Kirjoittaja</label>
+                        <label>Channel</label>
                         <input {...author} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Otsikko</label>
-                        <input {...otsikko} />
+                        <label>Title</label>
+                        <input {...title} />
                     </Form.Field>
                 </div>
             }
@@ -104,11 +106,11 @@ export const VideoForm = ({ itemService }) => {
             </Form.Field>
 
             <Form.Field>
-                <label>Kommentti</label>
-                <input {...kommentti} />
+                <label>Comment</label>
+                <input {...comment} />
             </Form.Field>
 
-            <Button positive type="submit" value="Submit">Lähetä</Button>
+            <Button positive type="submit" value="Submit">Submit</Button>
         </Form>
     )
 }

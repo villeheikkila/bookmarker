@@ -86,17 +86,17 @@ export const BookForm = ({ itemService }) => {
             {showFullForm &&
                 <div>
                     <Form.Field>
-                        <label>Kirjoittaja</label>
+                        <label>Author</label>
                         <input {...kirjoittaja} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Otsikko</label>
+                        <label>Title</label>
                         <input {...otsikko} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Vuosi</label>
+                        <label>Year</label>
                         <input {...year} />
                     </Form.Field>
 
@@ -108,12 +108,12 @@ export const BookForm = ({ itemService }) => {
             }
 
             <Form.Field>
-                <label>Tagit</label>
+                <label>Tags</label>
                 <input {...tagit} />
             </Form.Field>
 
             <Form.Field>
-                <label>Vastaavat kurssit</label>
+                <label>Related Courses</label>
                 <input {...related} />
             </Form.Field>
 
