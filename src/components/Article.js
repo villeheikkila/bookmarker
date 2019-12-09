@@ -25,7 +25,7 @@ export const Article = ({ article }) => {
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>URL</Table.Cell>
+                    <Table.Cell width={3}>Publisher</Table.Cell>
                     <Table.Cell>{publisher}</Table.Cell>
                 </Table.Row>
 
@@ -49,7 +49,7 @@ export const Article = ({ article }) => {
 
                 <Table.Row>
                     <Table.Cell width={3} >
-                        <Button basic color='red' onClick={handleDelete}>Delete</Button>
+                        <Button inverted color='red' onClick={handleDelete}>Delete</Button>
                     </Table.Cell>
                     <Table.Cell />
                 </Table.Row>
