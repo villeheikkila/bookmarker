@@ -28,3 +28,5 @@ Starts frontend by default on port 3000
 --------------
 
 [Backend -repositorio](https://github.com/CodemonkeysOhtu/lukuvinkkikirjasto)
+
+[License](LICENSE)
