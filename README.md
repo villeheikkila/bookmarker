@@ -1,31 +1,32 @@
+## Lukuvinkkikirjasto (frontend)
+
 [![CircleCI](https://circleci.com/gh/CodemonkeysOhtu/lukuvinkkikirjasto-frontend.svg?style=svg)](https://circleci.com/gh/CodemonkeysOhtu/lukuvinkkikirjasto-frontend)
 
-# Development
+## Development
 
 ### Start frontend development version
 
-```npm run start```
+`npm run start`
 
 Starts frontend by default on port 3000
 
 ### Build production version
 
-```npm run build```
+`npm run build`
 
---------------------
+---
 
 # Testing
 
 ### Run unit tests
 
-```npm run test```
+`npm run test`
 
 ### Run functional or Cucumber -tests
 
-```npm run fute```
+`npm run fute`
 
-
---------------
+---
 
 [Backend -repositorio](https://github.com/CodemonkeysOhtu/lukuvinkkikirjasto)
 
