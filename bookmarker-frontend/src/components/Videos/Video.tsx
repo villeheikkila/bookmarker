@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { Button, Embed, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Video = ({ video: { author, title, id, comment, url, relatedCourses } }) => {
-    const { itemService } = useContext(ItemServiceContext);
+export const Video = ({ author, title, id, comment, url, relatedCourses }: Video) => {
+    const { itemService }: any = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'videos');
 

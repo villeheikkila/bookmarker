@@ -3,8 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react';
 import { Book } from './Book';
 
-export const Books = ({ books }) => {
-    const [sortedBooks, setSortedBooks] = useState([]);
+interface BooksProps {
+    books: Book[];
+}
+
+export const Books = ({ books }: BooksProps) => {
+    const [sortedBooks, setSortedBooks] = useState<Book[]>([]);
     const [sortDirections, setSortDirections] = useState({
         author: true,
         title: true,
@@ -42,10 +46,10 @@ export const Books = ({ books }) => {
     const sortByYear = () => {
         const clone = sortDirections.year
             ? _.sortBy(sortedBooks, function(book) {
-                  return parseInt(book.year, 10);
+                  return book.year;
               })
             : _.sortBy(sortedBooks, function(book) {
-                  return parseInt(book.year, 10);
+                  return book.year;
               }).reverse();
         setSortedBooks(clone);
         setSortDirections(prev => ({
@@ -61,9 +65,9 @@ export const Books = ({ books }) => {
                 <Button onClick={sortByTitle}>Sort by title</Button>
                 <Button onClick={sortByYear}>Sort by year</Button>
             </Button.Group>
-            
-            {sortedBooks.map(b => (
-                <Book key={b.id} book={b} />
+
+            {sortedBooks.map(book => (
+                <Book key={book.id} {...book} />
             ))}
         </>
     );

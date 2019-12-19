@@ -3,8 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react';
 import { Article } from './Article';
 
-export const Articles = ({ articles }) => {
-    const [sortedArticles, setSortedArticles] = useState([]);
+interface ArticlesProps {
+    articles: Article[];
+}
+
+export const Articles = ({ articles }: ArticlesProps) => {
+    const [sortedArticles, setSortedArticles] = useState<Article[]>([]);
     const [sortDirections, setSortDirections] = useState({
         author: true,
         title: true,

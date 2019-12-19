@@ -3,17 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
 import { ItemModal } from './ItemModal';
 
-export const ItemsTable = ({ items }: any) => {
+interface ItemsTableProps {
+    items: any;
+}
+export const ItemsTable = ({ items }: ItemsTableProps) => {
     const [data, setData] = useState({
         column: '',
         data: [],
         direction: '',
     });
+
     const [modalOpen, setModalOpen] = useState(false);
-    const [modalObject, setModalObject] = useState({});
+    const [modalObject, setModalObject] = useState(null);
 
     useEffect(() => {
-        if (items.length !== 0) {
+        if (items) {
             setData((prevState: any) => ({
                 ...prevState,
                 data: Object.values(items).reduce(
@@ -57,7 +61,7 @@ export const ItemsTable = ({ items }: any) => {
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell
-                            sorted={data.column === 'type' ? (data.direction as any) : undefined}
+                            sorted={data.column === 'type' ? (data.direction as any) : null}
                             onClick={handleSort('type', data)}
                         >
                             Type

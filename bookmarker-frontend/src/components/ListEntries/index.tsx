@@ -12,7 +12,7 @@ interface ListEntriesProps {
 }
 
 export const ListEntries = ({ items, selected }: ListEntriesProps) => {
-    const [filteredItems, setFilteredItems] = useState([]);
+    const [filteredItems, setFilteredItems] = useState();
 
     useEffect(() => {
         if (items) {

@@ -1,26 +1,30 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { Button } from 'semantic-ui-react';
-import { Video } from './Video';
+import { Blogpost } from './Blogpost';
 
-export const Videos = ({ videos }) => {
-    const [sortedVideos, setSortedVideos] = useState([]);
+interface BlogsProps {
+    blogs: Blogpost[];
+}
+
+export const Blogposts = ({ blogs }: BlogsProps) => {
+    const [sortedBlogs, setSortedBlogs] = useState<Blogpost[]>([]);
     const [sortDirections, setSortDirections] = useState({
         author: true,
         title: true,
     });
 
     useEffect(() => {
-        if (videos && videos.length !== 0) {
-            setSortedVideos(videos);
-        } else setSortDirections([]);
-    }, [videos]);
+        if (blogs && blogs.length) {
+            setSortedBlogs(blogs);
+        } else setSortedBlogs([]);
+    }, [blogs]);
 
     const sortByAuthor = () => {
         const clone = sortDirections.author
-            ? _.sortBy(sortedVideos, ['author'])
-            : _.sortBy(sortedVideos, ['author']).reverse();
-        setSortedVideos(clone);
+            ? _.sortBy(sortedBlogs, ['author'])
+            : _.sortBy(sortedBlogs, ['author']).reverse();
+        setSortedBlogs(clone);
         setSortDirections(prev => ({
             ...prev,
             author: !prev.author,
@@ -29,9 +33,9 @@ export const Videos = ({ videos }) => {
 
     const sortByTitle = () => {
         const clone = sortDirections.title
-            ? _.sortBy(sortedVideos, ['title'])
-            : _.sortBy(sortedVideos, ['title']).reverse();
-        setSortedVideos(clone);
+            ? _.sortBy(sortedBlogs, ['title'])
+            : _.sortBy(sortedBlogs, ['title']).reverse();
+        setSortedBlogs(clone);
         setSortDirections(prev => ({
             ...prev,
             title: !prev.title,
@@ -44,9 +48,8 @@ export const Videos = ({ videos }) => {
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
             </Button.Group>
-
-            {sortedVideos.map(v => (
-                <Video key={v.id} video={v} />
+            {sortedBlogs.map(b => (
+                <Blogpost key={b.id} blogpost={b} />
             ))}
         </>
     );

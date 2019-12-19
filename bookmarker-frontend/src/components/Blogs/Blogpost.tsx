@@ -3,8 +3,9 @@ import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
 interface BlogpostProps {
-    blogpost: any;
+    blogpost: Blogpost;
 }
+
 export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCourses } }: BlogpostProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
 

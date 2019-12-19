@@ -3,13 +3,13 @@ import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
 interface ArticleProps {
-    article: any;
+    article: Article;
 }
 
 export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
-    const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
-
+    //const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
+    const date = '';
     const handleDelete = () => itemService.remove(id, 'articles');
 
     return (
