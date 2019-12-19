@@ -23,30 +23,30 @@ export const App = () => {
         background-color: #1C1C1E !important;
       }`}
             </style>
-                <Header size="huge" inverted>
-                    Bookmarker
-                </Header>
+            <Header size="huge" inverted>
+                Bookmarker
+            </Header>
 
-                <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
+            <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
 
-                {categorySelected >= 0 && categorySelected < 5 && (
-                    <Button
-                        inverted
-                        color="purple"
-                        style={{ display: 'block', margin: '0 auto' }}
-                        onClick={() => setShowForm(!showForm)}
-                    >
-                        {showForm ? 'Close form' : 'Show form'}
-                    </Button>
-                )}
+            {categorySelected >= 0 && categorySelected < 5 && (
+                <Button
+                    inverted
+                    color="purple"
+                    style={{ display: 'block', margin: '0 auto' }}
+                    onClick={() => setShowForm(!showForm)}
+                >
+                    {showForm ? 'Close form' : 'Show form'}
+                </Button>
+            )}
 
-                {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
+            {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
 
-                <ItemServiceContext.Provider value={{ itemService }}>
-                    <ListEntries items={items} selected={categorySelected} />
-                </ItemServiceContext.Provider>
+            <ItemServiceContext.Provider value={{ itemService }}>
+                <ListEntries items={items} selected={categorySelected} />
+            </ItemServiceContext.Provider>
         </Container>
     );
-}
+};
 
 export const ItemServiceContext = createContext({});

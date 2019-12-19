@@ -46,12 +46,12 @@ export const ArticleForm = ({ itemService }) => {
         e.preventDefault();
         const articleJson = await axios.get(`https://api.altmetric.com/v1/doi/${doi}`);
         if (articleJson) {
-            articleJson = articleJson.data;
-            setKirjoittaja(articleJson.authors.join(', '));
-            setOtsikko(articleJson.title);
-            setPublisher(articleJson.journal);
+            const articleData = articleJson.data;
+            setKirjoittaja(articleData.authors.join(', '));
+            setOtsikko(articleData.title);
+            setPublisher(articleData.journal);
             const publishedOn = new Date(0);
-            publishedOn.setUTCSeconds(parseInt(articleJson.published_on));
+            publishedOn.setUTCSeconds(parseInt(articleData.published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
             setLocalDate(publishedOnString);
         }
