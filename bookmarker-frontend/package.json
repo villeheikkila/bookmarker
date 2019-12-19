@@ -13,12 +13,11 @@
         "semantic-ui-react": "^0.88.2"
     },
     "devDependencies": {
-        "@babel/preset-env": "^7.7.6",
+        "@babel/preset-env": "^7.7.7",
         "@babel/preset-react": "^7.7.4",
         "babel-jest": "^24.9.0",
         "babel-plugin-transform-export-extensions": "^6.22.0",
         "cucumber": "^6.0.5",
-        "cypress": "^3.7.0",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "eslint-config-prettier": "^6.7.0",

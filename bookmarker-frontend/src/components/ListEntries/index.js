@@ -10,7 +10,7 @@ export const ListEntries = ({ items, selected }) => {
     const [filteredItems, setFilteredItems] = useState([]);
 
     useEffect(() => {
-        if (items !== undefined && items.length !== 0) {
+        if (items && items.length !== 0) {
             switch (selected) {
                 case 0:
                     setFilteredItems(items.books);

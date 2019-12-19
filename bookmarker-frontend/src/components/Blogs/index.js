@@ -11,7 +11,7 @@ export const Blogposts = ({ blogs }) => {
     });
 
     useEffect(() => {
-        if (blogs !== undefined && blogs.length !== 0) {
+        if (blogs && blogs.length) {
             setSortedBlogs(blogs);
         } else setSortedBlogs([]);
     }, [blogs]);
@@ -39,7 +39,7 @@ export const Blogposts = ({ blogs }) => {
     };
 
     return (
-        <div>
+        <>
             <Button.Group basic size="large" color="green" inverted style={{ display: 'flex', marginBottom: '10px' }}>
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
@@ -47,6 +47,6 @@ export const Blogposts = ({ blogs }) => {
             {sortedBlogs.map(b => (
                 <Blogpost key={b.id} blogpost={b} />
             ))}
-        </div>
+        </>
     );
 };

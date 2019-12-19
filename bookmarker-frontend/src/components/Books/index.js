@@ -12,7 +12,7 @@ export const Books = ({ books }) => {
     });
 
     useEffect(() => {
-        if (books !== undefined && books.length !== 0) {
+        if (books && books.length !== 0) {
             setSortedBooks(books);
         } else setSortedBooks([]);
     }, [books]);
@@ -55,15 +55,16 @@ export const Books = ({ books }) => {
     };
 
     return (
-        <div>
+        <>
             <Button.Group basic size="large" color="green" inverted style={{ display: 'flex', marginBottom: '10px' }}>
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
                 <Button onClick={sortByYear}>Sort by year</Button>
             </Button.Group>
+            
             {sortedBooks.map(b => (
                 <Book key={b.id} book={b} />
             ))}
-        </div>
+        </>
     );
 };

@@ -43,13 +43,13 @@ export const ItemsTable = ({ items }) => {
     };
 
     const handleModal = item => {
-        let itemFull = items[item.type + 's'].find(i => i.id === item.id);
+        const itemFull = items[item.type + 's'].find(i => i.id === item.id);
         setModalObject(itemFull);
         setModalOpen(true);
     };
 
     return (
-        <div>
+        <>
             <ItemModal portalOpen={modalOpen} setPortalOpen={setModalOpen} item={modalObject} />
             <Table sortable celled inverted>
                 <Table.Header>
@@ -99,6 +99,6 @@ export const ItemsTable = ({ items }) => {
                     )}
                 </Table.Body>
             </Table>
-        </div>
+        </>
     );
 };

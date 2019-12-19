@@ -13,7 +13,7 @@ export const Articles = ({ articles }) => {
     });
 
     useEffect(() => {
-        if (articles !== undefined && articles.length !== 0) {
+        if (articles && articles.length !== 0) {
             setSortedArticles(articles);
         } else setSortedArticles([]);
     }, [articles]);
@@ -67,7 +67,7 @@ export const Articles = ({ articles }) => {
     };
 
     return (
-        <div>
+        <>
             <Button.Group basic size="large" color="green" inverted style={{ display: 'flex', marginBottom: '10px' }}>
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
@@ -77,6 +77,6 @@ export const Articles = ({ articles }) => {
             {sortedArticles.map(a => (
                 <Article key={a.id} article={a} />
             ))}
-        </div>
+        </>
     );
 };

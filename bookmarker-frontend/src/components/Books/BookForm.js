@@ -56,7 +56,7 @@ export const BookForm = ({ itemService }) => {
             .then(json => {
                 setIsbnErrorMessage();
                 const data = json['ISBN:' + isbn.value];
-                if (data === undefined) {
+                if (data) {
                     isbnError();
                     return;
                 }

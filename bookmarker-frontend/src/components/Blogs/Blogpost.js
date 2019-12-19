@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Blogpost = ({ blogpost }) => {
-    const { id, author, title, url, tagit, relatedCourses } = blogpost;
+export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCourses } }) => {
     const { itemService } = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'blogposts');
