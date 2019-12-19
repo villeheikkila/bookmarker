@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
 
-export const BlogForm = ({ itemService }) => {
+export const BlogForm = ({ itemService }: any) => {
     const [otsikko, otsikkoReset] = useField('text');
     const [kirjoittaja, kirjoittajaReset] = useField('text');
     const [url, urlReset] = useField('text');
     const [relatedCourses, relatedCoursesReset] = useField('text');
     const [tagit, tagitReset] = useField('text');
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const splitTags = tagit.value.split(',');

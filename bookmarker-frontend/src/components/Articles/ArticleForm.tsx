@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
 
-export const ArticleForm = ({ itemService }) => {
+export const ArticleForm = ({ itemService }: any) => {
     const [doi, setDoi] = useState('');
     const [kirjoittaja, setKirjoittaja] = useField('text');
     const [otsikko, setOtsikko] = useField('text');
@@ -12,7 +12,7 @@ export const ArticleForm = ({ itemService }) => {
     const [tagit, setTags] = useField('text');
     const [related, setRelated] = useField('text');
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const splitTags = tagit.value.split(',');
@@ -42,7 +42,7 @@ export const ArticleForm = ({ itemService }) => {
         setRelated();
     };
 
-    const lookUpDOI = async e => {
+    const lookUpDOI = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const articleJson = await axios.get(`https://api.altmetric.com/v1/doi/${doi}`);
         if (articleJson) {

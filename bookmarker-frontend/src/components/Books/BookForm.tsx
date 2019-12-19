@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
 import { OwnLoader } from '../OwnLoader';
 
-export const BookForm = ({ itemService }) => {
+export const BookForm = ({ itemService }: any) => {
     const [kirjoittaja, kirjoittajaReset] = useField('text');
     const [otsikko, otsikkoReset] = useField('text');
     const [isbn, isbnReset] = useField('text');
@@ -15,7 +15,7 @@ export const BookForm = ({ itemService }) => {
     const [showFullForm, setShowFullForm] = useState(false);
     const [isbnLoader, setIsbnLoader] = useState(false);
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const splitTags = tagit.value.split(',');
@@ -47,14 +47,14 @@ export const BookForm = ({ itemService }) => {
         relatedReset();
     };
 
-    const autoFillWithISBN = e => {
+    const autoFillWithISBN = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
         setIsbnLoader(true);
         fetch('https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn.value.trim() + '&jscmd=details&format=json')
             .then(response => response.json())
             .then(json => {
-                setIsbnErrorMessage();
+                setIsbnErrorMessage('');
                 const data = json['ISBN:' + isbn.value];
                 if (data) {
                     isbnError();
@@ -77,7 +77,7 @@ export const BookForm = ({ itemService }) => {
         setIsbnLoader(false);
         setIsbnErrorMessage("Couldn't find anything with given ISBN");
         setTimeout(() => {
-            setIsbnErrorMessage();
+            setIsbnErrorMessage('');
         }, 5000);
     };
 

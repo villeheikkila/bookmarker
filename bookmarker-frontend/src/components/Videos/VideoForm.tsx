@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
 import { OwnLoader } from '../OwnLoader';
 
-export const VideoForm = ({ itemService }) => {
+export const VideoForm = ({ itemService }: any) => {
     const [author, authorReset] = useField('text');
     const [title, setTitle] = useField('text');
     const [url, setUrl] = useField('text');
@@ -12,9 +12,9 @@ export const VideoForm = ({ itemService }) => {
     const [showFullForm, setShowFullForm] = useState(false);
     const [loader, setLoader] = useState(false);
     const [id, setId] = useState();
-    const [loadErrorMessage, setLoadErrorMessage] = useField();
+    const [loadErrorMessage, setLoadErrorMessage] = useField('text');
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const splitRelated = relatedCourses.value.split(',');
@@ -40,7 +40,7 @@ export const VideoForm = ({ itemService }) => {
         setComment();
     };
 
-    const autoFillWithYoutubeUrl = e => {
+    const autoFillWithYoutubeUrl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
         setLoader(true);
