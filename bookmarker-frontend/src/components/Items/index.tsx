@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { Table } from 'semantic-ui-react';
 import { ItemModal } from './ItemModal';
 
-export const ItemsTable = ({ items }) => {
+export const ItemsTable = ({ items }: any) => {
     const [data, setData] = useState({
         column: '',
-        data: '',
+        data: [],
         direction: '',
     });
     const [modalOpen, setModalOpen] = useState(false);
@@ -14,18 +14,20 @@ export const ItemsTable = ({ items }) => {
 
     useEffect(() => {
         if (items.length !== 0) {
-            setData(prevState => ({
+            setData((prevState: any) => ({
                 ...prevState,
                 data: Object.values(items).reduce(
-                    (result, prev) =>
-                        result.concat(prev.map(p => ({ type: p.type, author: p.author, title: p.title, id: p.id }))),
+                    (result: any, prev: any) =>
+                        result.concat(
+                            prev.map((p: any) => ({ type: p.type, author: p.author, title: p.title, id: p.id })),
+                        ),
                     [],
                 ),
             }));
         }
     }, [items]);
 
-    const handleSort = (clickedColumn, st) => () => {
+    const handleSort = (clickedColumn: any, st: any) => () => {
         const { column, data, direction } = st;
         if (column !== clickedColumn) {
             setData({
@@ -42,8 +44,8 @@ export const ItemsTable = ({ items }) => {
         }));
     };
 
-    const handleModal = item => {
-        const itemFull = items[item.type + 's'].find(i => i.id === item.id);
+    const handleModal = (item: any) => {
+        const itemFull = items[item.type + 's'].find((i: any) => i.id === item.id);
         setModalObject(itemFull);
         setModalOpen(true);
     };
@@ -55,19 +57,19 @@ export const ItemsTable = ({ items }) => {
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell
-                            sorted={data.column === 'type' ? data.direction : null}
+                            sorted={data.column === 'type' ? (data.direction as any) : undefined}
                             onClick={handleSort('type', data)}
                         >
                             Type
                         </Table.HeaderCell>
                         <Table.HeaderCell
-                            sorted={data.column === 'author' ? data.direction : null}
+                            sorted={data.column === 'author' ? (data.direction as any) : null}
                             onClick={handleSort('author', data)}
                         >
                             Author
                         </Table.HeaderCell>
                         <Table.HeaderCell
-                            sorted={data.column === 'title' ? data.direction : null}
+                            sorted={data.column === 'title' ? (data.direction as any) : null}
                             onClick={handleSort('title', data)}
                         >
                             Title
@@ -77,7 +79,7 @@ export const ItemsTable = ({ items }) => {
 
                 <Table.Body>
                     {data.data.length !== 0 ? (
-                        data.data.map(item => (
+                        data.data.map((item: any) => (
                             <Table.Row key={item.id} onClick={() => handleModal(item)}>
                                 <Table.Cell key={`${item.id}${item.type}`}>{item.type}</Table.Cell>
                                 <Table.Cell

@@ -4,7 +4,11 @@ import { BlogForm } from '../Blogs/BlogForm';
 import { BookForm } from '../Books/BookForm';
 import { VideoForm } from '../Videos/VideoForm';
 
-export const CreateForm = ({ selected, itemService }) => {
+interface CreateFormProps {
+    selected: Number;
+    itemService: any;
+}
+export const CreateForm = ({ selected, itemService }: CreateFormProps) => {
     return (
         <>
             {selected === 0 ? (

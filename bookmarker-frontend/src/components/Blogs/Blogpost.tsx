@@ -2,8 +2,11 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCourses } }) => {
-    const { itemService } = useContext(ItemServiceContext);
+interface BlogpostProps {
+    blogpost: any;
+}
+export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCourses } }: BlogpostProps) => {
+    const { itemService }: any = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'blogposts');
 
@@ -31,7 +34,7 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCou
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
                         {tagit &&
-                            tagit.map(tagi => (
+                            tagit.map((tagi: string) => (
                                 <Label key={tagi}>
                                     <Icon name="tag" />
                                     {tagi}
@@ -43,7 +46,8 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCou
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedCourses && relatedCourses.map(related => <Label key={related}>{related}</Label>)}
+                        {relatedCourses &&
+                            relatedCourses.map((related: string) => <Label key={related}>{related}</Label>)}
                     </Table.Cell>
                 </Table.Row>
 

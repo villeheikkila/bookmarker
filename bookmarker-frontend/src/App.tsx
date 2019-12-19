@@ -6,8 +6,11 @@ import { ListEntries } from './components/ListEntries';
 import { NavBar } from './components/NavBar';
 import { useResource } from './hooks/useResource';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+
 export const App = () => {
-    const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL);
+    const [items, itemService] = useResource(BACKEND_URL);
+    console.log('TCL: items', items);
     const [showForm, setShowForm] = useState(false);
     const [categorySelected, setCategorySelected] = useState(-1);
 

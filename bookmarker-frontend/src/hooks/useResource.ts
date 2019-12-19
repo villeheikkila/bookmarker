@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-export const useResource = url => {
-    const [resources, setResources] = useState([]);
-    const [loading, setLoading] = useState([]);
+type Categories = 'articles' | 'blogposts' | 'videos' | 'books';
+
+export const useResource = (url: string) => {
+    const [resources, setResources] = useState({} as any);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState([]);
     const [isLoaded, setLoaded] = useState(false);
 
@@ -14,16 +16,15 @@ export const useResource = url => {
         }
     };
 
-    const create = async (data, endpoint) => {
+    const create = async (data: String, endpoint: Categories) => {
         try {
             const newResource = await axios.post(`${url}/${endpoint}`, data);
             const updatedResources = { ...resources };
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data);
             setResources(updatedResources);
-            setError(false);
             return newResource;
         } catch (error) {
-            setError(true);
+            setError(error);
         }
     };
 
@@ -32,24 +33,20 @@ export const useResource = url => {
         try {
             const response = await axios.get(url);
             setResources(response.data);
-            setError(false);
         } catch (error) {
-            setError(true);
+            setError(error);
         }
         setLoading(false);
     };
 
-    const remove = async (id, endpoint) => {
+    const remove = async (id: string, endpoint: Categories) => {
         try {
             await axios.delete(`${url}/${endpoint}/${id}`);
-            const removeEntry = resources[endpoint].filter(e => e.id !== id);
+            const removeEntry = resources[endpoint].filter((e: any) => e.id !== id);
             const updatedResources = { ...resources, [endpoint]: removeEntry };
             setResources(updatedResources);
-
-            setError(false);
         } catch (error) {
-            console.log(error);
-            setError(true);
+            setError(error);
         }
     };
 

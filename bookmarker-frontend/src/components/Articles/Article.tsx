@@ -2,8 +2,12 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }) => {
-    const { itemService } = useContext(ItemServiceContext);
+interface ArticleProps {
+    article: any;
+}
+
+export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
+    const { itemService }: any = useContext(ItemServiceContext);
     const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
 
     const handleDelete = () => itemService.remove(id, 'articles');
@@ -35,7 +39,7 @@ export const Article = ({ article: { id, author, title, publisher, localDate, ta
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
                         {tagit &&
-                            tagit.map(tagi => (
+                            tagit.map((tagi: any) => (
                                 <Label key={tagi}>
                                     <Icon name="tag" />
                                     {tagi}
@@ -46,7 +50,9 @@ export const Article = ({ article: { id, author, title, publisher, localDate, ta
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>{related && related.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
+                    <Table.Cell>
+                        {related && related.map((related: any) => <Label key={related}>{related}</Label>)}
+                    </Table.Cell>
                 </Table.Row>
 
                 <Table.Row>

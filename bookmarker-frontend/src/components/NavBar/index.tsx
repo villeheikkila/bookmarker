@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-export const NavBar = ({ selected, setSelected, setShowForm }) => {
-    const navButtonClicked = index => {
+export const NavBar = ({ selected, setSelected, setShowForm }: any) => {
+    const navButtonClicked = (index: Number) => {
         setSelected(index);
         setShowForm(false);
     };

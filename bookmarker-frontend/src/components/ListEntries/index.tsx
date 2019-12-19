@@ -6,11 +6,16 @@ import { Books } from '../Books';
 import { ItemsTable } from '../Items';
 import { Videos } from '../Videos';
 
-export const ListEntries = ({ items, selected }) => {
+interface ListEntriesProps {
+    items: Resource;
+    selected: Number;
+}
+
+export const ListEntries = ({ items, selected }: ListEntriesProps) => {
     const [filteredItems, setFilteredItems] = useState([]);
 
     useEffect(() => {
-        if (items && items.length !== 0) {
+        if (items) {
             switch (selected) {
                 case 0:
                     setFilteredItems(items.books);
