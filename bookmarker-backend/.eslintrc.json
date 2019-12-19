@@ -1,0 +1,17 @@
+{
+    "extends": ["airbnb"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "rules": {
+        "import/no-unresolved": 0,
+        "import-name": 0,
+        "plugins": ["prettier"],
+        "extends": ["prettier"],
+        "react/jsx-filename-extension": {
+            "extensions": [".jsx", ".tsx"]
+        }
+    }
+}
