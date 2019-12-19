@@ -43,7 +43,7 @@ export const ItemsTable = ({ items }) => {
     };
 
     const handleModal = item => {
-        let itemFull = items[item.type + 's'].find(i => i.id === item.id);
+        const itemFull = items[item.type + 's'].find(i => i.id === item.id);
         setModalObject(itemFull);
         setModalOpen(true);
     };
