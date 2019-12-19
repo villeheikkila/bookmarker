@@ -5,8 +5,7 @@ import { Blogpost } from '../Blogs/Blogpost';
 import { Book } from '../Books/Book';
 import { Video } from '../Videos/Video';
 
-export const ItemModal = ({ item, portalOpen, setPortalOpen }) => {
-    return (
+export const ItemModal = ({ item, portalOpen, setPortalOpen }) => 
         <TransitionablePortal open={portalOpen} onClose={() => setPortalOpen(false)}>
             <Modal className="inverted" open={portalOpen} centered={false}>
                 <Modal.Header></Modal.Header>
@@ -30,5 +29,3 @@ export const ItemModal = ({ item, portalOpen, setPortalOpen }) => {
                 </Modal.Content>
             </Modal>
         </TransitionablePortal>
-    );
-};

@@ -2,14 +2,12 @@ import React, { useContext } from 'react';
 import { Button, Embed, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Video = ({ video }) => {
-    const { author, title, id, comment, url, relatedCourses } = video;
+export const Video = ({ video: { author, title, id, comment, url, relatedCourses }}) => {
     const { itemService } = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'videos');
 
     return (
-        <div>
             <Table inverted celled>
                 <Table.Body>
                     <Table.Row>
@@ -51,7 +49,5 @@ export const Video = ({ video }) => {
                     </Table.Row>
                 </Table.Body>
             </Table>
-            <div />
-        </div>
     );
 };

@@ -6,7 +6,7 @@ import { VideoForm } from '../Videos/VideoForm';
 
 export const CreateForm = ({ selected, itemService }) => {
     return (
-        <div>
+        <>
             {selected === 0 ? (
                 <BookForm itemService={itemService} />
             ) : selected === 1 ? (
@@ -16,6 +16,6 @@ export const CreateForm = ({ selected, itemService }) => {
             ) : (
                 <BlogForm itemService={itemService} />
             )}
-        </div>
+        </>
     );
 };

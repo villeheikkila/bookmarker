@@ -6,7 +6,7 @@ import { ListEntries } from './components/ListEntries';
 import { NavBar } from './components/NavBar';
 import { useResource } from './hooks/useResource';
 
-function App() {
+export const App = () => {
     const [items, itemService] = useResource(process.env.REACT_APP_BACKEND_URL);
     const [showForm, setShowForm] = useState(false);
     const [categorySelected, setCategorySelected] = useState(-1);
@@ -23,12 +23,13 @@ function App() {
         background-color: #1C1C1E !important;
       }`}
             </style>
-            <div>
                 <Header size="huge" inverted>
-                    Lukuvinkkikirjasto
+                    Bookmarker
                 </Header>
+
                 <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
-                {categorySelected >= 0 && categorySelected < 5 ? (
+
+                {categorySelected >= 0 && categorySelected < 5 && (
                     <Button
                         inverted
                         color="purple"
@@ -37,17 +38,15 @@ function App() {
                     >
                         {showForm ? 'Close form' : 'Show form'}
                     </Button>
-                ) : (
-                    <div />
                 )}
+
                 {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
+
                 <ItemServiceContext.Provider value={{ itemService }}>
                     <ListEntries items={items} selected={categorySelected} />
                 </ItemServiceContext.Provider>
-            </div>
         </Container>
     );
 }
 
 export const ItemServiceContext = createContext({});
-export default App;

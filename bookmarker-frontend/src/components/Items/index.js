@@ -49,7 +49,7 @@ export const ItemsTable = ({ items }) => {
     };
 
     return (
-        <div>
+        <>
             <ItemModal portalOpen={modalOpen} setPortalOpen={setModalOpen} item={modalObject} />
             <Table sortable celled inverted>
                 <Table.Header>
@@ -99,6 +99,6 @@ export const ItemsTable = ({ items }) => {
                     )}
                 </Table.Body>
             </Table>
-        </div>
+        </>
     );
 };

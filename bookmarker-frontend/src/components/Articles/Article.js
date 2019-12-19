@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Article = ({ article }) => {
-    const { id, author, title, publisher, localDate, tagit, related } = article;
+export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }) => {
     const { itemService } = useContext(ItemServiceContext);
     const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
 

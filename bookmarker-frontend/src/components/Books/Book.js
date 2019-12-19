@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Book = ({ book }) => {
-    const { id, author, title, isbn, tagit, related, year } = book;
+export const Book = ({ book: { id, author, title, isbn, tagit, related, year }}) => {
     const { itemService } = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'books');

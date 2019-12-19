@@ -58,7 +58,7 @@ export const ArticleForm = ({ itemService }) => {
     };
 
     return (
-        <div>
+        <>
             <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={lookUpDOI} inverted>
                 <Form.Field>
                     <label>DOI</label>
@@ -104,6 +104,6 @@ export const ArticleForm = ({ itemService }) => {
                     Submit
                 </Button>
             </Form>
-        </div>
+        </>
     );
 };
