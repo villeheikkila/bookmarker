@@ -1,8 +1,8 @@
 import React from 'react';
-import { ArticleForm } from './saving_forms/ArticleForm';
-import { BlogForm } from './saving_forms/BlogForm';
-import { BookForm } from './saving_forms/BookForm';
-import { VideoForm } from './saving_forms/VideoForm';
+import { ArticleForm } from '../Articles/ArticleForm';
+import { BlogForm } from '../Blogs/BlogForm';
+import { BookForm } from '../Books/BookForm';
+import { VideoForm } from '../Videos/VideoForm';
 
 export const CreateForm = ({ selected, itemService }) => {
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, Modal, Segment, TransitionablePortal } from 'semantic-ui-react'
-import { Article } from './Article'
-import { Blogpost } from './Blogpost'
-import { Book } from './Book'
-import { Video } from './Video'
+import { Article } from '../Articles/Article'
+import { Blogpost } from '../Blogs/Blogpost'
+import { Book } from '../Books/Book'
+import { Video } from '../Videos/Video'
 
 export const ItemModal = ({ item, portalOpen, setPortalOpen }) => {
 

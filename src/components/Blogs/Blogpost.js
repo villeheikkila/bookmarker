@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
-import { ItemServiceContext } from '../App';
+import { ItemServiceContext } from '../../App';
 
 export const Blogpost = ({ blogpost }) => {
     const { id, author, title, url, tagit, relatedCourses } = blogpost

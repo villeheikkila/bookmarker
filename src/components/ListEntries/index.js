@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Divider, Header } from 'semantic-ui-react';
-import { Articles } from './Articles';
-import { Blogposts } from './Blogposts';
-import { Books } from './Books';
-import { ItemsTable } from './ItemsTable';
-import { Videos } from './Videos';
+import { Articles } from '../Articles';
+import { Blogposts } from '../Blogs';
+import { Books } from '../Books';
+import { ItemsTable } from '../Items';
+import { Videos } from '../Videos';
 
 export const ListEntries = ({ items, selected }) => {
     const [filteredItems, setFilteredItems] = useState([])

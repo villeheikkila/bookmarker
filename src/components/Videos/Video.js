@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Embed, Label, Table } from 'semantic-ui-react';
-import { ItemServiceContext } from '../App';
+import { ItemServiceContext } from '../../App';
 
 export const Video = ({ video }) => {
     const { author, title, id, comment, url, relatedCourses } = video;

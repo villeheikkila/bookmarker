@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
-import { ItemServiceContext } from '../App';
+import { ItemServiceContext } from '../../App';
 
-export const Book = ({ book }) => {
-    const { id, author, title, isbn, tagit, related, year } = book;
+export const Article = ({ article }) => {
+    const { id, author, title, publisher, localDate, tagit, related } = article
     const { itemService } = useContext(ItemServiceContext)
+    const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year
 
-    const handleDelete = () => itemService.remove(id, "books");
+    const handleDelete = () => itemService.remove(id, "articles");
+
+
 
     return (
         <Table inverted celled>
@@ -22,13 +25,13 @@ export const Book = ({ book }) => {
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>ISBN</Table.Cell>
-                    <Table.Cell>{isbn}</Table.Cell>
+                    <Table.Cell width={3}>Publisher</Table.Cell>
+                    <Table.Cell>{publisher}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
-                    <Table.Cell width={3}>Year</Table.Cell>
-                    <Table.Cell>{year}</Table.Cell>
+                    <Table.Cell width={3}>Date published</Table.Cell>
+                    <Table.Cell>{date}</Table.Cell>
                 </Table.Row>
 
 
@@ -43,13 +46,14 @@ export const Book = ({ book }) => {
                     <Table.Cell>{related && related.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
                 </Table.Row>
 
+
                 <Table.Row>
                     <Table.Cell width={3} >
                         <Button inverted color='red' onClick={handleDelete}>Delete</Button>
                     </Table.Cell>
                     <Table.Cell />
                 </Table.Row>
-            </Table.Body >
-        </Table >
+            </Table.Body>
+        </Table>
     )
 }
