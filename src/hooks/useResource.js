@@ -12,20 +12,20 @@ export const useResource = url => {
             getAll();
             setLoaded(true);
         }
-    }
+    };
 
     const create = async (data, endpoint) => {
         try {
-            const newResource = await axios.post(`${url}/${endpoint}`, data)
-            const updatedResources = { ...resources }
-            updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data)
-            setResources(updatedResources)
+            const newResource = await axios.post(`${url}/${endpoint}`, data);
+            const updatedResources = { ...resources };
+            updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data);
+            setResources(updatedResources);
             setError(false);
             return newResource;
         } catch (error) {
             setError(true);
         }
-    }
+    };
 
     const getAll = async () => {
         setLoading(true);
@@ -37,28 +37,28 @@ export const useResource = url => {
             setError(true);
         }
         setLoading(false);
-    }
+    };
 
     const remove = async (id, endpoint) => {
         try {
             await axios.delete(`${url}/${endpoint}/${id}`);
-            const removeEntry = resources[endpoint].filter(e => e.id !== id)
-            const updatedResources = { ...resources, [endpoint]: removeEntry }
-            setResources(updatedResources)
+            const removeEntry = resources[endpoint].filter(e => e.id !== id);
+            const updatedResources = { ...resources, [endpoint]: removeEntry };
+            setResources(updatedResources);
 
             setError(false);
         } catch (error) {
-            console.log(error)
+            console.log(error);
             setError(true);
         }
-    }
+    };
 
     const service = {
         init,
         create,
         remove,
         getAll,
-    }
+    };
 
-    return [resources, service, error, loading,]
-}
+    return [resources, service, error, loading];
+};

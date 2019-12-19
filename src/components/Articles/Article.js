@@ -3,13 +3,11 @@ import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
 export const Article = ({ article }) => {
-    const { id, author, title, publisher, localDate, tagit, related } = article
-    const { itemService } = useContext(ItemServiceContext)
-    const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year
+    const { id, author, title, publisher, localDate, tagit, related } = article;
+    const { itemService } = useContext(ItemServiceContext);
+    const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
 
-    const handleDelete = () => itemService.remove(id, "articles");
-
-
+    const handleDelete = () => itemService.remove(id, 'articles');
 
     return (
         <Table inverted celled>
@@ -34,11 +32,17 @@ export const Article = ({ article }) => {
                     <Table.Cell>{date}</Table.Cell>
                 </Table.Row>
 
-
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
-                    <Table.Cell>{tagit && tagit.map(tagi => <Label key={tagi}>
-                        <Icon name='tag' />{tagi}</Label>)}</Table.Cell>
+                    <Table.Cell>
+                        {tagit &&
+                            tagit.map(tagi => (
+                                <Label key={tagi}>
+                                    <Icon name="tag" />
+                                    {tagi}
+                                </Label>
+                            ))}
+                    </Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
@@ -46,14 +50,15 @@ export const Article = ({ article }) => {
                     <Table.Cell>{related && related.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
                 </Table.Row>
 
-
                 <Table.Row>
-                    <Table.Cell width={3} >
-                        <Button inverted color='red' onClick={handleDelete}>Delete</Button>
+                    <Table.Cell width={3}>
+                        <Button inverted color="red" onClick={handleDelete}>
+                            Delete
+                        </Button>
                     </Table.Cell>
                     <Table.Cell />
                 </Table.Row>
             </Table.Body>
         </Table>
-    )
-}
+    );
+};

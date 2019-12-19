@@ -1,48 +1,53 @@
-import _ from 'lodash'
-import React, { useEffect, useState } from 'react'
-import { Button } from 'semantic-ui-react'
-import { Video } from './Video'
+import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { Button } from 'semantic-ui-react';
+import { Video } from './Video';
 
 export const Videos = ({ videos }) => {
-    const [sortedVideos, setSortedVideos] = useState([])
+    const [sortedVideos, setSortedVideos] = useState([]);
     const [sortDirections, setSortDirections] = useState({
         author: true,
         title: true,
-    })
+    });
 
     useEffect(() => {
         if (videos !== undefined && videos.length !== 0) {
-            setSortedVideos(videos)
-        }
-        else setSortDirections([])
-    }, [videos])
+            setSortedVideos(videos);
+        } else setSortDirections([]);
+    }, [videos]);
 
     const sortByAuthor = () => {
-        const clone = sortDirections.author ? _.sortBy(sortedVideos, ['author']) : _.sortBy(sortedVideos, ['author']).reverse()
-        setSortedVideos(clone)
+        const clone = sortDirections.author
+            ? _.sortBy(sortedVideos, ['author'])
+            : _.sortBy(sortedVideos, ['author']).reverse();
+        setSortedVideos(clone);
         setSortDirections(prev => ({
             ...prev,
-            author: !prev.author
-        }))
-    }
+            author: !prev.author,
+        }));
+    };
 
     const sortByTitle = () => {
-        const clone = sortDirections.title ? _.sortBy(sortedVideos, ['title']) : _.sortBy(sortedVideos, ['title']).reverse()
-        setSortedVideos(clone)
+        const clone = sortDirections.title
+            ? _.sortBy(sortedVideos, ['title'])
+            : _.sortBy(sortedVideos, ['title']).reverse();
+        setSortedVideos(clone);
         setSortDirections(prev => ({
             ...prev,
-            title: !prev.title
-        }))
-    }
+            title: !prev.title,
+        }));
+    };
 
     return (
         <div>
-            <Button.Group basic size='large' color='green' inverted style={{ display: 'flex', marginBottom: '10px' }}>
+            <Button.Group basic size="large" color="green" inverted style={{ display: 'flex', marginBottom: '10px' }}>
                 <Button onClick={sortByAuthor}>Sort by author</Button>
                 <Button onClick={sortByTitle}>Sort by title</Button>
             </Button.Group>
 
-            {sortedVideos.map(v => <Video key={v.id} video={v} />)}
+            {sortedVideos.map(v => (
+                <Video key={v.id} video={v} />
+            ))}
         </div>
-    )
-} 
+    );
+};

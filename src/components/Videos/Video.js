@@ -4,9 +4,9 @@ import { ItemServiceContext } from '../../App';
 
 export const Video = ({ video }) => {
     const { author, title, id, comment, url, relatedCourses } = video;
-    const { itemService } = useContext(ItemServiceContext)
+    const { itemService } = useContext(ItemServiceContext);
 
-    const handleDelete = () => itemService.remove(id, "videos");
+    const handleDelete = () => itemService.remove(id, 'videos');
 
     return (
         <div>
@@ -29,19 +29,23 @@ export const Video = ({ video }) => {
 
                     <Table.Row>
                         <Table.Cell width={3}>Related courses</Table.Cell>
-                        <Table.Cell>{relatedCourses && relatedCourses.map(related => <Label key={related}>{related}</Label>)}</Table.Cell>
-                    </Table.Row>
-
-                    <Table.Row>
-                        <Table.Cell width={3} >Video</Table.Cell>
                         <Table.Cell>
-                            <Embed source='youtube' placeholder={`https://img.youtube.com/vi/${url}/0.jpg`} id={url} />
+                            {relatedCourses && relatedCourses.map(related => <Label key={related}>{related}</Label>)}
                         </Table.Cell>
                     </Table.Row>
 
                     <Table.Row>
-                        <Table.Cell width={3} >
-                            <Button inverted color='red' onClick={handleDelete}>Delete</Button>
+                        <Table.Cell width={3}>Video</Table.Cell>
+                        <Table.Cell>
+                            <Embed source="youtube" placeholder={`https://img.youtube.com/vi/${url}/0.jpg`} id={url} />
+                        </Table.Cell>
+                    </Table.Row>
+
+                    <Table.Row>
+                        <Table.Cell width={3}>
+                            <Button inverted color="red" onClick={handleDelete}>
+                                Delete
+                            </Button>
                         </Table.Cell>
                         <Table.Cell />
                     </Table.Row>
@@ -49,5 +53,5 @@ export const Video = ({ video }) => {
             </Table>
             <div />
         </div>
-    )
-}
+    );
+};
