@@ -3,10 +3,11 @@ const knex = require('../connection');
 interface Book {
     author: string;
     title: string;
-    year: Number;
+    year: number;
     tags: string;
     related: string;
 }
+
 const getAllBooks = () => {
     return knex('books').select('*');
 };
@@ -44,3 +45,5 @@ module.exports = {
     updateBook,
     deleteBook,
 };
+
+export {};
