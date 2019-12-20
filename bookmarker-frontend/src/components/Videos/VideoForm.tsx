@@ -26,7 +26,7 @@ export const VideoForm = ({ itemService }: any) => {
                 author: author.value,
                 title: title.value,
                 url: id,
-                relatedCourses: related,
+                related: related,
                 comment: comment.value,
             },
             'videos',

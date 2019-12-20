@@ -41,7 +41,9 @@ router.get(`${BASE_URL}/:id`, async (ctx: Context) => {
 
 router.post(`${BASE_URL}`, async (ctx: Context) => {
     try {
-        const blogpost = await queries.addBlogpost(ctx.request.body);
+        const body = ctx.request.body;
+        body.type = 'article';
+        const blogpost = await queries.addBlogpost(body);
 
         if (blogpost.length) {
             ctx.status = 201;

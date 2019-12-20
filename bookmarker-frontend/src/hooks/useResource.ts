@@ -17,8 +17,10 @@ export const useResource = (url: string) => {
     };
 
     const create = async (data: String, endpoint: Categories) => {
+        console.log('TCL: create -> data', data);
         try {
             const newResource = await axios.post(`${url}/${endpoint}`, data);
+            console.log('TCL: create -> newResource', newResource);
             const updatedResources = { ...resources };
             updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data);
             setResources(updatedResources);
@@ -32,8 +34,9 @@ export const useResource = (url: string) => {
         setLoading(true);
         try {
             const response = await axios.get(url);
-            setResources(response.data);
+            setResources(response.data.data);
         } catch (error) {
+            console.error(error);
             setError(error);
         }
         setLoading(false);

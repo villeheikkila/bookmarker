@@ -5,7 +5,6 @@ interface Video {
     url: string;
     author: string;
     localDate: Date;
-    year: number;
     comment: string;
     related: string;
 }

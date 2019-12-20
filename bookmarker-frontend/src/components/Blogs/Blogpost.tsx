@@ -6,8 +6,10 @@ interface BlogpostProps {
     blogpost: Blogpost;
 }
 
-export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCourses } }: BlogpostProps) => {
+export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCourses } }: BlogpostProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
+    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
+    const tagitSplit = tags ? tags.split(',') : [];
 
     const handleDelete = () => itemService.remove(id, 'blogposts');
 
@@ -34,8 +36,8 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCou
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagit &&
-                            tagit.map((tagi: string) => (
+                        {tagitSplit &&
+                            tagitSplit.map((tagi: string) => (
                                 <Label key={tagi}>
                                     <Icon name="tag" />
                                     {tagi}
@@ -47,8 +49,7 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tagit, relatedCou
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedCourses &&
-                            relatedCourses.map((related: string) => <Label key={related}>{related}</Label>)}
+                        {relatedSplit && relatedSplit.map((related: string) => <Label key={related}>{related}</Label>)}
                     </Table.Cell>
                 </Table.Row>
 

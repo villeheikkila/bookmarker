@@ -8,6 +8,9 @@ interface ArticleProps {
 
 export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
+    const relatedSplit = related ? related.split(',') : [];
+    const tagitSplit = tagit ? tagit.split(',') : [];
+
     //const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
     const date = '';
     const handleDelete = () => itemService.remove(id, 'articles');
@@ -38,8 +41,8 @@ export const Article = ({ article: { id, author, title, publisher, localDate, ta
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagit &&
-                            tagit.map((tagi: any) => (
+                        {tagitSplit &&
+                            tagitSplit.map((tagi: any) => (
                                 <Label key={tagi}>
                                     <Icon name="tag" />
                                     {tagi}
@@ -51,7 +54,7 @@ export const Article = ({ article: { id, author, title, publisher, localDate, ta
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {related && related.map((related: any) => <Label key={related}>{related}</Label>)}
+                        {relatedSplit && relatedSplit.map((related: any) => <Label key={related}>{related}</Label>)}
                     </Table.Cell>
                 </Table.Row>
 

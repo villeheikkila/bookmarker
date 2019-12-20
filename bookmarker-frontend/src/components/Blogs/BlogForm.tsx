@@ -23,9 +23,9 @@ export const BlogForm = ({ itemService }: any) => {
                 id: Math.floor(Math.random() * 1000 + 1),
                 title: otsikko.value,
                 author: kirjoittaja.value,
-                tagit: tags,
+                tags: tags,
                 url: url.value,
-                relatedCourses: related,
+                related: related,
             },
             'blogposts',
         );

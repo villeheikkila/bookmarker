@@ -17,7 +17,7 @@ export const ArticleForm = ({ itemService }: any) => {
 
         const splitTags = tagit.value.split(',');
         const splitRelated = related.value.split(',');
-
+        const dateFixed = localDate.value === '' ? null : localDate.value;
         const tags = splitTags[0] !== '' ? splitTags : null;
         const relatedCoureses = splitRelated[0] !== '' ? splitRelated : null;
 
@@ -27,8 +27,8 @@ export const ArticleForm = ({ itemService }: any) => {
                 author: kirjoittaja.value,
                 title: otsikko.value,
                 publisher: publisher.value,
-                localDate: localDate.value,
-                tagit: tags,
+                localDate: dateFixed,
+                tags: tags,
                 related: relatedCoureses,
             },
             'articles',

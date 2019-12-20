@@ -5,6 +5,8 @@ import { ItemServiceContext } from '../../App';
 export const Video = ({ author, title, id, comment, url, relatedCourses }: Video) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
+    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
+
     const handleDelete = () => itemService.remove(id, 'videos');
 
     return (
@@ -28,7 +30,7 @@ export const Video = ({ author, title, id, comment, url, relatedCourses }: Video
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedCourses && relatedCourses.map(related => <Label key={related}>{related}</Label>)}
+                        {relatedSplit && relatedSplit.map(related => <Label key={related}>{related}</Label>)}
                     </Table.Cell>
                 </Table.Row>
 

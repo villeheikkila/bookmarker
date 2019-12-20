@@ -6,6 +6,7 @@ exports.up = (knex: any) =>
         table.string('url').notNullable();
         table.string('tags');
         table.string('related');
+        table.string('type');
     });
 
 exports.down = (knex: any) => knex.schema.dropTable('blogposts');

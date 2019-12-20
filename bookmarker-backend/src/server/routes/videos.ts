@@ -41,7 +41,11 @@ router.get(`${BASE_URL}/:id`, async (ctx: Context) => {
 
 router.post(`${BASE_URL}`, async (ctx: Context) => {
     try {
-        const video = await queries.addVideo(ctx.request.body);
+        const body = ctx.request.body;
+        body.type = 'video';
+        const video = await queries.addVideo(body);
+
+        console.log('TCL: video', video);
 
         if (video.length) {
             ctx.status = 201;

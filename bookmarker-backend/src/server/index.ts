@@ -1,19 +1,24 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
+const cors = require('@koa/cors');
 
 const bookRoutes = require('./routes/books');
 const articleRoutes = require('./routes/articles');
 const blogpostRoutes = require('./routes/blogposts');
 const videoRoutes = require('./routes/videos');
+const allRoutes = require('./routes/all');
 
 const app = new Koa();
 const PORT = process.env.PORT || 1337;
 
+app.use(cors());
 app.use(bodyParser());
+
 app.use(bookRoutes.routes());
 app.use(articleRoutes.routes());
 app.use(blogpostRoutes.routes());
 app.use(videoRoutes.routes());
+app.use(allRoutes.routes());
 
 const server = app.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);

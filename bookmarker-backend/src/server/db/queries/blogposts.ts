@@ -6,6 +6,7 @@ interface Blogpost {
     author: string;
     comment: string;
     related: string;
+    tags: string;
 }
 
 const getAllBlogposts = () => {

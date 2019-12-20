@@ -3,7 +3,7 @@
 interface Resource {
     articles: Article[];
     videos: Video[];
-    blogposts: Blogpost[];
+    blogposts: Blogpost;
     books: Book[];
 }
 
@@ -13,7 +13,7 @@ interface Video {
     title: string;
     id: number;
     comment: string;
-    relatedCourses: string[];
+    relatedCourses: string;
 }
 
 interface Blogpost {
@@ -21,8 +21,8 @@ interface Blogpost {
     author: string;
     title: string;
     url: string;
-    tagit: string[];
-    relatedCourses: string[];
+    tags: string;
+    relatedCourses: string;
 }
 
 interface Article {
@@ -32,8 +32,8 @@ interface Article {
     date: string;
     publisher: string;
     localDate: string;
-    tagit: string[];
-    related: string[];
+    tagit: string;
+    related: string;
 }
 
 interface Book {
@@ -41,7 +41,7 @@ interface Book {
     author: string;
     title: string;
     isbn: string;
-    tagit: string[];
-    related: string[];
+    tagit: string;
+    related: string;
     year: number;
 }
