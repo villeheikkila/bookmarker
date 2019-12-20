@@ -1,0 +1,1 @@
+DELETE http://localhost:1337/api/books/11
