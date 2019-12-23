@@ -1,7 +1,7 @@
-import axios from 'axios';
 import React, { FormEvent, useState } from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
+import { getArticleByDOI } from '../../services/altmetric';
 
 export const ArticleForm = ({ itemService }: any) => {
     const [doi, setDoi] = useState('');
@@ -11,6 +11,7 @@ export const ArticleForm = ({ itemService }: any) => {
     const [localDate, setLocalDate] = useField('text');
     const [tagit, setTags] = useField('text');
     const [related, setRelated] = useField('text');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -44,11 +45,9 @@ export const ArticleForm = ({ itemService }: any) => {
 
     const lookUpDOI = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const articleJson = await axios.get(`https://api.altmetric.com/v1/doi/${doi}`);
-        console.log('TCL: lookUpDOI -> articleJson', articleJson);
-        if (articleJson) {
-            const { data } = articleJson;
-            console.log('TCL: lookUpDOI -> data', data);
+
+        try {
+            const data = await getArticleByDOI(doi);
             setKirjoittaja(data.authors.join(', '));
             setOtsikko(data.title);
             setPublisher(data.journal);
@@ -56,7 +55,16 @@ export const ArticleForm = ({ itemService }: any) => {
             publishedOn.setUTCSeconds(parseInt(data.published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
             setLocalDate(publishedOnString);
+        } catch {
+            error();
         }
+    };
+
+    const error = () => {
+        setErrorMessage("Couldn't find anything with given DOI");
+        setTimeout(() => {
+            setErrorMessage('');
+        }, 5000);
     };
 
     return (
@@ -66,10 +74,13 @@ export const ArticleForm = ({ itemService }: any) => {
                     <label>DOI</label>
                     <Input type="text" placeholder="DOI" onChange={e => setDoi(e.target.value)} />
                 </Form.Field>
+
                 <Button primary type="submit">
                     Look up info by DOI
                 </Button>
             </Form>
+
+            <p style={{ color: 'red' }}>{errorMessage}</p>
 
             <Form onSubmit={handleSubmit} inverted>
                 <Form.Field>

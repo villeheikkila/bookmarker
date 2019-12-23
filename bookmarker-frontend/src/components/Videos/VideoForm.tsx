@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
+import { GetYouTubeData } from '../../services/youtube';
 import { OwnLoader } from '../OwnLoader';
 
 export const VideoForm = ({ itemService }: any) => {
@@ -12,12 +13,12 @@ export const VideoForm = ({ itemService }: any) => {
     const [showFullForm, setShowFullForm] = useState(false);
     const [loader, setLoader] = useState(false);
     const [id, setId] = useState();
-    const [loadErrorMessage, setLoadErrorMessage] = useField('text');
+    const [loadErrorMessage, setLoadErrorMessage] = useState('');
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const response = await itemService.create(
+        await itemService.create(
             {
                 id: Math.floor(Math.random() * 1000 + 1),
                 author: author.value,
@@ -28,7 +29,6 @@ export const VideoForm = ({ itemService }: any) => {
             },
             'videos',
         );
-        console.log('TCL: handleSubmit -> response', response);
 
         authorReset('');
         setTitle('');
@@ -37,44 +37,24 @@ export const VideoForm = ({ itemService }: any) => {
         setComment('');
     };
 
-    const autoFillWithYoutubeUrl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const autoFillWithYoutubeUrl = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
         setLoader(true);
-        // Parse from url
+
         if (url.value) {
-            const id = url.value.toLowerCase().includes('youtube')
-                ? url.value
-                      .split('?')[1]
-                      .split('&')[0]
-                      .split('=')[1]
-                : url.value.split('//')[1].split('/')[1];
-            console.log('TCL: autoFillWithYoutubeUrl -> id', id);
-            fetch(
-                'https://www.googleapis.com/youtube/v3/videos/?part=snippet&id=' +
-                    id.trim() +
-                    '&key=' +
-                    process.env.REACT_APP_YOUTUBE_API_KEY,
-            )
-                .then(response => response.json())
-                .then(json => {
-                    setLoadErrorMessage();
-                    const data = json['items'];
-
-                    if (!data) {
-                        loadError();
-                        return;
-                    }
-
-                    const details = data[0]['snippet'];
-                    authorReset(details['channelTitle']);
-                    setTitle(details['title']);
-                    setLoader(false);
-                    setId(id);
-                    setShowFullForm(true);
-                })
-                .catch(() => loadError);
+            try {
+                const details = await GetYouTubeData(url.value);
+                authorReset(details['channelTitle']);
+                setTitle(details['title']);
+                setLoader(false);
+                setId(id);
+                setShowFullForm(true);
+            } catch {
+                loadError();
+            }
         } else {
+            setLoader(false);
             setLoadErrorMessage("URL can't be empty");
         }
     };
@@ -83,7 +63,7 @@ export const VideoForm = ({ itemService }: any) => {
         setLoader(false);
         setLoadErrorMessage("Couldn't find anything with given URL");
         setTimeout(() => {
-            setLoadErrorMessage();
+            setLoadErrorMessage('');
         }, 5000);
     };
 
@@ -98,7 +78,7 @@ export const VideoForm = ({ itemService }: any) => {
                 Autofill
             </Button>
 
-            <p style={{ color: 'red' }}>{loadErrorMessage.value}</p>
+            <p style={{ color: 'red' }}>{loadErrorMessage}</p>
 
             {loader && <OwnLoader />}
 

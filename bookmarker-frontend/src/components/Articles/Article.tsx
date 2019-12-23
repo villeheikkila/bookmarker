@@ -7,7 +7,6 @@ interface ArticleProps {
 }
 
 export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
-    console.log('TCL: Article -> localDate', localDate);
     const { itemService }: any = useContext(ItemServiceContext);
     const relatedSplit = related ? related.split(',') : [];
     const tagitSplit = tagit ? tagit.split(',') : [];

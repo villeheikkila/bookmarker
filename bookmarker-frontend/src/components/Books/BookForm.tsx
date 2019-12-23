@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
+import { GetDataByISBN } from '../../services/openlibrary';
 import { OwnLoader } from '../OwnLoader';
 
 export const BookForm = ({ itemService }: any) => {
@@ -47,31 +48,24 @@ export const BookForm = ({ itemService }: any) => {
         relatedReset();
     };
 
-    const autoFillWithISBN = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const autoFillWithISBN = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
         setIsbnLoader(true);
-        fetch('https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn.value.trim() + '&jscmd=details&format=json')
-            .then(response => response.json())
-            .then(json => {
-                setIsbnErrorMessage('');
-                const data = json['ISBN:' + isbn.value];
 
-                if (!data) {
-                    isbnError();
-                    return;
-                }
-                const details = data['details'];
-                const year = new Date(details['publish_date']).getFullYear();
+        try {
+            const details = await GetDataByISBN(isbn.value.trim());
+            const year = new Date(details['publish_date']).getFullYear();
 
-                kirjoittajaReset(details['authors'][0]['name']);
-                otsikkoReset(details['title']);
-                yearReset(year);
-                editionReset(details['revision']);
-                setIsbnLoader(false);
-                setShowFullForm(true);
-            })
-            .catch(() => isbnError);
+            kirjoittajaReset(details['authors'][0]['name']);
+            otsikkoReset(details['title']);
+            yearReset(year);
+            editionReset(details['revision']);
+            setIsbnLoader(false);
+            setShowFullForm(true);
+        } catch {
+            isbnError();
+        }
     };
 
     const isbnError = () => {
