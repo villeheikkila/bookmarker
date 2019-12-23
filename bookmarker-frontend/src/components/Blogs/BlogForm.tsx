@@ -1,9 +1,10 @@
 import React from 'react';
 import useForm from 'react-hook-form';
-import { Button, Form } from 'semantic-ui-react';
+import { RHFInput } from 'react-hook-form-input';
+import { Button, Form, Input } from 'semantic-ui-react';
 
 export const BlogForm = ({ itemService }: any) => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = ({ title, author, url, tags, related }: any) => {
         itemService.create(
@@ -16,33 +17,35 @@ export const BlogForm = ({ itemService }: any) => {
             },
             'blogposts',
         );
+
+        reset({
+            author: '',
+            title: '',
+            tags: '',
+            related: '',
+        });
     };
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
-                <label>Title</label>
-                <input name="title" ref={register} />
+                <RHFInput as={<Input label="Title" />} name="title" register={register} />
             </Form.Field>
 
             <Form.Field>
-                <label>Author</label>
-                <input name="author" ref={register} />
+                <RHFInput as={<Input label="Author" />} name="author" register={register} />
             </Form.Field>
 
             <Form.Field>
-                <label>URL</label>
-                <input name="url" ref={register} />
+                <RHFInput as={<Input label="URL" />} name="url" register={register} />
             </Form.Field>
 
             <Form.Field>
-                <label>Tags</label>
-                <input name="tags" ref={register} />
+                <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
             </Form.Field>
 
             <Form.Field>
-                <label>Related courses</label>
-                <input name="related" ref={register} />
+                <RHFInput as={<Input label="Related courses" />} name="related" register={register} />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">
