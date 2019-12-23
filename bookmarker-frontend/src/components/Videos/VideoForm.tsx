@@ -17,27 +17,24 @@ export const VideoForm = ({ itemService }: any) => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const splitRelated = relatedCourses.value.split(',');
-        const related = splitRelated[0] !== '' ? splitRelated : null;
-
         const response = await itemService.create(
             {
                 id: Math.floor(Math.random() * 1000 + 1),
                 author: author.value,
                 title: title.value,
                 url: id,
-                related: related,
+                related: relatedCourses,
                 comment: comment.value,
             },
             'videos',
         );
         console.log('TCL: handleSubmit -> response', response);
 
-        authorReset();
-        setTitle();
-        setUrl();
-        relatedCoursesReset();
-        setComment();
+        authorReset('');
+        setTitle('');
+        setUrl('');
+        relatedCoursesReset('');
+        setComment('');
     };
 
     const autoFillWithYoutubeUrl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

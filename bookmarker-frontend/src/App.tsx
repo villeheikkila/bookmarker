@@ -1,5 +1,5 @@
 import 'fomantic-ui-css/semantic.min.css';
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { Button, Container, Header } from 'semantic-ui-react';
 import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
@@ -10,13 +10,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080'
 
 export const App = () => {
     const [items, itemService] = useResource(BACKEND_URL);
-    console.log('TCL: items', items);
     const [showForm, setShowForm] = useState(false);
     const [categorySelected, setCategorySelected] = useState(-1);
-
-    useEffect(() => {
-        itemService.init();
-    }, [itemService]);
 
     return (
         <Container>

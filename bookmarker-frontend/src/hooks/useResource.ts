@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Categories = 'articles' | 'blogposts' | 'videos' | 'books';
 
@@ -9,6 +9,13 @@ export const useResource = (url: string) => {
     const [error, setError] = useState([]);
     const [isLoaded, setLoaded] = useState(false);
 
+    useEffect(() => {
+        (async function() {
+            const response = await axios.get(url);
+            setResources(response.data.data);
+        })();
+    }, [url]);
+
     const init = () => {
         if (!isLoaded) {
             getAll();
@@ -17,14 +24,12 @@ export const useResource = (url: string) => {
     };
 
     const create = async (data: String, endpoint: Categories) => {
-        console.log('TCL: create -> data', data);
         try {
-            const newResource = await axios.post(`${url}/${endpoint}`, data);
-            console.log('TCL: create -> newResource', newResource);
+            const { data: response }: any = await axios.post(`${url}/${endpoint}`, data);
             const updatedResources = { ...resources };
-            updatedResources[endpoint] = updatedResources[endpoint].concat(newResource.data);
+            updatedResources[endpoint] = updatedResources[endpoint].concat(response.data);
             setResources(updatedResources);
-            return newResource;
+            return response.data;
         } catch (error) {
             setError(error);
         }
