@@ -1,67 +1,48 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
+import useForm from 'react-hook-form';
 import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../../hooks/useField';
 
 export const BlogForm = ({ itemService }: any) => {
-    const [otsikko, otsikkoReset] = useField('text');
-    const [kirjoittaja, kirjoittajaReset] = useField('text');
-    const [url, urlReset] = useField('text');
-    const [relatedCourses, relatedCoursesReset] = useField('text');
-    const [tagit, tagitReset] = useField('text');
+    const { register, handleSubmit } = useForm();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const splitTags = tagit.value.split(',');
-        const splitRelated = relatedCourses.value.split(',');
-
-        const tags = splitTags[0] !== '' ? splitTags : null;
-        const related = splitRelated[0] !== '' ? splitRelated : null;
-
+    const onSubmit = ({ title, author, url, tags, related }: any) => {
         itemService.create(
             {
-                id: Math.floor(Math.random() * 1000 + 1),
-                title: otsikko.value,
-                author: kirjoittaja.value,
-                tags: tags,
-                url: url.value,
-                related: related,
+                title,
+                author,
+                tags,
+                url,
+                related,
             },
             'blogposts',
         );
-
-        otsikkoReset();
-        kirjoittajaReset();
-        urlReset();
-        relatedCoursesReset();
-        tagitReset();
     };
 
     return (
-        <Form onSubmit={handleSubmit} inverted>
+        <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
                 <label>Title</label>
-                <input {...otsikko} />
+                <input name="title" ref={register} />
             </Form.Field>
 
             <Form.Field>
                 <label>Author</label>
-                <input {...kirjoittaja} />
+                <input name="author" ref={register} />
             </Form.Field>
 
             <Form.Field>
                 <label>URL</label>
-                <input {...url} />
+                <input name="url" ref={register} />
             </Form.Field>
 
             <Form.Field>
                 <label>Tags</label>
-                <input {...tagit} />
+                <input name="tags" ref={register} />
             </Form.Field>
 
             <Form.Field>
                 <label>Related courses</label>
-                <input {...relatedCourses} />
+                <input name="related" ref={register} />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">
