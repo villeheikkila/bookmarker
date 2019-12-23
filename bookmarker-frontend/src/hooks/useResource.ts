@@ -5,9 +5,7 @@ type Categories = 'articles' | 'blogposts' | 'videos' | 'books';
 
 export const useResource = (url: string) => {
     const [resources, setResources] = useState({} as any);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState([]);
-    const [isLoaded, setLoaded] = useState(false);
 
     useEffect(() => {
         (async function() {
@@ -15,13 +13,6 @@ export const useResource = (url: string) => {
             setResources(response.data.data);
         })();
     }, [url]);
-
-    const init = () => {
-        if (!isLoaded) {
-            getAll();
-            setLoaded(true);
-        }
-    };
 
     const create = async (data: String, endpoint: Categories) => {
         try {
@@ -33,18 +24,6 @@ export const useResource = (url: string) => {
         } catch (error) {
             setError(error);
         }
-    };
-
-    const getAll = async () => {
-        setLoading(true);
-        try {
-            const response = await axios.get(url);
-            setResources(response.data.data);
-        } catch (error) {
-            console.error(error);
-            setError(error);
-        }
-        setLoading(false);
     };
 
     const remove = async (id: string, endpoint: Categories) => {
@@ -59,11 +38,9 @@ export const useResource = (url: string) => {
     };
 
     const service = {
-        init,
         create,
         remove,
-        getAll,
     };
 
-    return [resources, service, error, loading];
+    return [resources, service, error];
 };
