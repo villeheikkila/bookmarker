@@ -54,10 +54,9 @@ export const BookForm = ({ itemService }: any) => {
         fetch('https://openlibrary.org/api/books?bibkeys=ISBN:' + isbn.value.trim() + '&jscmd=details&format=json')
             .then(response => response.json())
             .then(json => {
-                console.log('TCL: autoFillWithISBN -> json', json);
                 setIsbnErrorMessage('');
                 const data = json['ISBN:' + isbn.value];
-                console.log('TCL: autoFillWithISBN -> data', data);
+
                 if (!data) {
                     isbnError();
                     return;
