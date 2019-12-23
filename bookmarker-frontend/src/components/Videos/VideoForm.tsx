@@ -1,61 +1,51 @@
-import React, { FormEvent, useState } from 'react';
-import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../../hooks/useField';
+import React, { useState } from 'react';
+import useForm from 'react-hook-form';
+import { RHFInput } from 'react-hook-form-input';
+import { Button, Form, Input } from 'semantic-ui-react';
 import { GetYouTubeData } from '../../services/youtube';
 import { OwnLoader } from '../OwnLoader';
 
 export const VideoForm = ({ itemService }: any) => {
-    const [author, authorReset] = useField('text');
-    const [title, setTitle] = useField('text');
-    const [url, setUrl] = useField('text');
-    const [relatedCourses, relatedCoursesReset] = useField('text');
-    const [comment, setComment] = useField('text');
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
-    const [id, setId] = useState();
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const { register, handleSubmit, setValue, reset } = useForm();
 
+    const onSubmit = async ({ author, title, url, comment, related }: any) => {
         await itemService.create(
             {
                 id: Math.floor(Math.random() * 1000 + 1),
-                author: author.value,
-                title: title.value,
-                url: id,
-                related: relatedCourses,
-                comment: comment.value,
+                author,
+                title,
+                url,
+                related,
+                comment,
             },
             'videos',
         );
 
-        authorReset('');
-        setTitle('');
-        setUrl('');
-        relatedCoursesReset('');
-        setComment('');
+        reset({
+            author: '',
+            title: '',
+            url: '',
+            related: '',
+            comment: '',
+        });
     };
 
-    const autoFillWithYoutubeUrl = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-
+    const autoFillWithYoutubeUrl = async ({ url }: any) => {
+        console.log('TCL: autoFillWithYoutubeUrl -> url', url);
         setShowLoader(true);
-
-        if (url.value) {
-            try {
-                const details = await GetYouTubeData(url.value);
-                authorReset(details['channelTitle']);
-                setTitle(details['title']);
-                setShowLoader(false);
-                setId(id);
-                setShowFullForm(true);
-            } catch {
-                loadError();
-            }
-        } else {
+        try {
+            const details = await GetYouTubeData(url);
+            setValue('author', details['channelTitle']);
+            setValue('title', details['title']);
             setShowLoader(false);
-            setErrorMessage("URL can't be empty");
+            setShowFullForm(true);
+        } catch {
+            setShowLoader(false);
+            loadError();
         }
     };
 
@@ -68,13 +58,12 @@ export const VideoForm = ({ itemService }: any) => {
     };
 
     return (
-        <Form onSubmit={handleSubmit} inverted>
+        <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
-                <label>Url</label>
-                <input {...url} />
+                <RHFInput as={<Input label="URL" />} name="url" setValue={setValue} register={register} />
             </Form.Field>
 
-            <Button primary onClick={autoFillWithYoutubeUrl}>
+            <Button primary onClick={handleSubmit(autoFillWithYoutubeUrl)}>
                 Autofill
             </Button>
 
@@ -83,27 +72,33 @@ export const VideoForm = ({ itemService }: any) => {
             {showLoader && <OwnLoader />}
 
             {showFullForm && (
-                <div>
+                <>
                     <Form.Field>
-                        <label>Channel</label>
-                        <input {...author} />
+                        <RHFInput
+                            as={<Input label="Channel" />}
+                            name="author"
+                            setValue={setValue}
+                            register={register}
+                        />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Title</label>
-                        <input {...title} />
+                        <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
                     </Form.Field>
-                </div>
+                </>
             )}
 
             <Form.Field>
-                <label>Related courses</label>
-                <input {...relatedCourses} />
+                <RHFInput
+                    as={<Input label="Related Courses" />}
+                    name="related"
+                    setValue={setValue}
+                    register={register}
+                />
             </Form.Field>
 
             <Form.Field>
-                <label>Comment</label>
-                <input {...comment} />
+                <RHFInput as={<Input label="Comment" />} name="comment" setValue={setValue} register={register} />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">
