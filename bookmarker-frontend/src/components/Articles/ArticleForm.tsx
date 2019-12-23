@@ -1,64 +1,51 @@
-import React, { FormEvent, useState } from 'react';
+import React, { useState } from 'react';
+import useForm from 'react-hook-form';
+import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
-import { useField } from '../../hooks/useField';
 import { getArticleByDOI } from '../../services/altmetric';
 import { OwnLoader } from '../OwnLoader';
 
 export const ArticleForm = ({ itemService }: any) => {
-    const [doi, setDoi] = useState('');
-    const [kirjoittaja, setKirjoittaja] = useField('text');
-    const [otsikko, setOtsikko] = useField('text');
-    const [publisher, setPublisher] = useField('text');
-    const [localDate, setLocalDate] = useField('text');
-    const [tagit, setTags] = useField('text');
-    const [related, setRelated] = useField('text');
     const [errorMessage, setErrorMessage] = useState('');
     const [showLoader, setShowLoader] = useState(false);
+    const { register, handleSubmit, reset, setValue } = useForm();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const splitTags = tagit.value.split(',');
-        const splitRelated = related.value.split(',');
-        const dateFixed = localDate.value === '' ? null : localDate.value;
-        const tags = splitTags[0] !== '' ? splitTags : null;
-        const relatedCoureses = splitRelated[0] !== '' ? splitRelated : null;
-
+    const onSubmit = ({ author, title, date, publisher, related, tags }: any) => {
         itemService.create(
             {
-                id: Math.floor(Math.random() * 1000 + 1),
-                author: kirjoittaja.value,
-                title: otsikko.value,
+                author,
+                title,
                 publisher: publisher.value,
-                localDate: dateFixed,
-                tags: tags,
-                related: relatedCoureses,
+                localDate: date,
+                tags,
+                related,
             },
             'articles',
         );
 
-        setKirjoittaja();
-        setOtsikko();
-        setPublisher();
-        setLocalDate();
-        setTags();
-        setRelated();
+        reset({
+            author: '',
+            title: '',
+            tags: '',
+            publisher: '',
+            date: '',
+            related: '',
+        });
     };
 
-    const lookUpDOI = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const lookUpDOI = async ({ doi }: any) => {
         setShowLoader(true);
 
         try {
-            const data = await getArticleByDOI(doi);
+            const { authors, title, journal, published_on } = await getArticleByDOI(doi);
             const publishedOn = new Date(0);
-            publishedOn.setUTCSeconds(parseInt(data.published_on));
+            publishedOn.setUTCSeconds(parseInt(published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
 
-            setKirjoittaja(data.authors.join(', '));
-            setOtsikko(data.title);
-            setPublisher(data.journal);
-            setLocalDate(publishedOnString);
+            setValue('author', authors.join(', '));
+            setValue('title', title);
+            setValue('publisher', journal);
+            setValue('date', publishedOnString);
         } catch {
             setShowLoader(false);
             error();
@@ -75,10 +62,9 @@ export const ArticleForm = ({ itemService }: any) => {
 
     return (
         <>
-            <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={lookUpDOI} inverted>
+            <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={handleSubmit(lookUpDOI)} inverted>
                 <Form.Field>
-                    <label>DOI</label>
-                    <Input type="text" placeholder="DOI" onChange={e => setDoi(e.target.value)} />
+                    <RHFInput as={<Input label="DOI" />} name="doi" register={register} />
                 </Form.Field>
 
                 <Button primary type="submit">
@@ -89,35 +75,29 @@ export const ArticleForm = ({ itemService }: any) => {
             {showLoader && <OwnLoader />}
             <p style={{ color: 'red' }}>{errorMessage}</p>
 
-            <Form onSubmit={handleSubmit} inverted>
+            <Form onSubmit={handleSubmit(onSubmit)} inverted>
                 <Form.Field>
-                    <label>Author</label>
-                    <input {...kirjoittaja} />
+                    <RHFInput as={<Input label="Author" />} name="author" register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Title</label>
-                    <input {...otsikko} />
+                    <RHFInput as={<Input label="Title" />} name="title" register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Publisher</label>
-                    <input {...publisher} />
+                    <RHFInput as={<Input label="PublisherI" />} name="publisher" register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Date</label>
-                    <input {...localDate} />
+                    <RHFInput as={<Input label="Date" />} name="date" register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Tags</label>
-                    <input {...tagit} />
+                    <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <label>Related Courses</label>
-                    <input {...related} />
+                    <RHFInput as={<Input label="Related Courses" />} name="related" register={register} />
                 </Form.Field>
 
                 <Button positive type="submit" value="Submit">
