@@ -11,6 +11,7 @@ export const ArticleForm = () => {
     const [showLoader, setShowLoader] = useState(false);
     const { itemService }: any = useContext(ItemServiceContext);
     const { register, handleSubmit, reset, setValue } = useForm();
+    const [showFullForm, setShowFullForm] = useState(false);
 
     const onSubmit = ({ author, title, date, publisher, related, tags }: any) => {
         itemService.create(
@@ -45,6 +46,7 @@ export const ArticleForm = () => {
             const publishedOnString = publishedOn.toISOString().split('T')[0];
 
             setShowLoader(false);
+            setShowFullForm(true);
             setValue('author', authors.join(', '));
             setValue('title', title);
             setValue('publisher', journal);
@@ -65,58 +67,75 @@ export const ArticleForm = () => {
 
     return (
         <>
-            <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={handleSubmit(lookUpDOI)} inverted>
-                <Form.Field>
-                    <RHFInput as={<Input label="DOI" />} name="doi" setValue={setValue} register={register} />
-                </Form.Field>
-
-                <Button primary type="submit">
-                    Look up info by DOI
-                </Button>
-            </Form>
+            <div
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                }}
+            >
+                <RHFInput
+                    as={
+                        <Input
+                            label="DOI"
+                            action={{
+                                icon: 'search',
+                                onClick: handleSubmit(lookUpDOI),
+                            }}
+                            placeholder="Search..."
+                            style={{ width: '50%' }}
+                        />
+                    }
+                    name="isbn"
+                    setValue={setValue}
+                    register={register}
+                />
+            </div>
 
             {showLoader && <OwnLoader />}
             <p style={{ color: 'red' }}>{errorMessage}</p>
 
-            <Form onSubmit={handleSubmit(onSubmit)} inverted>
-                <Form.Field>
-                    <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
-                </Form.Field>
+            {showFullForm && (
+                <Form onSubmit={handleSubmit(onSubmit)} inverted>
+                    <Form.Field>
+                        <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
+                    </Form.Field>
 
-                <Form.Field>
-                    <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
-                </Form.Field>
+                    <Form.Field>
+                        <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
+                    </Form.Field>
 
-                <Form.Field>
-                    <RHFInput
-                        as={<Input label="PublisherI" />}
-                        name="publisher"
-                        setValue={setValue}
-                        register={register}
-                    />
-                </Form.Field>
+                    <Form.Field>
+                        <RHFInput
+                            as={<Input label="PublisherI" />}
+                            name="publisher"
+                            setValue={setValue}
+                            register={register}
+                        />
+                    </Form.Field>
 
-                <Form.Field>
-                    <RHFInput as={<Input label="Date" />} name="date" setValue={setValue} register={register} />
-                </Form.Field>
+                    <Form.Field>
+                        <RHFInput as={<Input label="Date" />} name="date" setValue={setValue} register={register} />
+                    </Form.Field>
 
-                <Form.Field>
-                    <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
-                </Form.Field>
+                    <Form.Field>
+                        <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
+                    </Form.Field>
 
-                <Form.Field>
-                    <RHFInput
-                        as={<Input label="Related Courses" />}
-                        name="related"
-                        setValue={setValue}
-                        register={register}
-                    />
-                </Form.Field>
+                    <Form.Field>
+                        <RHFInput
+                            as={<Input label="Related Courses" />}
+                            name="related"
+                            setValue={setValue}
+                            register={register}
+                        />
+                    </Form.Field>
 
-                <Button positive type="submit" value="Submit">
-                    Submit
-                </Button>
-            </Form>
+                    <Button positive type="submit" value="Submit">
+                        Submit
+                    </Button>
+                </Form>
+            )}
         </>
     );
 };

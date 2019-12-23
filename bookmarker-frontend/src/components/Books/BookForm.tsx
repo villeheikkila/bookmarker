@@ -7,7 +7,7 @@ import { GetDataByISBN } from '../../services/openlibrary';
 import { OwnLoader } from '../OwnLoader';
 
 export const BookForm = () => {
-    const [isbnErrorMessage, setIsbnErrorMessage] = useState();
+    const [errorMessage, setErrorMessage] = useState();
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
     const { register, handleSubmit, reset, setValue } = useForm();
@@ -41,85 +41,103 @@ export const BookForm = () => {
         setShowLoader(true);
 
         try {
-            const details = await GetDataByISBN(isbn.value.trim());
-            const year = new Date(details['publish_date']).getFullYear();
+            const { publish_date, title, revision, authors } = await GetDataByISBN(isbn.trim());
+            const author = authors ? authors[0].name : null;
 
             setShowLoader(false);
             setShowFullForm(true);
 
-            setValue('author', details['authors'][0]['name']);
-            setValue('title', details['title']);
-            setValue('edition', details['revision']);
-            setValue('year', year);
-        } catch {
-            setShowLoader(false);
+            setValue('author', author);
+            setValue('title', title);
+            setValue('edition', revision);
+            setValue('year', publish_date.split(' ')[0]);
+        } catch (error) {
             isbnError();
         }
     };
 
     const isbnError = () => {
         setShowLoader(false);
-        setIsbnErrorMessage("Couldn't find anything with given ISBN");
+        setErrorMessage("Couldn't find anything with given ISBN");
         setTimeout(() => {
-            setIsbnErrorMessage('');
+            setErrorMessage('');
         }, 5000);
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} inverted>
-            <Form.Field>
-                <RHFInput as={<Input label="ISBN" />} name="isbn" setValue={setValue} register={register} />
-            </Form.Field>
-
-            <Button primary onClick={handleSubmit(autoFillWithISBN)}>
-                Autofill
-            </Button>
-
-            <p style={{ color: 'red' }}>{isbnErrorMessage}</p>
+        <>
+            <RHFInput
+                as={
+                    <Input
+                        label="ISBN"
+                        action={{
+                            icon: 'search',
+                            onClick: handleSubmit(autoFillWithISBN),
+                        }}
+                        placeholder="Search..."
+                    />
+                }
+                name="isbn"
+                setValue={setValue}
+                register={register}
+            />
 
             {showLoader && <OwnLoader />}
+            <p style={{ color: 'red' }}>{errorMessage}</p>
 
             {showFullForm && (
-                <>
-                    <Form.Field>
-                        <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
-                    </Form.Field>
+                <Form onSubmit={handleSubmit(onSubmit)} inverted>
+                    <>
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Author" />}
+                                name="author"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Title" />}
+                                name="title"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <RHFInput as={<Input label="Year" />} name="year" setValue={setValue} register={register} />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Edition" />}
+                                name="edition"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+                    </>
 
                     <Form.Field>
-                        <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
-                    </Form.Field>
-
-                    <Form.Field>
-                        <RHFInput as={<Input label="Year" />} name="year" setValue={setValue} register={register} />
+                        <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
                     </Form.Field>
 
                     <Form.Field>
                         <RHFInput
-                            as={<Input label="Edition" />}
-                            name="edition"
+                            as={<Input label="Related Courses" />}
+                            name="related"
                             setValue={setValue}
                             register={register}
                         />
                     </Form.Field>
-                </>
+
+                    <Button positive type="submit" value="Submit">
+                        Submit
+                    </Button>
+                </Form>
             )}
-
-            <Form.Field>
-                <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
-            </Form.Field>
-
-            <Form.Field>
-                <RHFInput
-                    as={<Input label="Related Courses" />}
-                    name="related"
-                    setValue={setValue}
-                    register={register}
-                />
-            </Form.Field>
-
-            <Button positive type="submit" value="Submit">
-                Submit
-            </Button>
-        </Form>
+        </>
     );
 };

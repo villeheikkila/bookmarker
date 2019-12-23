@@ -16,8 +16,10 @@ export const CreateForm = ({ selected }: CreateFormProps) => {
                 <VideoForm />
             ) : selected === 2 ? (
                 <ArticleForm />
-            ) : (
+            ) : selected === 3 ? (
                 <BlogForm />
+            ) : (
+                <div />
             )}
         </>
     );

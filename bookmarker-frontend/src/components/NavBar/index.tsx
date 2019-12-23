@@ -4,7 +4,6 @@ import { Button } from 'semantic-ui-react';
 export const NavBar = ({ selected, setSelected, setShowForm }: any) => {
     const navButtonClicked = (index: Number) => {
         setSelected(index);
-        setShowForm(false);
     };
 
     return (

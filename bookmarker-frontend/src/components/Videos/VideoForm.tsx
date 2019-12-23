@@ -60,52 +60,82 @@ export const VideoForm = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)} inverted>
-            <Form.Field>
-                <RHFInput as={<Input label="URL" />} name="url" setValue={setValue} register={register} />
-            </Form.Field>
+        <>
+            <RHFInput
+                as={
+                    <Input
+                        label="URL"
+                        action={{
+                            icon: 'search',
+                            onClick: handleSubmit(autoFillWithYoutubeUrl),
+                        }}
+                        placeholder="Search..."
+                    />
+                }
+                name="url"
+                setValue={setValue}
+                register={register}
+            />
 
-            <Button primary onClick={handleSubmit(autoFillWithYoutubeUrl)}>
-                Autofill
-            </Button>
+            {!showFullForm && (
+                <Button inverted color="purple" onClick={() => setShowFullForm(!showFullForm)}>
+                    Input manually
+                </Button>
+            )}
 
             <p style={{ color: 'red' }}>{errorMessage}</p>
 
             {showLoader && <OwnLoader />}
 
             {showFullForm && (
-                <>
-                    <Form.Field>
-                        <RHFInput
-                            as={<Input label="Channel" />}
-                            name="author"
-                            setValue={setValue}
-                            register={register}
-                        />
-                    </Form.Field>
+                <Form onSubmit={handleSubmit(onSubmit)} inverted>
+                    <>
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Channel" />}
+                                name="author"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
 
-                    <Form.Field>
-                        <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
-                    </Form.Field>
-                </>
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Title" />}
+                                name="title"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Related Courses" />}
+                                name="related"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+
+                        <Form.Field>
+                            <RHFInput
+                                as={<Input label="Comment" />}
+                                name="comment"
+                                setValue={setValue}
+                                register={register}
+                            />
+                        </Form.Field>
+
+                        <Button positive type="submit" value="Submit">
+                            Submit
+                        </Button>
+
+                        <Button inverted color="purple" onClick={() => setShowFullForm(!showFullForm)}>
+                            Close form
+                        </Button>
+                    </>
+                </Form>
             )}
-
-            <Form.Field>
-                <RHFInput
-                    as={<Input label="Related Courses" />}
-                    name="related"
-                    setValue={setValue}
-                    register={register}
-                />
-            </Form.Field>
-
-            <Form.Field>
-                <RHFInput as={<Input label="Comment" />} name="comment" setValue={setValue} register={register} />
-            </Form.Field>
-
-            <Button positive type="submit" value="Submit">
-                Submit
-            </Button>
-        </Form>
+        </>
     );
 };

@@ -1,6 +1,6 @@
 import 'fomantic-ui-css/semantic.min.css';
 import React, { createContext, useState } from 'react';
-import { Button, Container, Header } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import { BACKEND_URL } from './';
 import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
@@ -9,7 +9,6 @@ import { useResource } from './hooks/useResource';
 
 export const App = () => {
     const [items, itemService] = useResource(BACKEND_URL);
-    const [showForm, setShowForm] = useState(false);
     const [categorySelected, setCategorySelected] = useState(-1);
 
     return (
@@ -24,22 +23,10 @@ export const App = () => {
                 Bookmarker
             </Header>
 
-            <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
-
-            {categorySelected !== -1 && (
-                <Button
-                    inverted
-                    color="purple"
-                    style={{ display: 'block', margin: '0 auto' }}
-                    onClick={() => setShowForm(!showForm)}
-                >
-                    {showForm ? 'Close form' : 'Show form'}
-                </Button>
-            )}
+            <NavBar selected={categorySelected} setSelected={setCategorySelected} />
 
             <ItemServiceContext.Provider value={{ itemService }}>
-                {showForm && <CreateForm selected={categorySelected} />}
-
+                <CreateForm selected={categorySelected} />
                 <ListEntries items={items} selected={categorySelected} />
             </ItemServiceContext.Provider>
         </Container>
