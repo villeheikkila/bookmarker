@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import useForm from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
+import { ItemServiceContext } from '../../App';
 import { GetDataByISBN } from '../../services/openlibrary';
 import { OwnLoader } from '../OwnLoader';
-import { ItemServiceContext } from '../../App';
 
 export const BookForm = () => {
     const [isbnErrorMessage, setIsbnErrorMessage] = useState();
@@ -12,7 +12,6 @@ export const BookForm = () => {
     const [showLoader, setShowLoader] = useState(false);
     const { register, handleSubmit, reset, setValue } = useForm();
     const { itemService }: any = useContext(ItemServiceContext);
-
 
     const onSubmit = ({ isbn, author, title, tags, edition, year, related }: any) => {
         itemService.create(
@@ -69,7 +68,7 @@ export const BookForm = () => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
-                <RHFInput as={<Input label="ISBN" />} name="isbn" register={register} />
+                <RHFInput as={<Input label="ISBN" />} name="isbn" setValue={setValue} register={register} />
             </Form.Field>
 
             <Button primary onClick={handleSubmit(autoFillWithISBN)}>
@@ -83,29 +82,39 @@ export const BookForm = () => {
             {showFullForm && (
                 <>
                     <Form.Field>
-                        <RHFInput as={<Input label="Author" />} name="author" register={register} />
+                        <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <RHFInput as={<Input label="Title" />} name="title" register={register} />
+                        <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <RHFInput as={<Input label="Year" />} name="year" register={register} />
+                        <RHFInput as={<Input label="Year" />} name="year" setValue={setValue} register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <RHFInput as={<Input label="Edition" />} name="edition" register={register} />
+                        <RHFInput
+                            as={<Input label="Edition" />}
+                            name="edition"
+                            setValue={setValue}
+                            register={register}
+                        />
                     </Form.Field>
                 </>
             )}
 
             <Form.Field>
-                <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
+                <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
             </Form.Field>
 
             <Form.Field>
-                <RHFInput as={<Input label="Related Courses" />} name="related" register={register} />
+                <RHFInput
+                    as={<Input label="Related Courses" />}
+                    name="related"
+                    setValue={setValue}
+                    register={register}
+                />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">

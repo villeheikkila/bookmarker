@@ -26,7 +26,7 @@ export const App = () => {
 
             <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
 
-            {categorySelected != -1 && (
+            {categorySelected !== -1 && (
                 <Button
                     inverted
                     color="purple"

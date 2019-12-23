@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Button, Icon, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Book = ({ id, author, title, isbn, tagit, related, year }: Book) => {
+export const Book = ({ id, author, title, isbn, tags, related, year }: Book) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
-    const relatedSplit = (related && related.split(',')) || [];
-    const tagitSplit = (tagit && tagit.split(',')) || [];
+    const splitRelated = (related && related.split(',')) || [];
+    const splitTags = (tags && tags.split(',')) || [];
 
     const handleDelete = () => itemService.remove(id, 'books');
 
@@ -36,10 +36,10 @@ export const Book = ({ id, author, title, isbn, tagit, related, year }: Book) =>
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagitSplit.map(tagi => (
-                            <Label key={tagi}>
+                        {splitTags.map(tag => (
+                            <Label key={tag}>
                                 <Icon name="tag" />
-                                {tagi}
+                                {tag}
                             </Label>
                         ))}
                     </Table.Cell>
@@ -48,7 +48,7 @@ export const Book = ({ id, author, title, isbn, tagit, related, year }: Book) =>
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedSplit.map(related => (
+                        {splitRelated.map(related => (
                             <Label key={related}>{related}</Label>
                         ))}
                     </Table.Cell>

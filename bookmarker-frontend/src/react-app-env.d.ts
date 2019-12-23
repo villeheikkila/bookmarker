@@ -13,7 +13,7 @@ interface Video {
     title: string;
     id: number;
     comment: string;
-    relatedCourses: string;
+    related: string;
 }
 
 interface Blogpost {
@@ -22,7 +22,7 @@ interface Blogpost {
     title: string;
     url: string;
     tags: string;
-    relatedCourses: string;
+    related: string;
 }
 
 interface Article {
@@ -31,8 +31,7 @@ interface Article {
     title: string;
     date: string;
     publisher: string;
-    localDate: string;
-    tagit: string;
+    tags: string;
     related: string;
 }
 
@@ -41,7 +40,7 @@ interface Book {
     author: string;
     title: string;
     isbn: string;
-    tagit: string;
+    tags: string;
     related: string;
     year: number;
 }

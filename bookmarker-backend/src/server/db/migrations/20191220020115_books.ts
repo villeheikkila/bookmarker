@@ -4,6 +4,8 @@ exports.up = (knex: any) =>
         table.string('author').notNullable();
         table.string('title').notNullable();
         table.integer('year');
+        table.integer('isbn');
+        table.integer('edition');
         table.string('tags');
         table.string('related');
         table.string('type');

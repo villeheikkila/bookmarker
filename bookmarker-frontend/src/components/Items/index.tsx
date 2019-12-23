@@ -84,7 +84,7 @@ export const ItemsTable = ({ items }: ItemsTableProps) => {
                 <Table.Body>
                     {data.data.length !== 0 ? (
                         data.data.map((item: any) => (
-                            <Table.Row key={item.id} onClick={() => handleModal(item)}>
+                            <Table.Row key={item.id + item.type} onClick={() => handleModal(item)}>
                                 <Table.Cell key={`${item.id}${item.type}`}>{item.type}</Table.Cell>
                                 <Table.Cell
                                     key={`${item.id}${item.author ? item.author : Math.floor(Math.random() * 1000)}`}

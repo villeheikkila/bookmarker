@@ -17,8 +17,8 @@ export const ArticleForm = () => {
             {
                 author,
                 title,
-                publisher: publisher.value,
-                localDate: date,
+                publisher,
+                date,
                 tags,
                 related,
             },
@@ -26,12 +26,12 @@ export const ArticleForm = () => {
         );
 
         reset({
-            author: '',
-            title: '',
-            tags: '',
-            publisher: '',
-            date: '',
-            related: '',
+            author: null,
+            title: null,
+            tags: null,
+            publisher: null,
+            date: null,
+            related: null,
         });
     };
 
@@ -67,7 +67,7 @@ export const ArticleForm = () => {
         <>
             <Form style={{ marginBottom: '10px', marginTop: '10px' }} onSubmit={handleSubmit(lookUpDOI)} inverted>
                 <Form.Field>
-                    <RHFInput as={<Input label="DOI" />} name="doi" register={register} />
+                    <RHFInput as={<Input label="DOI" />} name="doi" setValue={setValue} register={register} />
                 </Form.Field>
 
                 <Button primary type="submit">
@@ -80,27 +80,37 @@ export const ArticleForm = () => {
 
             <Form onSubmit={handleSubmit(onSubmit)} inverted>
                 <Form.Field>
-                    <RHFInput as={<Input label="Author" />} name="author" register={register} />
+                    <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <RHFInput as={<Input label="Title" />} name="title" register={register} />
+                    <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <RHFInput as={<Input label="PublisherI" />} name="publisher" register={register} />
+                    <RHFInput
+                        as={<Input label="PublisherI" />}
+                        name="publisher"
+                        setValue={setValue}
+                        register={register}
+                    />
                 </Form.Field>
 
                 <Form.Field>
-                    <RHFInput as={<Input label="Date" />} name="date" register={register} />
+                    <RHFInput as={<Input label="Date" />} name="date" setValue={setValue} register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
+                    <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
                 </Form.Field>
 
                 <Form.Field>
-                    <RHFInput as={<Input label="Related Courses" />} name="related" register={register} />
+                    <RHFInput
+                        as={<Input label="Related Courses" />}
+                        name="related"
+                        setValue={setValue}
+                        register={register}
+                    />
                 </Form.Field>
 
                 <Button positive type="submit" value="Submit">

@@ -4,7 +4,7 @@ exports.up = (knex: any) =>
         table.string('title').notNullable();
         table.string('author');
         table.string('publisher');
-        table.date('localDate');
+        table.date('date');
         table.integer('year');
         table.string('tags');
         table.string('related');

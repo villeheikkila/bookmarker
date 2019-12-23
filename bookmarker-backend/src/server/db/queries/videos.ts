@@ -4,7 +4,7 @@ interface Video {
     title: string;
     url: string;
     author: string;
-    localDate: Date;
+    date: Date;
     comment: string;
     related: string;
 }

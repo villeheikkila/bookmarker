@@ -4,7 +4,7 @@ interface Article {
     author: string;
     title: string;
     publisher: string;
-    localDate: Date;
+    date: Date;
     year: number;
     tags: string;
     related: string;

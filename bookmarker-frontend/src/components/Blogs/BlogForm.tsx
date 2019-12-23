@@ -5,7 +5,7 @@ import { Button, Form, Input } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
 export const BlogForm = () => {
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, setValue } = useForm();
     const { itemService }: any = useContext(ItemServiceContext);
 
     const onSubmit = ({ title, author, url, tags, related }: any) => {
@@ -31,23 +31,28 @@ export const BlogForm = () => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
-                <RHFInput as={<Input label="Title" />} name="title" register={register} />
+                <RHFInput as={<Input label="Title" />} name="title" setValue={setValue} register={register} />
             </Form.Field>
 
             <Form.Field>
-                <RHFInput as={<Input label="Author" />} name="author" register={register} />
+                <RHFInput as={<Input label="Author" />} name="author" setValue={setValue} register={register} />
             </Form.Field>
 
             <Form.Field>
-                <RHFInput as={<Input label="URL" />} name="url" register={register} />
+                <RHFInput as={<Input label="URL" />} name="url" setValue={setValue} register={register} />
             </Form.Field>
 
             <Form.Field>
-                <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
+                <RHFInput as={<Input label="Tags" />} name="tags" setValue={setValue} register={register} />
             </Form.Field>
 
             <Form.Field>
-                <RHFInput as={<Input label="Related courses" />} name="related" register={register} />
+                <RHFInput
+                    as={<Input label="Related courses" />}
+                    name="related"
+                    setValue={setValue}
+                    register={register}
+                />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">

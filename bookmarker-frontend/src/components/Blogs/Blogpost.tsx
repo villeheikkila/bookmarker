@@ -6,13 +6,13 @@ interface BlogpostProps {
     blogpost: Blogpost;
 }
 
-export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCourses } }: BlogpostProps) => {
+export const Blogpost = ({ blogpost: { id, author, title, url, tags, related } }: BlogpostProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'blogposts');
 
-    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
-    const tagitSplit = tags ? tags.split(',') : [];
+    const splitRelated = related ? related.split(',') : [];
+    const splitTags = tags ? tags.split(',') : [];
 
     return (
         <Table inverted celled>
@@ -37,10 +37,10 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCour
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagitSplit.map((tagi: string) => (
-                            <Label key={tagi}>
+                        {splitTags.map((tag: string) => (
+                            <Label key={tag}>
                                 <Icon name="tag" />
-                                {tagi}
+                                {tag}
                             </Label>
                         ))}
                     </Table.Cell>
@@ -49,7 +49,9 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCour
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedSplit && relatedSplit.map((related: string) => <Label key={related}>{related}</Label>)}
+                        {splitRelated.map((rel: string) => (
+                            <Label key={rel}>{rel}</Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 

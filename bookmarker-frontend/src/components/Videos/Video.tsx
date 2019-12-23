@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { Button, Embed, Label, Table } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 
-export const Video = ({ author, title, id, comment, url, relatedCourses }: Video) => {
+export const Video = ({ author, title, id, comment, url, related }: Video) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
-    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
+    const splitRelated = related ? related.split(',') : [];
 
     const handleDelete = () => itemService.remove(id, 'videos');
 
@@ -29,9 +29,7 @@ export const Video = ({ author, title, id, comment, url, relatedCourses }: Video
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
-                    <Table.Cell>
-                        {relatedSplit && relatedSplit.map(related => <Label key={related}>{related}</Label>)}
-                    </Table.Cell>
+                    <Table.Cell>{splitRelated && splitRelated.map(rel => <Label key={rel}>{rel}</Label>)}</Table.Cell>
                 </Table.Row>
 
                 <Table.Row>

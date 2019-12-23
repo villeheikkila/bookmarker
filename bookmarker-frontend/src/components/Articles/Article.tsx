@@ -6,15 +6,13 @@ interface ArticleProps {
     article: Article;
 }
 
-export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
+export const Article = ({ article: { id, author, title, publisher, date, tags, related } }: ArticleProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
     const handleDelete = () => itemService.remove(id, 'articles');
 
-    //const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
-    const date = '';
-    const relatedSplit = related ? related.split(',') : [];
-    const tagitSplit = tagit ? tagit.split(',') : [];
+    const splitRelated = related ? related.split(',') : [];
+    const splitTags = tags ? tags.split(',') : [];
 
     return (
         <Table inverted celled>
@@ -42,20 +40,21 @@ export const Article = ({ article: { id, author, title, publisher, localDate, ta
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagitSplit &&
-                            tagitSplit.map((tagi: any) => (
-                                <Label key={tagi}>
-                                    <Icon name="tag" />
-                                    {tagi}
-                                </Label>
-                            ))}
+                        {splitTags.map((tag: string) => (
+                            <Label key={tag}>
+                                <Icon name="tag" />
+                                {tag}
+                            </Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedSplit && relatedSplit.map((related: any) => <Label key={related}>{related}</Label>)}
+                        {splitRelated.map((rel: string) => (
+                            <Label key={rel}>{rel}</Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 
