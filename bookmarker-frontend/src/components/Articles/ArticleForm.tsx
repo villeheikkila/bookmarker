@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { Button, Form, Input } from 'semantic-ui-react';
 import { useField } from '../../hooks/useField';
 import { getArticleByDOI } from '../../services/altmetric';
+import { OwnLoader } from '../OwnLoader';
 
 export const ArticleForm = ({ itemService }: any) => {
     const [doi, setDoi] = useState('');
@@ -12,6 +13,7 @@ export const ArticleForm = ({ itemService }: any) => {
     const [tagit, setTags] = useField('text');
     const [related, setRelated] = useField('text');
     const [errorMessage, setErrorMessage] = useState('');
+    const [showLoader, setShowLoader] = useState(false);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -45,22 +47,26 @@ export const ArticleForm = ({ itemService }: any) => {
 
     const lookUpDOI = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setShowLoader(true);
 
         try {
             const data = await getArticleByDOI(doi);
-            setKirjoittaja(data.authors.join(', '));
-            setOtsikko(data.title);
-            setPublisher(data.journal);
             const publishedOn = new Date(0);
             publishedOn.setUTCSeconds(parseInt(data.published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
+
+            setKirjoittaja(data.authors.join(', '));
+            setOtsikko(data.title);
+            setPublisher(data.journal);
             setLocalDate(publishedOnString);
         } catch {
+            setShowLoader(false);
             error();
         }
     };
 
     const error = () => {
+        setShowLoader(false);
         setErrorMessage("Couldn't find anything with given DOI");
         setTimeout(() => {
             setErrorMessage('');
@@ -80,6 +86,7 @@ export const ArticleForm = ({ itemService }: any) => {
                 </Button>
             </Form>
 
+            {showLoader && <OwnLoader />}
             <p style={{ color: 'red' }}>{errorMessage}</p>
 
             <Form onSubmit={handleSubmit} inverted>

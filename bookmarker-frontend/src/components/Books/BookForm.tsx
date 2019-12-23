@@ -14,7 +14,7 @@ export const BookForm = ({ itemService }: any) => {
     const [related, relatedReset] = useField('text');
     const [isbnErrorMessage, setIsbnErrorMessage] = useState();
     const [showFullForm, setShowFullForm] = useState(false);
-    const [isbnLoader, setIsbnLoader] = useState(false);
+    const [showLoader, setShowLoader] = useState(false);
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,7 +51,7 @@ export const BookForm = ({ itemService }: any) => {
     const autoFillWithISBN = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        setIsbnLoader(true);
+        setShowLoader(true);
 
         try {
             const details = await GetDataByISBN(isbn.value.trim());
@@ -61,15 +61,16 @@ export const BookForm = ({ itemService }: any) => {
             otsikkoReset(details['title']);
             yearReset(year);
             editionReset(details['revision']);
-            setIsbnLoader(false);
+            setShowLoader(false);
             setShowFullForm(true);
         } catch {
+            setShowLoader(false);
             isbnError();
         }
     };
 
     const isbnError = () => {
-        setIsbnLoader(false);
+        setShowLoader(false);
         setIsbnErrorMessage("Couldn't find anything with given ISBN");
         setTimeout(() => {
             setIsbnErrorMessage('');
@@ -89,7 +90,7 @@ export const BookForm = ({ itemService }: any) => {
 
             <p style={{ color: 'red' }}>{isbnErrorMessage}</p>
 
-            {isbnLoader && <OwnLoader />}
+            {showLoader && <OwnLoader />}
 
             {showFullForm && (
                 <div>

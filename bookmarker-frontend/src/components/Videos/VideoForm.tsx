@@ -11,9 +11,9 @@ export const VideoForm = ({ itemService }: any) => {
     const [relatedCourses, relatedCoursesReset] = useField('text');
     const [comment, setComment] = useField('text');
     const [showFullForm, setShowFullForm] = useState(false);
-    const [loader, setLoader] = useState(false);
+    const [showLoader, setShowLoader] = useState(false);
     const [id, setId] = useState();
-    const [loadErrorMessage, setLoadErrorMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -40,30 +40,30 @@ export const VideoForm = ({ itemService }: any) => {
     const autoFillWithYoutubeUrl = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        setLoader(true);
+        setShowLoader(true);
 
         if (url.value) {
             try {
                 const details = await GetYouTubeData(url.value);
                 authorReset(details['channelTitle']);
                 setTitle(details['title']);
-                setLoader(false);
+                setShowLoader(false);
                 setId(id);
                 setShowFullForm(true);
             } catch {
                 loadError();
             }
         } else {
-            setLoader(false);
-            setLoadErrorMessage("URL can't be empty");
+            setShowLoader(false);
+            setErrorMessage("URL can't be empty");
         }
     };
 
     const loadError = () => {
-        setLoader(false);
-        setLoadErrorMessage("Couldn't find anything with given URL");
+        setShowLoader(false);
+        setErrorMessage("Couldn't find anything with given URL");
         setTimeout(() => {
-            setLoadErrorMessage('');
+            setErrorMessage('');
         }, 5000);
     };
 
@@ -78,9 +78,9 @@ export const VideoForm = ({ itemService }: any) => {
                 Autofill
             </Button>
 
-            <p style={{ color: 'red' }}>{loadErrorMessage}</p>
+            <p style={{ color: 'red' }}>{errorMessage}</p>
 
-            {loader && <OwnLoader />}
+            {showLoader && <OwnLoader />}
 
             {showFullForm && (
                 <div>
