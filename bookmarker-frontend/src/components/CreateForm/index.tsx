@@ -6,19 +6,18 @@ import { VideoForm } from '../Videos/VideoForm';
 
 interface CreateFormProps {
     selected: Number;
-    itemService: any;
 }
-export const CreateForm = ({ selected, itemService }: CreateFormProps) => {
+export const CreateForm = ({ selected }: CreateFormProps) => {
     return (
         <>
             {selected === 0 ? (
-                <BookForm itemService={itemService} />
+                <BookForm />
             ) : selected === 1 ? (
-                <VideoForm itemService={itemService} />
+                <VideoForm />
             ) : selected === 2 ? (
-                <ArticleForm itemService={itemService} />
+                <ArticleForm />
             ) : (
-                <BlogForm itemService={itemService} />
+                <BlogForm />
             )}
         </>
     );

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import useForm from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
+import { ItemServiceContext } from '../../App';
 import { getArticleByDOI } from '../../services/altmetric';
 import { OwnLoader } from '../OwnLoader';
 
-export const ArticleForm = ({ itemService }: any) => {
+export const ArticleForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showLoader, setShowLoader] = useState(false);
+    const { itemService }: any = useContext(ItemServiceContext);
     const { register, handleSubmit, reset, setValue } = useForm();
 
     const onSubmit = ({ author, title, date, publisher, related, tags }: any) => {

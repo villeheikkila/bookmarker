@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useForm from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
+import { ItemServiceContext } from '../../App';
 
-export const BlogForm = ({ itemService }: any) => {
+export const BlogForm = () => {
     const { register, handleSubmit, reset } = useForm();
+    const { itemService }: any = useContext(ItemServiceContext);
 
     const onSubmit = ({ title, author, url, tags, related }: any) => {
         itemService.create(

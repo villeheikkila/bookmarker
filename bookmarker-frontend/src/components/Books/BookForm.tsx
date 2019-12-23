@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import useForm from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
 import { GetDataByISBN } from '../../services/openlibrary';
 import { OwnLoader } from '../OwnLoader';
+import { ItemServiceContext } from '../../App';
 
-export const BookForm = ({ itemService }: any) => {
+export const BookForm = () => {
     const [isbnErrorMessage, setIsbnErrorMessage] = useState();
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
     const { register, handleSubmit, reset, setValue } = useForm();
+    const { itemService }: any = useContext(ItemServiceContext);
+
 
     const onSubmit = ({ isbn, author, title, tags, edition, year, related }: any) => {
         itemService.create(

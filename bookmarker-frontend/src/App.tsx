@@ -26,7 +26,7 @@ export const App = () => {
 
             <NavBar selected={categorySelected} setSelected={setCategorySelected} setShowForm={setShowForm} />
 
-            {categorySelected >= 0 && categorySelected < 5 && (
+            {categorySelected != -1 && (
                 <Button
                     inverted
                     color="purple"
@@ -37,9 +37,9 @@ export const App = () => {
                 </Button>
             )}
 
-            {showForm ? <CreateForm selected={categorySelected} itemService={itemService} /> : <div />}
-
             <ItemServiceContext.Provider value={{ itemService }}>
+                {showForm && <CreateForm selected={categorySelected} />}
+
                 <ListEntries items={items} selected={categorySelected} />
             </ItemServiceContext.Provider>
         </Container>

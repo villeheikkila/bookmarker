@@ -12,7 +12,7 @@ export const NavBar = ({ selected, setSelected, setShowForm }: any) => {
             <div style={{ textAlign: 'center' }}>
                 <Button
                     style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button}
-                    onClick={() => navButtonClicked(10)}
+                    onClick={() => navButtonClicked(-1)}
                 >
                     All
                 </Button>

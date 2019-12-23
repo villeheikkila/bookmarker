@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import useForm from 'react-hook-form';
 import { RHFInput } from 'react-hook-form-input';
 import { Button, Form, Input } from 'semantic-ui-react';
+import { ItemServiceContext } from '../../App';
 import { GetYouTubeData } from '../../services/youtube';
 import { OwnLoader } from '../OwnLoader';
 
-export const VideoForm = ({ itemService }: any) => {
+export const VideoForm = () => {
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const { itemService }: any = useContext(ItemServiceContext);
 
     const { register, handleSubmit, setValue, reset } = useForm();
 
