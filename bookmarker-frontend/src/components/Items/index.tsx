@@ -49,7 +49,6 @@ export const ItemsTable = ({ items }: ItemsTableProps) => {
     };
 
     const handleModal = (item: any) => {
-        console.log('TCL: handleModal -> item', item);
         const itemFull = items[item.type + 's'].find((i: any) => i.id === item.id);
         setModalObject(itemFull);
         setModalOpen(true);

@@ -5,7 +5,7 @@ import { ItemServiceContext } from '../../App';
 export const Book = ({ id, author, title, isbn, tagit, related, year }: Book) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
-    const relatedSplit = related.split(',');
+    const relatedSplit = (related && related.split(',')) || [];
     const tagitSplit = (tagit && tagit.split(',')) || [];
 
     const handleDelete = () => itemService.remove(id, 'books');
@@ -36,20 +36,21 @@ export const Book = ({ id, author, title, isbn, tagit, related, year }: Book) =>
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagitSplit &&
-                            tagitSplit.map(tagi => (
-                                <Label key={tagi}>
-                                    <Icon name="tag" />
-                                    {tagi}
-                                </Label>
-                            ))}
+                        {tagitSplit.map(tagi => (
+                            <Label key={tagi}>
+                                <Icon name="tag" />
+                                {tagi}
+                            </Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 
                 <Table.Row>
                     <Table.Cell width={3}>Related courses</Table.Cell>
                     <Table.Cell>
-                        {relatedSplit && relatedSplit.map(related => <Label key={related}>{related}</Label>)}
+                        {relatedSplit.map(related => (
+                            <Label key={related}>{related}</Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 

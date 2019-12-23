@@ -8,10 +8,11 @@ interface BlogpostProps {
 
 export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCourses } }: BlogpostProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
-    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
-    const tagitSplit = tags ? tags.split(',') : [];
 
     const handleDelete = () => itemService.remove(id, 'blogposts');
+
+    const relatedSplit = relatedCourses ? relatedCourses.split(',') : [];
+    const tagitSplit = tags ? tags.split(',') : [];
 
     return (
         <Table inverted celled>
@@ -36,13 +37,12 @@ export const Blogpost = ({ blogpost: { id, author, title, url, tags, relatedCour
                 <Table.Row>
                     <Table.Cell width={3}>Tags</Table.Cell>
                     <Table.Cell>
-                        {tagitSplit &&
-                            tagitSplit.map((tagi: string) => (
-                                <Label key={tagi}>
-                                    <Icon name="tag" />
-                                    {tagi}
-                                </Label>
-                            ))}
+                        {tagitSplit.map((tagi: string) => (
+                            <Label key={tagi}>
+                                <Icon name="tag" />
+                                {tagi}
+                            </Label>
+                        ))}
                     </Table.Cell>
                 </Table.Row>
 

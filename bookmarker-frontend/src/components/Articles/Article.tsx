@@ -8,12 +8,13 @@ interface ArticleProps {
 
 export const Article = ({ article: { id, author, title, publisher, localDate, tagit, related } }: ArticleProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
-    const relatedSplit = related ? related.split(',') : [];
-    const tagitSplit = tagit ? tagit.split(',') : [];
+
+    const handleDelete = () => itemService.remove(id, 'articles');
 
     //const date = localDate && localDate.day + '/' + localDate.month + '/' + localDate.year;
     const date = '';
-    const handleDelete = () => itemService.remove(id, 'articles');
+    const relatedSplit = related ? related.split(',') : [];
+    const tagitSplit = tagit ? tagit.split(',') : [];
 
     return (
         <Table inverted celled>

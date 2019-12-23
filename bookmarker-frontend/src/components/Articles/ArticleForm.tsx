@@ -42,6 +42,7 @@ export const ArticleForm = ({ itemService }: any) => {
             publishedOn.setUTCSeconds(parseInt(published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
 
+            setShowLoader(false);
             setValue('author', authors.join(', '));
             setValue('title', title);
             setValue('publisher', journal);
