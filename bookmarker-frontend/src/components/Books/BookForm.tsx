@@ -1,68 +1,54 @@
-import React, { FormEvent, useState } from 'react';
-import { Button, Form } from 'semantic-ui-react';
-import { useField } from '../../hooks/useField';
+import React, { useState } from 'react';
+import useForm from 'react-hook-form';
+import { RHFInput } from 'react-hook-form-input';
+import { Button, Form, Input } from 'semantic-ui-react';
 import { GetDataByISBN } from '../../services/openlibrary';
 import { OwnLoader } from '../OwnLoader';
 
 export const BookForm = ({ itemService }: any) => {
-    const [kirjoittaja, kirjoittajaReset] = useField('text');
-    const [otsikko, otsikkoReset] = useField('text');
-    const [isbn, isbnReset] = useField('text');
-    const [year, yearReset] = useField('text');
-    const [edition, editionReset] = useField('text');
-    const [tagit, tagitReset] = useField('text');
-    const [related, relatedReset] = useField('text');
     const [isbnErrorMessage, setIsbnErrorMessage] = useState();
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
+    const { register, handleSubmit, reset, setValue } = useForm();
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const splitTags = tagit.value.split(',');
-        const splitRelated = related.value.split(',');
-
-        const tags = splitTags[0] !== '' ? splitTags : null;
-        const relatedCourses = splitRelated[0] !== '' ? splitRelated : null;
-
+    const onSubmit = ({ isbn, author, title, tags, edition, year, related }: any) => {
         itemService.create(
             {
-                id: Math.floor(Math.random() * 1000 + 1),
-                author: kirjoittaja.value,
-                title: otsikko.value,
-                isbn: isbn.value,
-                year: year.value,
-                edition: edition.value,
-                tagit: tags,
-                related: relatedCourses,
+                author,
+                title,
+                isbn,
+                year,
+                edition,
+                tags,
+                related,
             },
             'books',
         );
 
-        kirjoittajaReset();
-        otsikkoReset();
-        isbnReset();
-        yearReset();
-        editionReset();
-        tagitReset();
-        relatedReset();
+        reset({
+            author: '',
+            title: '',
+            tags: '',
+            edition: '',
+            year: '',
+            related: '',
+        });
     };
 
-    const autoFillWithISBN = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.preventDefault();
-
+    const autoFillWithISBN = async ({ isbn }: any) => {
         setShowLoader(true);
 
         try {
             const details = await GetDataByISBN(isbn.value.trim());
             const year = new Date(details['publish_date']).getFullYear();
 
-            kirjoittajaReset(details['authors'][0]['name']);
-            otsikkoReset(details['title']);
-            yearReset(year);
-            editionReset(details['revision']);
             setShowLoader(false);
             setShowFullForm(true);
+
+            setValue('author', details['authors'][0]['name']);
+            setValue('title', details['title']);
+            setValue('edition', details['revision']);
+            setValue('year', year);
         } catch {
             setShowLoader(false);
             isbnError();
@@ -78,13 +64,12 @@ export const BookForm = ({ itemService }: any) => {
     };
 
     return (
-        <Form onSubmit={handleSubmit} inverted>
+        <Form onSubmit={handleSubmit(onSubmit)} inverted>
             <Form.Field>
-                <label>ISBN</label>
-                <input {...isbn} />
+                <RHFInput as={<Input label="ISBN" />} name="isbn" register={register} />
             </Form.Field>
 
-            <Button primary onClick={autoFillWithISBN}>
+            <Button primary onClick={handleSubmit(autoFillWithISBN)}>
                 Autofill
             </Button>
 
@@ -93,37 +78,31 @@ export const BookForm = ({ itemService }: any) => {
             {showLoader && <OwnLoader />}
 
             {showFullForm && (
-                <div>
+                <>
                     <Form.Field>
-                        <label>Author</label>
-                        <input {...kirjoittaja} />
+                        <RHFInput as={<Input label="Author" />} name="author" register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Title</label>
-                        <input {...otsikko} />
+                        <RHFInput as={<Input label="Title" />} name="title" register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Year</label>
-                        <input {...year} />
+                        <RHFInput as={<Input label="Year" />} name="year" register={register} />
                     </Form.Field>
 
                     <Form.Field>
-                        <label>Edition</label>
-                        <input {...edition} />
+                        <RHFInput as={<Input label="Edition" />} name="edition" register={register} />
                     </Form.Field>
-                </div>
+                </>
             )}
 
             <Form.Field>
-                <label>Tags</label>
-                <input {...tagit} />
+                <RHFInput as={<Input label="Tags" />} name="tags" register={register} />
             </Form.Field>
 
             <Form.Field>
-                <label>Related Courses</label>
-                <input {...related} />
+                <RHFInput as={<Input label="Related Courses" />} name="related" register={register} />
             </Form.Field>
 
             <Button positive type="submit" value="Submit">

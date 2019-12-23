@@ -35,8 +35,8 @@ export const VideoForm = ({ itemService }: any) => {
     };
 
     const autoFillWithYoutubeUrl = async ({ url }: any) => {
-        console.log('TCL: autoFillWithYoutubeUrl -> url', url);
         setShowLoader(true);
+
         try {
             const details = await GetYouTubeData(url);
             setValue('author', details['channelTitle']);
