@@ -45,13 +45,15 @@ export const ArticleForm = ({ itemService }: any) => {
     const lookUpDOI = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const articleJson = await axios.get(`https://api.altmetric.com/v1/doi/${doi}`);
+        console.log('TCL: lookUpDOI -> articleJson', articleJson);
         if (articleJson) {
-            const articleData = articleJson.data;
-            setKirjoittaja(articleData.authors.join(', '));
-            setOtsikko(articleData.title);
-            setPublisher(articleData.journal);
+            const { data } = articleJson;
+            console.log('TCL: lookUpDOI -> data', data);
+            setKirjoittaja(data.authors.join(', '));
+            setOtsikko(data.title);
+            setPublisher(data.journal);
             const publishedOn = new Date(0);
-            publishedOn.setUTCSeconds(parseInt(articleData.published_on));
+            publishedOn.setUTCSeconds(parseInt(data.published_on));
             const publishedOnString = publishedOn.toISOString().split('T')[0];
             setLocalDate(publishedOnString);
         }
