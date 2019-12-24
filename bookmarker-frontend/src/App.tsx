@@ -6,20 +6,33 @@ import { CreateForm } from './components/CreateForm';
 import { ListEntries } from './components/ListEntries';
 import { NavBar } from './components/NavBar';
 import { useResource } from './hooks/useResource';
+import { createUseStyles } from 'react-jss';
 
-export const App = () => {
+const useStyles = createUseStyles({
+    '@global': {
+        body: {
+            backgroundColor: "#1C1C1E",
+        },
+        html: {
+            backgroundColor: "#1C1C1E",
+        }
+    },
+    header: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        fontSize: 70
+    }
+})
+
+const App = () => {
     const [items, itemService] = useResource(BACKEND_URL);
     const [categorySelected, setCategorySelected] = useState(-1);
+    const classes = useStyles()
 
     return (
         <Container>
-            <style>
-                {`
-      html, body {
-        background-color: #1C1C1E !important;
-      }`}
-            </style>
-            <Header size="huge" inverted>
+            <Header size="huge" inverted className={classes.header}>
                 Bookmarker
             </Header>
 
@@ -34,3 +47,4 @@ export const App = () => {
 };
 
 export const ItemServiceContext = createContext({});
+export default (App);

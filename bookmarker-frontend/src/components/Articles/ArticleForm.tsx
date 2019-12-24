@@ -5,6 +5,22 @@ import { Button, Form, Input } from 'semantic-ui-react';
 import { ItemServiceContext } from '../../App';
 import { getArticleByDOI } from '../../services/altmetric';
 import { OwnLoader } from '../OwnLoader';
+import { createUseStyles } from 'react-jss';
+
+
+const useStyles = createUseStyles({
+    search: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+    },
+    searchInput: {
+        width: "50%"
+    },
+    error: {
+        color: "red"
+    }
+})
 
 export const ArticleForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -12,6 +28,7 @@ export const ArticleForm = () => {
     const { itemService }: any = useContext(ItemServiceContext);
     const { register, handleSubmit, reset, setValue } = useForm();
     const [showFullForm, setShowFullForm] = useState(false);
+    const classes = useStyles()
 
     const onSubmit = ({ author, title, date, publisher, related, tags }: any) => {
         itemService.create(
@@ -68,11 +85,7 @@ export const ArticleForm = () => {
     return (
         <>
             <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                }}
+                className={classes.search}
             >
                 <RHFInput
                     as={
@@ -83,7 +96,7 @@ export const ArticleForm = () => {
                                 onClick: handleSubmit(lookUpDOI),
                             }}
                             placeholder="Search..."
-                            style={{ width: '50%' }}
+                            className={classes.searchInput}
                         />
                     }
                     name="isbn"
@@ -93,7 +106,7 @@ export const ArticleForm = () => {
             </div>
 
             {showLoader && <OwnLoader />}
-            <p style={{ color: 'red' }}>{errorMessage}</p>
+            <p className={classes.error}>{errorMessage}</p>
 
             {showFullForm && (
                 <Form onSubmit={handleSubmit(onSubmit)} inverted>

@@ -1,14 +1,41 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
+import { createUseStyles } from 'react-jss'
 
-export const NavBar = ({ selected, setSelected, setShowForm }: any) => {
+
+const useStyles = createUseStyles({
+    navBar: {
+        width: 'auto', 
+        backgroundColor: '#fef6fb', 
+        height: 50, 
+        display: 'inline'
+    },
+    buttonRow: {
+        textAlign: 'center'
+    }
+})
+
+const styles = {
+    Button: {
+        margin: 10,
+        backgroundColor: '#e6b2c6',
+    },
+    selectedButton: {
+        margin: 10,
+        backgroundColor: '#d77fa1',
+    }
+}
+  
+
+export const NavBar = ({ selected, setSelected }: any) => {
+    const classes = useStyles()
     const navButtonClicked = (index: Number) => {
         setSelected(index);
     };
 
     return (
-        <div style={{ width: 'auto', backgroundColor: '#fef6fb', height: 50, display: 'inline' }}>
-            <div style={{ textAlign: 'center' }}>
+        <div className={classes.navBar}>
+            <div className={classes.buttonRow}>
                 <Button
                     style={selected > 3 || selected < 0 ? styles.selectedButton : styles.Button}
                     onClick={() => navButtonClicked(-1)}
@@ -42,15 +69,4 @@ export const NavBar = ({ selected, setSelected, setShowForm }: any) => {
             </div>
         </div>
     );
-};
-
-const styles = {
-    Button: {
-        margin: 10,
-        backgroundColor: '#e6b2c6',
-    },
-    selectedButton: {
-        margin: 10,
-        backgroundColor: '#d77fa1',
-    },
 };

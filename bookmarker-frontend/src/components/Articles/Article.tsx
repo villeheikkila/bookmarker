@@ -6,6 +6,7 @@ interface ArticleProps {
     article: Article;
 }
 
+
 export const Article = ({ article: { id, author, title, publisher, date, tags, related } }: ArticleProps) => {
     const { itemService }: any = useContext(ItemServiceContext);
 
