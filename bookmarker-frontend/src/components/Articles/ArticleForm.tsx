@@ -6,6 +6,7 @@ import { ItemServiceContext } from '../../App';
 import { getArticleByDOI } from '../../services/altmetric';
 import { OwnLoader } from '../OwnLoader';
 import { createUseStyles } from 'react-jss';
+import { Search } from '../Search'
 
 
 const useStyles = createUseStyles({
@@ -53,8 +54,8 @@ export const ArticleForm = () => {
         });
     };
 
-    const lookUpDOI = async ({ doi }: any) => {
-        setShowLoader(true);
+    const lookUpDOI = async ({doi}: any) => {
+         setShowLoader(true);
 
         try {
             const { authors, title, journal, published_on } = await getArticleByDOI(doi);
@@ -84,26 +85,8 @@ export const ArticleForm = () => {
 
     return (
         <>
-            <div
-                className={classes.search}
-            >
-                <RHFInput
-                    as={
-                        <Input
-                            label="DOI"
-                            action={{
-                                icon: 'search',
-                                onClick: handleSubmit(lookUpDOI),
-                            }}
-                            placeholder="Search..."
-                            className={classes.searchInput}
-                        />
-                    }
-                    name="isbn"
-                    setValue={setValue}
-                    register={register}
-                />
-            </div>
+        <Search label="doi" onSubmit={lookUpDOI} reset={reset}/>
+
 
             {showLoader && <OwnLoader />}
             <p className={classes.error}>{errorMessage}</p>
