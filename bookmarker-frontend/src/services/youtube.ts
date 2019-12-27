@@ -16,5 +16,8 @@ export const GetYouTubeData = async (url: string) => {
         data: { items },
     } = await axios.get(properURL);
 
-    return items[0].snippet;
+    return {
+        id,
+        details: items[0].snippet,
+    };
 };

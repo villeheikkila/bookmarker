@@ -9,6 +9,7 @@ import { OwnLoader } from '../OwnLoader';
 export const VideoForm = () => {
     const [showFullForm, setShowFullForm] = useState(false);
     const [showLoader, setShowLoader] = useState(false);
+    const [id, setId] = useState<string | null>(null);
     const [errorMessage, setErrorMessage] = useState('');
     const { itemService }: any = useContext(ItemServiceContext);
 
@@ -20,7 +21,7 @@ export const VideoForm = () => {
                 id: Math.floor(Math.random() * 1000 + 1),
                 author,
                 title,
-                url,
+                url: id,
                 related,
                 comment,
             },
@@ -34,13 +35,16 @@ export const VideoForm = () => {
             related: '',
             comment: '',
         });
+
+        setId(null);
     };
 
     const autoFillWithYoutubeUrl = async ({ url }: any) => {
         setShowLoader(true);
 
         try {
-            const details = await GetYouTubeData(url);
+            const { id, details } = await GetYouTubeData(url);
+            setId(id);
             setValue('author', details['channelTitle']);
             setValue('title', details['title']);
             setShowLoader(false);
